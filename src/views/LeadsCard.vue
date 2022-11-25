@@ -1,15 +1,27 @@
 <template lang="pug">
 .usi-mortgage--leadscard
-  .usi-mortgage--leadscard__mortgage-btn MORTGAGE_BUTTON
+  MortgageButton {{ mortgageButtonTitle }} : {{ mortgageBtnShow }}
 </template>
 
 <script>
+import MortgageButton from "@/components/ui/Button";
+
 export default {
-  components: {},
+  components: {
+    MortgageButton,
+  },
 
   props: {},
-  data: () => ({}),
-  computed: {},
+  data: () => {
+    return {
+      mortgageButtonTitle: "HYPOTHEK BTN 2022",
+    };
+  },
+  computed: {
+    mortgageBtnShow() {
+      return document.querySelector('div[data-id="685555"] .icon-radio-checked input')?.value;
+    },
+  },
 
   watch: {},
   methods: {
@@ -26,15 +38,16 @@ export default {
   mounted() {
     console.debug("LeadsCard << mounted"); //DELETE
   },
-}
+};
 </script>
 
 <style lang="scss">
 .usi-mortgage--leadscard {
-  &__mortgage-btn {
-    color: red;
-    font-weight: bold;
-    font-size: 16px;
-  }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 }
 </style>

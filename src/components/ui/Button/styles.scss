@@ -1,0 +1,34 @@
+.um-button {
+  width: 100%;
+  background: #319CD0;
+  border: 1px solid #4077d6;
+  max-height: 38px;
+  padding: 10px;
+  border-radius: 3px;
+  vertical-align: middle;
+  outline: 0;
+  z-index: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+  font-size: 15px;
+  line-height: 15px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background: #2E91CA;
+  }
+
+  &:active {
+    background: #2B88BE !important;
+  }
+}

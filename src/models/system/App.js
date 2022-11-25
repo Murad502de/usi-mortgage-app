@@ -10,6 +10,10 @@ class App {
 
     const MOUNT_POINT = MountPoint.getByArea({ area });
 
+    console.debug('AppClass << create : MOUNT_POINT', MOUNT_POINT); //DELETE
+
+    if (!MOUNT_POINT) return;
+
     await MountPoint.createAfter({
       point: MOUNT_POINT,
       after: this.getRelativeRenderSelector({ area }),
