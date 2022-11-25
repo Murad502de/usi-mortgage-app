@@ -1,6 +1,6 @@
 <template lang="pug">
-.usi-mortgage--widget-settings vue usi mortgage widget settings with PUG
-  .test qwertyuio
+.usi-mortgage--leadscard
+  .usi-mortgage--leadscard__mortgage-btn MORTGAGE_BUTTON
 </template>
 
 <script>
@@ -21,18 +21,20 @@ export default {
   },
 
   created() {
-    console.debug("WidgetSettings << created"); //DELETE
+    console.debug("LeadsCard << created"); //DELETE
   },
   mounted() {
-    console.debug("WidgetSettings << mounted"); //DELETE
+    console.debug("LeadsCard << mounted"); //DELETE
   },
 }
 </script>
 
 <style lang="scss">
-.usi-mortgage--widget-settings {
-  .test {
+.usi-mortgage--leadscard {
+  &__mortgage-btn {
     color: red;
+    font-weight: bold;
+    font-size: 16px;
   }
 }
 </style>
