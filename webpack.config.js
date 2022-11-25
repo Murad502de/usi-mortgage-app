@@ -6,7 +6,7 @@ const ZipFilesPlugin = require('webpack-zip-files-plugin');
 const ENV = 'dev';
 
 module.exports = {
-  entry: ['./src/app.js'],
+  entry: ['./src/main.js'],
   mode: 'production',
   devtool: 'source-map',
   output: {
@@ -43,6 +43,18 @@ module.exports = {
           'css-loader'
         ]
       },
+      {
+        test: /\.scss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      },
+      {
+        test: /\.pug$/,
+        loader: 'vue-pug-loader'
+      }
     ]
   },
   resolve: {

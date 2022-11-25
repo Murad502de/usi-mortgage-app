@@ -1,0 +1,1 @@
+export const WIDGET_SETTINGS = '.widget-settings__desc-space';
