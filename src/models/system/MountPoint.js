@@ -7,7 +7,7 @@ class MountPoint {
 
     switch (area) {
       case pageCodes.LEADS_CARD:
-        return '.linked-form__field_budget';
+        return 'usi-mortgage-app--button';
 
       default:
         return null;

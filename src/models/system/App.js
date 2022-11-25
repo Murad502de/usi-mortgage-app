@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import store from '@/store';
+import * as pageCodes from '@/shared/pageCodes';
 import MountPoint from '@/models/system/MountPoint';
 import View from '@/models/system/View';
 
@@ -7,11 +8,11 @@ class App {
   async create({ area }) {
     console.debug('AppClass << create'); //
 
-    const MOUNT_POINT = MountPoint.getByArea({ area, });
+    const MOUNT_POINT = MountPoint.getByArea({ area });
 
     await MountPoint.createAfter({
       point: MOUNT_POINT,
-      after: 'div[data-id="685555"]',
+      after: this.getRelativeRenderSelector({ area }),
     });
 
     this.createIn({
@@ -25,6 +26,17 @@ class App {
     createApp(view)
       .use(store)
       .mount(`.${mountPoint}`);
+  }
+  getRelativeRenderSelector({ area }) {
+    console.debug('AppClass << getRelativeRenderSelector'); //DELETE
+
+    switch (area) {
+      case pageCodes.LEADS_CARD:
+        return 'div[data-id="685555"]';
+
+      default:
+        return null;
+    }
   }
 }
 
