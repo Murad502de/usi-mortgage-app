@@ -3,8 +3,6 @@ import * as mountPoints from '@/shared/mountPoints';
 
 class MountPoint {
   getByArea({ area }) {
-    console.debug('MountPointClass << getByArea'); //DELETE
-
     switch (area) {
       case pageCodes.LEADS_CARD:
         return 'usi-mortgage-app--button';
@@ -19,7 +17,7 @@ class MountPoint {
 
       mountPoint.className = point;
 
-      document.querySelector(`.${after}`).after(div)
+      document.querySelector(after).after(mountPoint)
     }
   }
   exists({ point }) {
