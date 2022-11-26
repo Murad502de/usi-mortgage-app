@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
 import store from '@/store';
 import * as pageCodes from '@/shared/pageCodes';
-import MountPoint from '@/models/system/MountPoint';
-import View from '@/models/system/View';
+import MountPoint from '@/services/MountPoint';
+import View from '@/services/View';
 
 class App {
   async create({ area }) {

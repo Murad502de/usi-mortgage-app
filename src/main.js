@@ -1,6 +1,6 @@
 import WidgetSettings from "@/views/WidgetSettings";
 import * as mountPoints from '@/shared/mountPoints';
-import App from '@/models/system/App';
+import App from '@/services/App';
 
 const Widget = {
   render() {
