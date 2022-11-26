@@ -7,6 +7,8 @@ const Widget = {
     return true;
   },
   init() {
+    console.debug('VUE_APP_API_GATEWAY_DEFAULT_URL', process.env.VUE_APP_API_GATEWAY_DEFAULT_URL); //DELETE
+
     App.create({
       area: AMOCRM.getWidgetsArea(),
     });

@@ -2,6 +2,7 @@ const path = require('path')
 const { VueLoaderPlugin } = require("vue-loader"); // плагин для загрузки кода Vue
 const AmdWebpackPlugin = require('amd-webpack-plugin');
 const ZipFilesPlugin = require('webpack-zip-files-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const ENV = 'dev';
 
@@ -66,6 +67,7 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new AmdWebpackPlugin(),
+    new Dotenv(),
     new ZipFilesPlugin({
       entries: [
         { src: path.join(__dirname, './dist/'), dist: '/' }
