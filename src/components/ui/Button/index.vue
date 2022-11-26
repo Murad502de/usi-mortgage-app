@@ -1,7 +1,6 @@
 <template lang="pug">
 .um-button(
   :class="[{ 'mt-button_load': loader }, color ? `um-button_${color}` : '']"
-  @click="click"
 )
   template(v-if="loader")
     //- Icon(name="loader" fill="#fff" loader)

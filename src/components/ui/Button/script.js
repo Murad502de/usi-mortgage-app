@@ -23,17 +23,10 @@ export default {
     /* GETTERS */
     /* SETTERS */
     /* HANDLERS */
-    click() {
-      console.debug('on hypothek button clicked'); //DELETE
-    },
     /* HELPERS */
     /* ACTIONS */
   },
 
-  created() {
-    console.debug('BUTTON'); //DELETE
-  },
-  mounted() {
-    console.debug('BUTTON'); //DELETE
-  },
+  created() {},
+  mounted() {},
 };
