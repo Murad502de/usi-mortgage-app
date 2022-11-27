@@ -22,9 +22,13 @@ export default {
 
   created() {
     console.debug("WidgetSettings << created"); //DELETE
+
+    console.debug('THiS', this.$apiGatewayDefault); //DELETE
   },
   mounted() {
     console.debug("WidgetSettings << mounted"); //DELETE
+
+    console.debug('THiS mounted', this.$apiGatewayDefault); //DELETE
   },
 }
 </script>

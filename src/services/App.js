@@ -1,4 +1,6 @@
 import { createApp } from 'vue';
+import VueAxios from 'vue-axios';
+import apiGatewayDefault from '@/network/gateways/default';
 import store from '@/store';
 import * as pageCodes from '@/shared/pageCodes';
 import MountPoint from '@/services/MountPoint';
@@ -7,6 +9,8 @@ import View from '@/services/View';
 class App {
   async create({ area }) {
     console.debug('AppClass << create'); //DELETE
+
+    console.debug('AppClass << create : area', area); //DELETE
 
     const MOUNT_POINT = MountPoint.getByArea({ area });
 
@@ -26,6 +30,7 @@ class App {
   }
   createIn({ view, mountPoint }) {
     createApp(view)
+      .use(VueAxios, { $apiGatewayDefault: apiGatewayDefault, })
       .use(store)
       .mount(`.${mountPoint}`);
   }
