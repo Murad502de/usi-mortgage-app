@@ -1,9 +1,3 @@
-<template lang="pug">
-.usi-mortgage--widget-settings vue usi mortgage widget settings with PUG
-  .test qwertyuio
-</template>
-
-<script>
 export default {
   components: {},
 
@@ -31,12 +25,3 @@ export default {
     console.debug('THiS mounted', this.$apiGatewayDefault); //DELETE
   },
 }
-</script>
-
-<style lang="scss">
-.usi-mortgage--widget-settings {
-  .test {
-    color: red;
-  }
-}
-</style>
