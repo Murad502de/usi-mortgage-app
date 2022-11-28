@@ -1,7 +1,10 @@
-import { teleport } from "@/utils/teleport";
+import { teleport } from '@/utils/teleport';
+import MortgageCard from '@/components/ui/Card';
 
 export default {
-  components: {},
+  components: {
+    MortgageCard,
+  },
 
   props: {},
   data: () => {

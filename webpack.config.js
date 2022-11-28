@@ -76,4 +76,21 @@ module.exports = {
       format: 'zip',
     }),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        default: false,
+        vendors: false,
+        // choose other node_modules to be vendor.js
+        // vendor: {
+        //   name: 'vendor',
+        //   chunks: 'all',
+        //   minChunks: 1,
+        //   test: /[\\/]node_modules[\\/]/,
+        //   priority: 10
+        // }
+      }
+    }
+  },
 }

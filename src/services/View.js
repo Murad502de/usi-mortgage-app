@@ -11,8 +11,8 @@ class View {
       case pageCodes.LEADS_CARD:
         return LeadsCard;
 
-      case `${pageCodes.ADVANCED_SETTINGS}${widgetCode}`:
-        return AdvancedSettings;
+      // case `${pageCodes.ADVANCED_SETTINGS}${widgetCode}`:
+      //   return AdvancedSettings;
 
       default:
         return null;

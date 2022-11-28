@@ -7,18 +7,21 @@ import MountPoint from '@/services/MountPoint';
 import View from '@/services/View';
 
 class App {
-  async create({ area, widget, }) {
-    // console.debug('AppService::create[widget]', widget); //DELETE
+  async create({ area, widget, view, }) {
+    console.debug('AppService::create[widget]', widget); //DELETE
 
     const WIDGET_CODE = widget.params.widget_code;
     const MOUNT_POINT = process.env.VUE_APP_MOUNT_POINT || null;
+    let VIEW = view;
 
-    const VIEW = View.getByArea({
-      area,
-      widgetCode: WIDGET_CODE,
-    });
+    if (!VIEW) {
+      VIEW = View.getByArea({
+        area,
+        widgetCode: WIDGET_CODE,
+      });
+    }
 
-    // console.debug('AppService::create[VIEW]', VIEW); //DELETE
+    console.debug('AppService::create[VIEW]', VIEW); //DELETE
 
     if (!VIEW || !MOUNT_POINT) return;
 
@@ -31,14 +34,14 @@ class App {
     });
   }
   async createIn({ view, point, widget, }) {
-    // console.debug('AppService::createIn', { view, point, widget, }); //DELETE
+    console.debug('AppService::createIn', { view, point, widget, }); //DELETE
 
     const app = createApp(view)
       .use(VueAxios, { $apiGatewayDefault: apiGatewayDefault, })
       .use(store)
       .mount(point);
 
-    // console.debug('AppService::createIn[app]', app); //DELETE
+    console.debug('AppService::createIn[app]', app); //DELETE
 
     await app.$store.dispatch('widget/setParams', {
       params: widget.params
