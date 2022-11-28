@@ -1,8 +1,8 @@
 {
     "widget":{
-        "name":"Vue Widget Template",
-        "short_description":"Short description",
-        "description":"Full description"
+        "name":"USI-Mortgage ABP",
+        "short_description":"The widget for automating the Mortgage business process",
+        "description":"The widget for automating the Mortgage business process"
     },
     "settings":{
         "login":"User login",
@@ -11,6 +11,6 @@
         "try_free": "Try for free"
     },
     "advanced":{
-        "title":"usi mortgage"
+        "title":"Advanced settings of the widget for automating the Mortgage business process"
     }
 }

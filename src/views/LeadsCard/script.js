@@ -1,4 +1,5 @@
 import debounce from "@/utils/debounce";
+import MountPoint from '@/services/MountPoint';
 import Mortgage from './services/helpers/Mortgage';
 import MortgageButton from "@/components/ui/Button";
 
@@ -28,6 +29,12 @@ export default {
     /* ACTIONS */
   },
 
+  async beforeCreate() {
+    await MountPoint.createAfter({
+      point: 'usi-mortgage-app--button',
+      after: 'div[data-id="685555"]',
+    });
+  },
   created() {
     Mortgage.addEventListener({ callback: this.selectMortgage });
   },

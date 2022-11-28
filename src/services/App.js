@@ -7,32 +7,42 @@ import MountPoint from '@/services/MountPoint';
 import View from '@/services/View';
 
 class App {
-  async create({ area }) {
-    console.debug('AppClass << create'); //DELETE
+  async create({ area, widget, }) {
+    // console.debug('AppService::create[widget]', widget); //DELETE
 
-    console.debug('AppClass << create : area', area); //DELETE
+    const WIDGET_CODE = widget.params.widget_code;
+    const MOUNT_POINT = process.env.VUE_APP_MOUNT_POINT || null;
 
-    const MOUNT_POINT = MountPoint.getByArea({ area });
-
-    console.debug('AppClass << create : MOUNT_POINT', MOUNT_POINT); //DELETE
-
-    if (!MOUNT_POINT) return;
-
-    await MountPoint.createAfter({
-      point: MOUNT_POINT,
-      after: this.getRelativeRenderSelector({ area }),
+    const VIEW = View.getByArea({
+      area,
+      widgetCode: WIDGET_CODE,
     });
+
+    // console.debug('AppService::create[VIEW]', VIEW); //DELETE
+
+    if (!VIEW || !MOUNT_POINT) return;
+
+    await MountPoint.create({ point: MOUNT_POINT });
 
     this.createIn({
-      view: View.getByArea({ area, }),
-      mountPoint: MOUNT_POINT,
+      view: VIEW,
+      point: `#${MOUNT_POINT}`,
+      widget,
     });
   }
-  createIn({ view, mountPoint }) {
-    createApp(view)
+  async createIn({ view, point, widget, }) {
+    // console.debug('AppService::createIn', { view, point, widget, }); //DELETE
+
+    const app = createApp(view)
       .use(VueAxios, { $apiGatewayDefault: apiGatewayDefault, })
       .use(store)
-      .mount(`.${mountPoint}`);
+      .mount(point);
+
+    // console.debug('AppService::createIn[app]', app); //DELETE
+
+    await app.$store.dispatch('widget/setParams', {
+      params: widget.params
+    });
   }
   getRelativeRenderSelector({ area }) {
     switch (area) {

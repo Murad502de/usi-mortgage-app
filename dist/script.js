@@ -1,57 +1,61 @@
-define(['http://localhost:8080/dist/app.js?cache=' + Date.now()], function (App) { // http://localhost:8080/dist/app.js | ./app.js
-  const Widget = function () {
-    const self = this;
+define(
+  // http://localhost:8080/dist/app.js | ./app.js
+  ['http://localhost:8080/dist/app.js?cache=' + Date.now()],
+  function (App) {
+    const Widget = function () {
+      const self = this;
 
-    self.system = this.system();
-    self.langs = this.langs;
+      self.system = this.system();
+      self.langs = this.langs;
 
-    /** @private */
-    this.callbacks = {
-      render() {
-        console.debug('App RENDER', App) //DELETE;
+      /** @private */
+      this.callbacks = {
+        render() {
+          // console.debug('App RENDER', App) //DELETE;
 
-        App.default.render(self);
+          App.default.render(self);
 
-        return true;
-      },
-      init() {
-        App.default.init(self);
+          return true;
+        },
+        init() {
+          App.default.init(self);
 
-        return true;
-      },
-      bind_actions() {
-        App.default.bind_actions(self);
+          return true;
+        },
+        bind_actions() {
+          App.default.bind_actions(self);
 
-        return true;
-      },
-      settings() {
-        App.default.settings(self);
-      },
-      onSave() {
-        App.default.onSave(self);
-      },
-      destroy() {
-        App.default.destroy(self);
-      },
-      contacts: {
-        selected() {
-          App.default.contacts_selected(self);
+          return true;
+        },
+        settings() {
+          App.default.settings(self);
+        },
+        onSave() {
+          App.default.onSave(self);
+        },
+        destroy() {
+          App.default.destroy(self);
+        },
+        contacts: {
+          selected() {
+            App.default.contacts_selected(self);
+          }
+        },
+        leads: {
+          selected() {
+            App.default.leads_selected(self);
+          }
+        },
+        tasks: {
+          selected() {
+            App.default.tasks_selected(self);
+          }
         }
-      },
-      leads: {
-        selected() {
-          App.default.leads_selected(self);
-        }
-      },
-      tasks: {
-        selected() {
-          App.default.tasks_selected(self);
-        }
-      }
+      };
+
+      return this;
     };
 
-    return this;
-  };
-
-  return Widget;
-});
+    return Widget;
+  }
+);

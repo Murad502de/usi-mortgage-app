@@ -1,6 +1,7 @@
 <template lang="pug">
 .usi-mortgage--leadscard
-  MortgageButton(v-show="mortgageBtnShow") {{ mortgageButtonTitle }}
+  teleport(to='#usi-mortgage-app--button')
+    MortgageButton(v-show="mortgageBtnShow") {{ mortgageButtonTitle }}
 </template>
 
 <script src="./script.js" />

@@ -7,10 +7,9 @@ const Widget = {
     return true;
   },
   init(self) {
-    console.debug('INIT', self.get_settings().widget_code); //DELETE
-
     App.create({
       area: AMOCRM.getWidgetsArea(),
+      widget: self,
     });
 
     return true;
@@ -21,7 +20,8 @@ const Widget = {
   settings(self) {
     App.createIn({
       view: WidgetSettings,
-      mountPoint: mountPoints.WIDGET_SETTINGS,
+      point: `.${mountPoints.WIDGET_SETTINGS}`,
+      widget: self,
     });
   },
   onSave(self) { },
