@@ -1,0 +1,65 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@app/*": ["app/*"],
+      "@config/*": ["app/_config/*"],
+      "@environment/*": ["environments/*"],
+      "@shared/*": ["app/_shared/*"],
+      "@helpers/*": ["helpers/*"],
+      "@types/*": ["types/*"],
+      "@*": ["./*"]
+    },
+    "strict": true,
+    "module": "commonjs",
+    "moduleResolution": "Node",
+    "declaration": false,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "strictFunctionTypes": false,
+    "strictNullChecks": false,
+    "target": "es3",
+    "lib": [
+      "ESNext",
+      "dom"
+    ],
+    "sourceMap": true,
+    "outDir": "dist",
+    "isolatedModules": true,
+    "noImplicitThis": false,
+    "rootDir": "src",
+    "resolveJsonModule": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
+  },
+  "files": [
+    "./src/ts-shim.d.ts"
+  ],
+  "include": [
+    "src//*.ts",
+    "src//*.ts",
+    "src/modules//*.ts",
+    "src/app/main.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "/*.md",
+    "/rollup.config.js",
+    "src//.types.ts",
+    "src/amocrm",
+    "src//**.test.ts"
+  ],
+}

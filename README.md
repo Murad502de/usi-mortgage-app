@@ -1,36 +1,33 @@
-# amoCRM widget template (Vue.js)
+amoCRM/Kommo + TypeScript + SASS starter
+---
 
-Шаблон виджета для amoCRM с поддержкой *Vue*, *Vuex* и автоматической сборкой архива *widget.zip*
-
-## 1. Установка и сборка
-
-Требует [Node.js](https://nodejs.org/) 10+ для запуска.
+![example](https://static.tildacdn.com/tild3662-6462-4562-a531-363639316435/image.png)
 
 
-```sh
-$ git clone https://github.com/iamkuper/amocrm-vue-widget.git ./widget
-$ cd widget
-$ npm install
+## Окружение
+
+- [x] Rollup
+- [x] TypeScript
+- [x] SASS
+- [x] Zip
+
+## Как использоваться
+
+Просто склонируйте репозиторий, а дальше:
+
+```bash
+# Переходим в директорию с проектом
+$ cd <your-project-name>
+
+# Удаляем `.git` директорию
+
+# Установка зависимостей
+$ npm i
+
+
+# Сборка виджета без uglify и prettier
+$ npm run build:development
+
+# Сборка виджета
+$ npm run build:production
 ```
-Далее создать виджет внутри amoCRM и сгенерировать код виджета + ключ.
-Ключи указываются в файле **/dist/manifest.json**
-Далее выполнить сборку виджета.
-
-```sh
-$ npm build
-```
-Залить готовый виджет **widget.zip** в amoCRM
-
-## 2. Для работы через webpack-dev-server:
-*Для разработки на локальном сервере без перезагрузки виджета в amoCRM*
-
-Заменить пути в файле **/dist/script.js**:
-`./app.js` на `http://localhost:8080/dist/app.js`
-
-и запустить локальный вебсервер
-
-```sh
-$ npm run build && npm run dev
-```
-
-**Не забудьте повторно залить виджет с новыми путями!**
