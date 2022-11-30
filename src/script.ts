@@ -5,7 +5,8 @@ console.debug('WIDGET[MORTGAGE]::START[script.js]'); //DELETE
 // declare const APP: Application;
 
 import { Widget, Settings, System, Statuses } from '@/types/widget.types';
-import App from '@app/main';
+
+import App from '@/app/main';
 
 export default class WidgetTemplate implements Widget {
 	system?(): System;

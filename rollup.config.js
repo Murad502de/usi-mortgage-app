@@ -4,7 +4,7 @@ import postcss from 'rollup-plugin-postcss'
 import prettier from "rollup-plugin-prettier";
 
 import typescript from '@rollup/plugin-typescript';
-import uglify from '@lopatnov/rollup-plugin-uglify';
+// import uglify from '@lopatnov/rollup-plugin-uglify';
 import copy from 'rollup-plugin-copy2'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import styles from "rollup-plugin-styles";
@@ -16,6 +16,7 @@ import vue from 'rollup-plugin-vue';
 import vuePugPlugin from 'vue-pug-plugin';
 import bundleScss from 'rollup-plugin-bundle-scss';
 import alias from '@rollup/plugin-alias';
+import { terser } from 'rollup-plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -45,7 +46,7 @@ export default {
     dir: 'dist',
     format: 'amd',
     name: 'widget',
-    sourcemap: true
+    sourcemap: false,
   },
 
   watch: {
@@ -101,7 +102,7 @@ export default {
 
     // babel(babelOptions),
 
-    uglify(),
+    terser(),
 
     zip({
       file: 'widget.zip'

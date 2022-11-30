@@ -3,7 +3,7 @@
   <p>TEST_VIEW Pug and Ts</p>
 
   <MortgageButton>
-    Hello from Button 2022!!!
+    Hello from Button!
   </MortgageButton>
 </div>
 </template>
