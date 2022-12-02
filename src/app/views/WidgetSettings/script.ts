@@ -19,6 +19,8 @@ export default defineComponent({
 
   created() {
     console.debug("WidgetSettings << created"); //DELETE
+
+    console.debug('THiS mounted', this.$apiGatewayDefault); //DELETE
   },
   mounted() {
     console.debug("WidgetSettings << mounted"); //DELETE

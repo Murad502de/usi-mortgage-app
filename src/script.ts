@@ -1,6 +1,6 @@
 console.debug('WIDGET[MORTGAGE]::START[script.js]'); //DELETE
 
-// import { bind } from 'underscore';
+import { bind } from 'underscore';
 // import { Application } from './types/global.types'; // Constants
 // declare const APP: Application;
 
@@ -15,6 +15,8 @@ export default class WidgetTemplate implements Widget {
 	set_status?(status: Statuses): void;
 	get_version?(): string;
 
+	self = this;
+
 	callbacks = {
 		async render(): Promise<boolean> {
 			console.debug('WidgetTemplate[Mortgage]::render'); //DELETE
@@ -23,13 +25,15 @@ export default class WidgetTemplate implements Widget {
 
 			return true;
 		},
-		async init(): Promise<boolean> {
+
+		init: bind(async (): Promise<boolean> => {
 			console.debug('WidgetTemplate[Mortgage]::init'); //DELETE
 
-			App.init();
+			App.init(this);
 
 			return true;
-		},
+		}, this),
+
 		async bind_actions(): Promise<boolean> {
 			console.debug('WidgetTemplate[Mortgage]::bind_actions'); //DELETE
 
@@ -37,20 +41,24 @@ export default class WidgetTemplate implements Widget {
 
 			return true;
 		},
-		async advancedSettings(): Promise<boolean> {
+
+		advancedSettings: bind(async (): Promise<boolean> => {
 			console.debug('WidgetTemplate[Mortgage]::advancedSettings'); //DELETE
 
-			App.advancedSettings();
+			App.advancedSettings(this);
 
 			return true;
-		},
-		async settings(): Promise<boolean> {
+		}, this),
+
+		settings: bind(async (): Promise<boolean> => {
 			console.debug('WidgetTemplate[Mortgage]::settings'); //DELETE
 
-			App.settings();
+			App.settings(this);
 
 			return true;
-		},
+		}, this),
+
+
 		async onSave(): Promise<boolean> {
 			console.debug('WidgetTemplate[Mortgage]::onSave'); //DELETE
 

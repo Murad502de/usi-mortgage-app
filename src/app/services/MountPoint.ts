@@ -1,5 +1,5 @@
-import * as pageCodes from '@/shared/pageCodes';
-import * as mountPoints from '@/shared/mountPoints';
+import * as pageCodes from '@/app/shared/pageCodes';
+import * as mountPoints from '@/app/shared/mountPoints';
 
 class MountPoint {
   async create({ point, }) {

@@ -1,28 +1,41 @@
-import { createApp } from 'vue'
-
-import TestView from './views/TestView/index.vue';
+import App from '@/app/services/App';
+import { mountPoints } from '@/app/shared/mountPoints';
+import WidgetSettings from "./views/WidgetSettings/index.vue";
+import AdvancedSettings from "./views/AdvancedSettings/index.vue";
 
 const Widget = {
   render() {
     console.debug('Widget[Mortgage]::render'); //DELETE
   },
-  init() {
+  init(self: any) {
     console.debug('Widget[Mortgage]::init'); //DELETE
+
+    App.create({
+      area: window.AMOCRM.getWidgetsArea(),
+      widget: self,
+      view: null,
+    });
   },
   bindActions() {
     console.debug('Widget[Mortgage]::bindActions'); //DELETE
   },
-  settings() {
+  settings(self: any) {
     console.debug('Widget[Mortgage]::settings'); //DELETE
 
-    createApp(TestView).mount('.widget-settings__desc-space');
+    App.createIn({
+      view: WidgetSettings,
+      point: `.${mountPoints.WIDGET_SETTINGS}`,
+      widget: self,
+    });
   },
-  advancedSettings() {
-    console.debug('Widget[Mortgage]::advancedSettings'); //DELETE
+  advancedSettings(self: any) {
+    console.debug('Widget[Mortgage]::advancedSettings', self); //DELETE
 
-    // #work-area-xlyq4ruhpi3wci1edvbwa1yud2jm0wsuntuonbe0
-
-    createApp(TestView).mount('#work-area-xlyq4ruhpi3wci1edvbwa1yud2jm0wsuntuonbe0');
+    App.create({
+      area: window.AMOCRM.getWidgetsArea(),
+      view: AdvancedSettings,
+      widget: self,
+    });
   },
   onSave() {
     console.debug('Widget[Mortgage]::onSave'); //DELETE

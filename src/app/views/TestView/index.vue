@@ -1,6 +1,6 @@
 <template>
 <div class="test-view">
-  <p>TEST_VIEW Pug and Ts</p>
+  <p>TEST_VIEW Pug and Ts++</p>
 
   <MortgageButton>
     Hello from Button!

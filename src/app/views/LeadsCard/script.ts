@@ -1,7 +1,7 @@
-import debounce from "@/utils/debounce";
-import MountPoint from '@/services/MountPoint';
+import debounce from "@/app/utils/debounce";
+import MountPoint from '@/app/services/MountPoint';
 import Mortgage from './services/helpers/Mortgage';
-import MortgageButton from "@/components/ui/Button";
+import MortgageButton from "@components/ui/Button/index.vue";
 
 export default {
   components: {
@@ -36,6 +36,8 @@ export default {
     });
   },
   created() {
+    console.debug('lead card created jq', $); //DELETE
+
     Mortgage.addEventListener({ callback: this.selectMortgage });
   },
   mounted() {

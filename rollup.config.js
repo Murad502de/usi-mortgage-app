@@ -41,18 +41,21 @@ const vuePluginConfig = {
 
 export default {
   input: `src/script.ts`,
-
   output: {
     dir: 'dist',
     format: 'amd',
     name: 'widget',
     sourcemap: false,
+    globals: {
+      axios: 'axios',
+    },
   },
 
   watch: {
     include: ['src/**/*.json', 'src/**/*.ts', 'src/**/*.scss']
   },
   sourceMap: "inline",
+
   plugins: [
     alias({
       entries: [
@@ -64,6 +67,8 @@ export default {
       __WIDGET__: `${vendor}_${widgetName}`,
       __VERSION__: version,
       'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env.VUE_APP_MOUNT_POINT': JSON.stringify('usi-mortgage-app'),
+      'process.env.VUE_APP_API_GATEWAY_DEFAULT_URL': JSON.stringify('https://itwelt.de'),
     }),
     jsonlint({
       mode: 'json',

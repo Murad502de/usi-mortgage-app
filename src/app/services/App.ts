@@ -1,10 +1,10 @@
 import { createApp } from 'vue';
-import VueAxios from 'vue-axios';
-import apiGatewayDefault from '@/network/gateways/default';
-import store from '@/store';
-import * as pageCodes from '@/shared/pageCodes';
-import MountPoint from '@/services/MountPoint';
-import View from '@/services/View';
+// import VueAxios from 'vue-axios';
+// import apiGatewayDefault from '@/app/network/gateways/default';
+import store from '@/app/store';
+import * as pageCodes from '@/app/shared/pageCodes';
+import MountPoint from '@/app/services/MountPoint';
+import View from '@/app/services/View';
 
 class App {
   async create({ area, widget, view, }) {
@@ -36,8 +36,23 @@ class App {
   async createIn({ view, point, widget, }) {
     console.debug('AppService::createIn', { view, point, widget, }); //DELETE
 
+    console.debug('AppService::createIn[widget]', widget.authorizedRequest); //DELETE
+
+    // widget.crm_post(
+    //   'https://webhook.site/aa372c9b-68ea-4731-9ec0-8c17d9616158',
+    //   {
+    //     // Передаем POST данные
+    //     name: 'TEST NAME',
+    //   },
+    //   function (msg: any) {
+    //     console.debug('AppService::crm_post', msg)
+    //   },
+    //   'json'
+    // );
+
+
     const app = createApp(view)
-      .use(VueAxios, { $apiGatewayDefault: apiGatewayDefault, })
+      // .use(VueAxios, { $apiGatewayDefault: apiGatewayDefault, })
       .use(store)
       .mount(point);
 

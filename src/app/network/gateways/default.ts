@@ -1,7 +1,10 @@
 import axios from 'axios';
-import { failInterceptor } from '@/network/interceptors/failInterceptor';
-import { tokenInterceptor } from '@/network/interceptors/tokenInterceptor';
-import { dataLengthInterceptor } from '@/network/interceptors/dataLengthInterceptor';
+
+// const axios = require('axios');
+
+import { failInterceptor } from '@/app/network/interceptors/failInterceptor';
+import { tokenInterceptor } from '@/app/network/interceptors/tokenInterceptor';
+import { dataLengthInterceptor } from '@/app/network/interceptors/dataLengthInterceptor';
 
 axios.defaults.baseURL = process.env.VUE_APP_API_GATEWAY_DEFAULT_URL;
 axios.defaults.headers['Content-Type'] = "application/json";

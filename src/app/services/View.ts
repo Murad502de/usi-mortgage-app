@@ -1,6 +1,6 @@
-import * as pageCodes from '@/shared/pageCodes';
-import LeadsCard from "@/views/LeadsCard";
-import AdvancedSettings from "@/views/AdvancedSettings";
+import * as pageCodes from '@/app/shared/pageCodes';
+import LeadsCard from "../views/LeadsCard/index.vue";
+// import AdvancedSettings from "../views/AdvancedSettings/index.vue";
 
 class View {
   getByArea({ area, widgetCode, }) {

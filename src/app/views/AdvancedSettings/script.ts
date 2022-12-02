@@ -1,5 +1,5 @@
-import { teleport } from '@/utils/teleport';
-import MortgageCard from '@/components/ui/Card/index.vue';
+import { teleport } from '@/app/utils/teleport';
+import MortgageCard from '@components/ui/Card/index.vue';
 
 export default {
   components: {

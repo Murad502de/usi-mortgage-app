@@ -108,6 +108,8 @@ export interface Widget {
 	get_version?(): string;
 	get_install_status?(): Statuses;
 
+	self?: any;
+
 
 
 	/**

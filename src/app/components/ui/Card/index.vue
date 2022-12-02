@@ -1,9 +1,11 @@
-<template lang="pug">
-.usi-mortgage--card
-  template(v-if="loader")
+<template>
+  <div class="usi-mortgage--card">
+    <template v-if="loader" />
 
-  template(v-else)
-    slot(name="default")
+    <template v-else>
+      <slot name="default" />
+    </template>
+  </div>
 </template>
 
 <script src="./script.js" />
