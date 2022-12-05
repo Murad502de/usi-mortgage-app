@@ -1,0 +1,12 @@
+.usi-mortgage--advanced-settings__header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+
+  .um-button {
+    width: max-content !important;
+  }
+}

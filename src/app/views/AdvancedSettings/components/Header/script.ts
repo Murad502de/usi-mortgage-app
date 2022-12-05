@@ -11,7 +11,7 @@ export default defineComponent({
   props: {},
   data() {
     return {
-      addMortgageTitle: '+ Добавить Ипотеку',
+      addMortgageTitle: 'Добавить ипотеку',
     };
   },
   computed: {},

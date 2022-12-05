@@ -1,9 +1,10 @@
 <template>
   <div class="um-result-actions">
-    <Button>
+    <Button class="um-result-actions__button um-result-actions__button-cancel" color="default">
       {{ cancelBtnTitle }}
     </Button>
-    <Button>
+
+    <Button class="um-result-actions__button um-result-actions__button-save">
       {{ saveBtnTitle }}
     </Button>
   </div>

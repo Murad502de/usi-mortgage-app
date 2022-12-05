@@ -1,7 +1,5 @@
 .um-button {
   width: 100%;
-  background: #4c8bf7;
-  border: 1px solid #4077d6;
   max-height: 38px;
   padding: 10px;
   border-radius: 3px;
@@ -15,7 +13,6 @@
   font-size: 15px;
   line-height: 15px;
   font-weight: 700;
-  color: #fff;
   text-decoration: none;
   display: flex;
   flex-direction: row;
@@ -24,12 +21,28 @@
   justify-content: center;
   align-items: center;
 
-  &:hover {
-    background: #4d85e6;
+  &_default {
+    background: 0 0 !important;
+    border: 0 !important;
+    color: #92989b;
+
+    &:active {
+      transform: translateY(1px);
+    }
   }
 
-  &:active {
-    background: #4d85e6;
-    transform: translateY(1px);
+  &_blue {
+    background: #4c8bf7;
+    border: 1px solid #4077d6;
+    color: #fff;
+
+    &:hover {
+      background: #4d85e6;
+    }
+
+    &:active {
+      background: #4d85e6;
+      transform: translateY(1px);
+    }
   }
 }
