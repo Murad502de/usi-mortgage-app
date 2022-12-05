@@ -45,6 +45,7 @@ export default defineComponent({
     /* HANDLERS */
     cancel() {
       console.debug('AdvancedSettings::cancel'); //DELETE
+      console.debug('AdvancedSettings << open modal'); //DELETE
     },
     save() {
       console.debug('AdvancedSettings::save'); //DELETE
