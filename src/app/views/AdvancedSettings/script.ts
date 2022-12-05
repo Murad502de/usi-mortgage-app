@@ -23,6 +23,8 @@ export default {
   watch: {
     workArea(newWorkArea, oldWorkArea) {
       if (newWorkArea) {
+        console.debug('AdvancedSettings::watch[workArea]', newWorkArea, oldWorkArea); //DELETE
+
         teleport({
           toSelector: newWorkArea,
           elementSelector: ".usi-mortgage--advanced-settings",

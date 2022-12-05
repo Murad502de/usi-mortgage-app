@@ -18,13 +18,13 @@ export default class WidgetTemplate implements Widget {
 	self = this;
 
 	callbacks = {
-		async render(): Promise<boolean> {
+		render: bind(async (): Promise<boolean> => {
 			console.debug('WidgetTemplate[Mortgage]::render'); //DELETE
 
 			App.render();
 
 			return true;
-		},
+		}, this),
 
 		init: bind(async (): Promise<boolean> => {
 			console.debug('WidgetTemplate[Mortgage]::init'); //DELETE
@@ -34,13 +34,13 @@ export default class WidgetTemplate implements Widget {
 			return true;
 		}, this),
 
-		async bind_actions(): Promise<boolean> {
+		bind_actions: bind(async (): Promise<boolean> => {
 			console.debug('WidgetTemplate[Mortgage]::bind_actions'); //DELETE
 
 			App.bindActions();
 
 			return true;
-		},
+		}, this),
 
 		advancedSettings: bind(async (): Promise<boolean> => {
 			console.debug('WidgetTemplate[Mortgage]::advancedSettings'); //DELETE
@@ -58,21 +58,22 @@ export default class WidgetTemplate implements Widget {
 			return true;
 		}, this),
 
-
-		async onSave(): Promise<boolean> {
+		onSave: bind(async (): Promise<boolean> => {
 			console.debug('WidgetTemplate[Mortgage]::onSave'); //DELETE
 
 			App.onSave();
 
 			return true;
-		},
-		async destroy(): Promise<boolean> {
+		}, this),
+
+		destroy: bind(async (): Promise<boolean> => {
 			console.debug('WidgetTemplate[Mortgage]::destroy'); //DELETE
 
 			App.destroy();
 
 			return true;
-		},
+		}, this),
+
 		contacts: {
 			async selected(): Promise<boolean> {
 				console.debug('WidgetTemplate[Mortgage]::selected'); //DELETE
