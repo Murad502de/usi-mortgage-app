@@ -4,7 +4,7 @@
       {{ addMortgageTitle }}
     </Button>
 
-    <ResultActions :cancelVisibility="false" :saveDisabled="true" />
+    <ResultActions :cancelVisibility="true" :cancelDisabled="false" :saveDisabled="false" @save="save" @cancel="cancel" />
   </div>
 </template>
 

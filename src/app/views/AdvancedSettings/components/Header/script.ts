@@ -21,6 +21,16 @@ export default defineComponent({
     /* GETTERS */
     /* SETTERS */
     /* HANDLERS */
+    cancel() {
+      console.debug('AdvancedSettings[Header]::cancel'); //DELETE
+
+      this.$emit('cancel');
+    },
+    save() {
+      console.debug('AdvancedSettings[Header]::save'); //DELETE
+
+      this.$emit('save');
+    },
     /* HELPERS */
     /* ACTIONS */
   },

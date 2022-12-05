@@ -42,6 +42,21 @@ export default defineComponent({
     /* GETTERS */
     /* SETTERS */
     /* HANDLERS */
+    cancel() {
+      console.debug('ResultActions::cancel'); //DELETE
+
+      if (!this.cancelDisabled) {
+        this.$emit('cancel');
+      }
+    },
+    save() {
+      console.debug('ResultActions::save'); //DELETE
+
+      if (!this.saveDisabled) {
+        this.$emit('save');
+      }
+    },
+
     /* HELPERS */
     /* ACTIONS */
   },

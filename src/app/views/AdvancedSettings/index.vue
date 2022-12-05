@@ -1,6 +1,6 @@
 <template>
   <div class="usi-mortgage--advanced-settings">
-    <Header />
+    <Header @save="save" @cancel="cancel" />
     <Main />
 
     <!-- <MortgageCard class="mortgage-card">

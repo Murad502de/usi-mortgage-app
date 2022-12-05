@@ -43,9 +43,13 @@ export default defineComponent({
     /* GETTERS */
     /* SETTERS */
     /* HANDLERS */
-    testClick() {
-      this.count++;
+    cancel() {
+      console.debug('AdvancedSettings::cancel'); //DELETE
     },
+    save() {
+      console.debug('AdvancedSettings::save'); //DELETE
+    },
+
     /* HELPERS */
     /* ACTIONS */
   },
