@@ -15,7 +15,7 @@ export default defineComponent({
     },
     color: {
       type: String,
-      default: 'green'
+      default: 'blue'
     }
   },
   data: () => ({}),
