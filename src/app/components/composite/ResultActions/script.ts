@@ -15,6 +15,22 @@ export default defineComponent({
       type: String,
       default: "Сохранить",
     },
+    cancelVisibility: {
+      type: Boolean,
+      default: true
+    },
+    cancelDisabled: {
+      type: Boolean,
+      default: false
+    },
+    saveVisibility: {
+      type: Boolean,
+      default: true
+    },
+    saveDisabled: {
+      type: Boolean,
+      default: false
+    },
   },
   data() {
     return {};

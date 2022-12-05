@@ -45,4 +45,18 @@
       transform: translateY(1px);
     }
   }
+
+  &_disabled {
+    cursor: default;
+    color: #2e3640;
+    opacity: .6;
+    background: #fcfcfc !important;
+    border: 1px solid #dbdedf;
+    border-radius: 3px;
+    user-select: none;
+
+    &:active {
+      transform: none !important;
+    }
+  }
 }

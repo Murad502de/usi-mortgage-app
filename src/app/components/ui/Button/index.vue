@@ -1,5 +1,5 @@
 <template>
-<div class="um-button" :class="[{ 'mt-button_load': loader }, color ? `um-button_${color}` : '']">
+<div class="um-button" :class="classes">
   <template v-if="loader"></template>
 
   <template v-else>

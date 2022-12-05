@@ -18,7 +18,15 @@ export default defineComponent({
     }
   },
   data: () => ({}),
-  computed: {},
+  computed: {
+    classes() {
+      return [
+        { 'mt-button_load': this.loader },
+        this.color ? `um-button_${this.color}` : '',
+        this.disabled ? `um-button_disabled` : '',
+      ];
+    },
+  },
 
   watch: {},
   methods: {
