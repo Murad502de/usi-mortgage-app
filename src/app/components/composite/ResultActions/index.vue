@@ -1,10 +1,11 @@
 <template>
-  <div class="usi-mortgage--advanced-settings__header">
+  <div class="um-result-actions">
     <Button>
-      {{ addMortgageTitle }}
+      {{ cancelBtnTitle }}
     </Button>
-
-    <ResultActions />
+    <Button>
+      {{ saveBtnTitle }}
+    </Button>
   </div>
 </template>
 

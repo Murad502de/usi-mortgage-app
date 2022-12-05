@@ -1,6 +1,5 @@
 <template>
-<div class="">
-</div>
+  <div class="">hallo aus Main</div>
 </template>
 
 <script src="./script.ts" />

@@ -1,18 +1,23 @@
 import { defineComponent } from "vue";
 import Button from "@components/ui/Button/index.vue";
-import ResultActions from "@components/composite/ResultActions/index.vue";
 
 export default defineComponent({
   components: {
     Button,
-    ResultActions,
   },
 
-  props: {},
+  props: {
+    cancelBtnTitle: {
+      type: String,
+      default: "Отменить",
+    },
+    saveBtnTitle: {
+      type: String,
+      default: "Сохранить",
+    },
+  },
   data() {
-    return {
-      addMortgageTitle: '+ Добавить Ипотеку',
-    };
+    return {};
   },
   computed: {},
 
