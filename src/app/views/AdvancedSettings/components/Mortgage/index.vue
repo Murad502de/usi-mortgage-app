@@ -1,7 +1,13 @@
 <template>
   <Card class="usi-mortgage--advanced-settings__mortgage">
-    <div class="usi-mortgage--advanced-settings__mortgage--close">x</div>
-    <div class="usi-mortgage--advanced-settings__mortgage--title"></div>
+    <Icon
+      class="usi-mortgage--advanced-settings__mortgage--close"
+      name="close"
+      color="#CCC8C8"
+    />
+    <div class="usi-mortgage--advanced-settings__mortgage--title">
+      {{ cardTitel }}
+    </div>
     <div class="usi-mortgage--advanced-settings__mortgage--main"></div>
   </Card>
 </template>

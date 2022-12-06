@@ -1,0 +1,14 @@
+.mt-svg {
+  &__icon {
+    transition: all ease-in-out 0.2s;
+  }
+  &__loader {
+    animation: spin infinite linear 1s;
+  }
+
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

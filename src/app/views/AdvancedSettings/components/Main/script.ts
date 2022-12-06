@@ -1,12 +1,12 @@
 import { defineComponent } from "vue";
-import type { PropType } from 'vue'
+// import { PropType } from 'vue'
 import Mortgage from '../Mortgage/index.vue';
 
-interface IMortgage {
-  title: string
-  author: string
-  year: number
-}
+// interface IMortgage {
+//   title: string
+//   author: string
+//   year: number
+// }
 
 export default defineComponent({
   components: {
@@ -15,7 +15,7 @@ export default defineComponent({
 
   props: {
     mortgage: {
-      type: Object as PropType<IMortgage>,
+      type: Object,
       required: true,
     },
   },
