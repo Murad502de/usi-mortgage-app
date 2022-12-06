@@ -8,5 +8,5 @@
   </div>
 </template>
 
-<script src="./script.js" />
+<script lang="ts" src="./script.js" />
 <style lang="scss" src="./styles.scss" />

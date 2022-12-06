@@ -3,5 +3,5 @@
 <component class="mt-svg__loader" v-show="preloader" :is="getIconCmpName({ name: preloaderName, })" :color="preloaderColor" />
 </template>
 
-<script src="./script.ts" />
+<script lang="ts" src="./script.ts" />
 <style lang="scss" src="./styles.scss" />

@@ -7,5 +7,5 @@
   </svg>
 </template>
 
-<script src="./script.ts" />
+<script lang="ts" src="./script.ts" />
 <style lang="scss" src="./styles.scss" />
