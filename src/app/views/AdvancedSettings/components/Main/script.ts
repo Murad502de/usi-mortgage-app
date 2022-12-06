@@ -1,7 +1,10 @@
 import { defineComponent } from "vue";
+import Mortgage from '../Mortgage/index.vue';
 
 export default defineComponent({
-  components: {},
+  components: {
+    Mortgage,
+  },
 
   props: {},
   data: () => ({}),

@@ -1,5 +1,9 @@
 <template>
-  <div class="usi-mortgage--advanced-settings__main">hallo aus Main</div>
+  <div class="usi-mortgage--advanced-settings__main">
+    <Mortgage class="usi-mortgage--advanced-settings__main--card" />
+    <Mortgage class="usi-mortgage--advanced-settings__main--card" />
+    <Mortgage class="usi-mortgage--advanced-settings__main--card" />
+  </div>
 </template>
 
 <script src="./script.ts" />
