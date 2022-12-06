@@ -1,6 +1,8 @@
 <template>
   <Card class="usi-mortgage--advanced-settings__mortgage">
-    Mortgage Card
+    <div class="usi-mortgage--advanced-settings__mortgage--close">x</div>
+    <div class="usi-mortgage--advanced-settings__mortgage--title"></div>
+    <div class="usi-mortgage--advanced-settings__mortgage--main"></div>
   </Card>
 </template>
 
