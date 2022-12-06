@@ -2,10 +2,27 @@
   <div class="usi-mortgage--advanced-settings">
     <Header @save="save" @cancel="cancel" />
     <Main />
-
-    <!-- <MortgageCard class="mortgage-card">
-      <div class="mortgage-card__content">data of mortgage card new 3</div>
-    </MortgageCard> -->
+    <Modal
+      teleportTo="#page_holder"
+      :visibility="modalVisibility"
+      @close="closeModal"
+      class="usi-mortgage--advanced-settings__modal"
+    >
+      <div class="usi-mortgage--advanced-settings__modal--message">
+        Вы не сохранили внесенные изменения.
+      </div>
+      <div class="usi-mortgage--advanced-settings__modal--actions">
+        <ModalActions
+          cancelBtnTitle="Вернуться к настройкам"
+          saveBtnTitle="Отменить"
+          :cancelVisibility="true"
+          :cancelDisabled="false"
+          :saveDisabled="false"
+          @save="saveModal"
+          @cancel="closeModal"
+        />
+      </div>
+    </Modal>
   </div>
 </template>
 

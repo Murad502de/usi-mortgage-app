@@ -1,7 +1,9 @@
-.mortgage-card {
-  margin-top: 20px;
+.usi-mortgage--advanced-settings {
+  &__modal {
+    &--message {}
 
-  &:first-child {
-    margin-top: 0;
+    &--actions {
+      margin-top: 24px;
+    }
   }
 }

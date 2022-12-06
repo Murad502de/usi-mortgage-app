@@ -1,0 +1,43 @@
+.um-modal {
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, .6);
+  }
+
+  &__window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+
+  &__window-card {
+    position: relative;
+    padding: 30px;
+    min-width: 500px;
+    border: 1px solid #d3d6d7;
+    border-radius: 1px;
+
+    &--content {
+      &__header {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+
+        &--close {
+          width: 24px;
+          height: 24px;
+          cursor: pointer;
+        }
+      }
+
+      &__main {}
+    }
+  }
+}
