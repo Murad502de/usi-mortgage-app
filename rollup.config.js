@@ -18,6 +18,8 @@ import bundleScss from 'rollup-plugin-bundle-scss';
 import alias from '@rollup/plugin-alias';
 import { terser } from 'rollup-plugin-terser';
 
+import commonjs from '@rollup/plugin-commonjs';
+
 const production = !process.env.ROLLUP_WATCH;
 
 const babelOptions = {
@@ -88,6 +90,8 @@ export default {
     nodeResolve({
       extensions: ['.scss', '.vue', '.ts']
     }),
+
+    commonjs(),
 
     copy({
       assets: [

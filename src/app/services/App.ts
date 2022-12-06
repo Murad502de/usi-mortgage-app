@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 // import VueAxios from 'vue-axios';
 // import apiGatewayDefault from '@/app/network/gateways/default';
+import vClickOutside from "click-outside-vue3";
 import store from '@/app/store';
 import * as pageCodes from '@/app/shared/pageCodes';
 import MountPoint from '@/app/services/MountPoint';
@@ -54,6 +55,7 @@ class App {
     const app = createApp(view)
       // .use(VueAxios, { $apiGatewayDefault: apiGatewayDefault, })
       .use(store)
+      .use(vClickOutside)
       .mount(point);
 
     console.debug('AppService::createIn[app]', app); //DELETE

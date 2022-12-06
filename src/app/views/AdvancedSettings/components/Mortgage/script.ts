@@ -1,18 +1,20 @@
 import { defineComponent } from "vue";
 import Card from '@components/ui/Card/index.vue';
 import Icon from '@components/ui-embedded/Icon/index.vue';
+import Select from '@components/ui/Select/index.vue';
 
 export default defineComponent({
-  // name: "Button",
   components: {
     Card,
     Icon,
+    Select,
   },
 
   props: {},
   data() {
     return {
       cardTitel: 'Настройки узла обработки ипотеки',
+      mortgageStagesTitle: 'Этапы воронки "Ипотека"',
     };
   },
   computed: {},

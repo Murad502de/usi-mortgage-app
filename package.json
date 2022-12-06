@@ -70,6 +70,7 @@
   "dependencies": {
     "@rollup/plugin-node-resolve": "^15.0.1",
     "axios": "^1.2.0",
+    "click-outside-vue3": "^4.0.1",
     "js-cookie": "^3.0.1",
     "vue-axios": "^3.5.2",
     "vuex": "^4.0.2"
