@@ -1,10 +1,10 @@
 <template>
   <div class="usi-mortgage--advanced-settings__header">
-    <Button>
+    <Button :disabled="stub">
       {{ addMortgageTitle }}
     </Button>
 
-    <ResultActions :cancelVisibility="true" :cancelDisabled="false" :saveDisabled="false" @save="save" @cancel="cancel" />
+    <ResultActions :cancelVisibility="true && !stub" :cancelDisabled="false || stub" :saveDisabled="false || stub" @save="save" @cancel="cancel" />
   </div>
 </template>
 

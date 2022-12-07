@@ -1,9 +1,11 @@
 import { defineComponent } from "vue";
 import Icon from '@components/ui-embedded/Icon/index.vue';
+import Skeleton from '@components/ui-embedded/Skeleton/index.vue';
 
 export default defineComponent({
   components: {
     Icon,
+    Skeleton,
   },
 
   props: {
@@ -30,6 +32,10 @@ export default defineComponent({
     label: {
       type: String,
       default: '',
+    },
+    stub: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -66,6 +72,10 @@ export default defineComponent({
     /* ACTIONS */
   },
 
-  created() { },
-  mounted() { },
+  created() {
+    console.debug('Select::created', this.stub); //DELETE
+  },
+  mounted() {
+    console.debug('Select::mounted', this.stub); //DELETE
+  },
 });

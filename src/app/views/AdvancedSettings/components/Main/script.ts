@@ -11,6 +11,10 @@ export default defineComponent({
       type: Array,
       default: () => []
     },
+    stub: {
+      type: Boolean,
+      default: false,
+    },
   },
   data: () => ({}),
   computed: {},

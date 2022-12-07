@@ -8,7 +8,12 @@ export default defineComponent({
     ResultActions,
   },
 
-  props: {},
+  props: {
+    stub: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       addMortgageTitle: 'Добавить ипотеку',

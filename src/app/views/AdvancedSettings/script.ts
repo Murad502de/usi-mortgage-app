@@ -34,6 +34,8 @@ export default defineComponent({
           idCreationLeadStage: 12434321,
         },
       ],
+
+      stub: true,
     };
   },
   computed: {
@@ -83,5 +85,9 @@ export default defineComponent({
   created() {
     console.debug('advancedSettings::created', this); //DELETE
   },
-  mounted() { },
+  mounted() {
+    setTimeout(() => {
+      this.stub = false;
+    }, 5000);
+  },
 });

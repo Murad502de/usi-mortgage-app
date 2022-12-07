@@ -3,7 +3,9 @@
     <div v-if="label" class="um-textfield__label">
       {{label}}
     </div>
+
     <input
+      v-if="!stub"
       class="um-textfield__input"
       v-model="bufferValue"
       @focus="$emit('focus');focused = true;"
@@ -13,6 +15,8 @@
       @input="inputHandler"
       :disabled="disabled"
     />
+
+    <Skeleton v-else height="36" />
   </div>
 </template>
 

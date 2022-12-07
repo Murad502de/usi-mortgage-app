@@ -1,7 +1,10 @@
 import { defineComponent } from "vue";
+import Skeleton from '@components/ui-embedded/Skeleton/index.vue';
 
 export default defineComponent({
-  components: {},
+  components: {
+    Skeleton,
+  },
 
   props: {
     type: {
@@ -51,7 +54,11 @@ export default defineComponent({
     disabled: {
       type: Boolean,
       default: false
-    }
+    },
+    stub: {
+      type: Boolean,
+      default: false,
+    },
   },
   created() {
     this.bufferValue = this.modelValue

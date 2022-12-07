@@ -6,7 +6,7 @@ export default defineComponent({
   props: {
     height: {
       type: [String, Number],
-      default: 50,
+      default: 48,
     },
   },
   data() {
