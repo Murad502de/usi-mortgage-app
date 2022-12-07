@@ -13,8 +13,8 @@
     <div class="usi-mortgage--advanced-settings__mortgage--main">
       <div class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline">
         <div class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__pipeline">
-          <Select :label="mortgagePipelineTitle" />
-          <TextField :label="idCreationLeadStage" />
+          <Select class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__pipeline--select" :label="mortgagePipelineTitle" />
+          <TextField class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__pipeline--textfield" :label="idCreationLeadStage" />
         </div>
 
         <div class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__stages">
@@ -43,7 +43,8 @@
 
         <div class="usi-mortgage--advanced-settings__mortgage--pipelines__items">
           <div class="usi-mortgage--advanced-settings__mortgage--pipelines__item">
-            <TextField class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__stages--row-item" :label="idBookingStageTitle" />
+            <Select class="usi-mortgage--advanced-settings__mortgage--pipelines__item--select" :label="basicPipelineTitle" />
+            <TextField class="usi-mortgage--advanced-settings__mortgage--pipelines__item--textfiled" :label="idBookingStageTitle" />
           </div>
         </div>
       </div>

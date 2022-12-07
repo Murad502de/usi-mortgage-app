@@ -24,6 +24,12 @@
       align-content: center;
       justify-content: flex-start;
       align-items: center;
+
+      &--select {}
+
+      &--textfield {
+        margin-left: 14px;
+      }
     }
 
     &__stages {
@@ -64,6 +70,21 @@
 
     &__items {
       margin-top: 24px;
+    }
+
+    &__item {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-content: center;
+      justify-content: flex-start;
+      align-items: center;
+
+      &--select {}
+
+      &--textfiled {
+        margin-left: 14px;
+      }
     }
   }
 }

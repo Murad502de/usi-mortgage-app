@@ -20,6 +20,7 @@ export default defineComponent({
       cardTitel: 'Настройки узла обработки ипотеки',
       mortgageStagesTitle: 'Этапы воронки "Ипотека"',
       mortgagePipelineTitle: 'Воронка "Ипотека"',
+      basicPipelineTitle: 'Воронка',
       idCreationLeadStage: 'ID этапа создания ЛИДа',
       idApplyingStageTitle: 'ID этапа "Подача заявки"',
       idsBeforeApplyingStageTitle: 'ID этапов до этапа "Подача заявки" через ","',
