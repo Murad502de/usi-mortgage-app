@@ -20,6 +20,7 @@ export default defineComponent({
 
       mortgages: [
         {
+          uuid: 'asd2-12sse-12de1',
           mortgagePipeline: {
             id: 23412341,
             name: 'Ипотека 1'
@@ -27,6 +28,7 @@ export default defineComponent({
           idCreationLeadStage: 12434321,
         },
         {
+          uuid: 'asd2-12sse-12de2',
           mortgagePipeline: {
             id: 23412341,
             name: 'Ипотека 2'

@@ -72,10 +72,6 @@ export default defineComponent({
     /* ACTIONS */
   },
 
-  created() {
-    console.debug('Select::created', this.stub); //DELETE
-  },
-  mounted() {
-    console.debug('Select::mounted', this.stub); //DELETE
-  },
+  created() {},
+  mounted() {},
 });

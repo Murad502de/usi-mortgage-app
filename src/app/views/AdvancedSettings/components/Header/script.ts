@@ -26,6 +26,11 @@ export default defineComponent({
     /* GETTERS */
     /* SETTERS */
     /* HANDLERS */
+    add() {
+      console.debug('AdvancedSettings[Header]::add'); //DELETE
+
+      this.$emit('add');
+    },
     cancel() {
       console.debug('AdvancedSettings[Header]::cancel'); //DELETE
 
