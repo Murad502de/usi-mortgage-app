@@ -47,7 +47,7 @@ export default {
     dir: 'dist',
     format: 'amd',
     name: 'widget',
-    sourcemap: false,
+    sourcemap: true,
     globals: {
       axios: 'axios',
     },

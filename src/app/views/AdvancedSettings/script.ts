@@ -6,7 +6,6 @@ import Modal from '@components/TheModal/index.vue';
 import ModalActions from "@components/composite/ResultActions/index.vue";
 
 export default defineComponent({
-  // name: "Button",
   components: {
     Header,
     Main,
@@ -64,6 +63,8 @@ export default defineComponent({
     /* ACTIONS */
   },
 
-  created() { },
+  created() {
+    console.debug('advancedSettings::created', this); //DELETE
+  },
   mounted() { },
 });

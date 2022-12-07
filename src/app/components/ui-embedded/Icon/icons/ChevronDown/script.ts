@@ -1,12 +1,16 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  components: {},
-
-  props: {},
-  data() {
-    return {};
+  components: {
   },
+
+  props: {
+    color: {
+      type: String,
+      default: "#CCC8C8",
+    },
+  },
+  data: () => ({}),
   computed: {},
 
   watch: {},

@@ -1,5 +1,5 @@
-// import Cookies from 'js-cookie';
-const Cookies = require('js-cookie');
+import Cookies from 'js-cookie';
+// const Cookies = require('js-cookie');
 
 export const tokenInterceptor = ({ tokenName, }) => {
   return (config) => {

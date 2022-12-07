@@ -1,0 +1,20 @@
+.um-textfield {
+  min-width: 280px;
+
+  &__label {
+    margin-bottom: 14px;
+    white-space: nowrap;
+  }
+
+  &__input {
+    border: 1px solid #dbdedf;
+    border-radius: 3px;
+    font-size: 15px;
+    height: 36px;
+    padding: 8px 9px 7px;
+    box-sizing: border-box;
+    color: #313942;
+    background: #fff;
+    width: 100%;
+  }
+}

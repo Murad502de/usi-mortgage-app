@@ -7,4 +7,56 @@
     right: 10px;
     cursor: pointer;
   }
+
+  &--title {
+    font-weight: bold;
+  }
+
+  &--main {
+    margin-top: 48px;
+  }
+
+  &--mortgage-pipeline {
+    &__pipeline {}
+
+    &__stages {
+      margin-top: 48px;
+
+      &--title {
+        font-weight: bold;
+      }
+
+      &--rows {}
+
+      &--row {
+        margin-top: 24px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: flex-start;
+        align-items: center;
+
+        &-item {
+          margin-left: 14px;
+
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &--pipelines {
+    margin-top: 48px;
+
+    &__add {
+      width: max-content;
+    }
+
+    &__items {
+      margin-top: 24px;
+    }
+  }
 }

@@ -19,7 +19,15 @@ export default defineComponent({
     theme: {
       type: String,
       default: null
-    }
+    },
+    width: {
+      type: String,
+      default: '280'
+    },
+    label: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
