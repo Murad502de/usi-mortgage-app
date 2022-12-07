@@ -14,14 +14,19 @@ export default defineComponent({
     Button,
   },
 
-  props: {},
+  props: {
+    stub: {
+      type: Boolean,
+      default: false,
+    }
+  },
   data() {
     return {
       cardTitel: 'Настройки узла обработки ипотеки',
       mortgageStagesTitle: 'Этапы воронки "Ипотека"',
       mortgagePipelineTitle: 'Воронка "Ипотека"',
       basicPipelineTitle: 'Воронка',
-      idCreationLeadStage: 'ID этапа создания ЛИДа',
+      idCreationLeadStageTitle: 'ID этапа создания ЛИДа',
       idApplyingStageTitle: 'ID этапа "Подача заявки"',
       idsBeforeApplyingStageTitle: 'ID этапов до этапа "Подача заявки" через ","',
       idsAfterApplyingStageTitle: 'ID этапов после этапа "Подача заявки" через ","',

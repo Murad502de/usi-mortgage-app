@@ -17,6 +17,23 @@ export default defineComponent({
   data: () => {
     return {
       modalVisibility: false,
+
+      mortgages: [
+        {
+          mortgagePipeline: {
+            id: 23412341,
+            name: 'Ипотека 1'
+          },
+          idCreationLeadStage: 12434321,
+        },
+        {
+          mortgagePipeline: {
+            id: 23412341,
+            name: 'Ипотека 2'
+          },
+          idCreationLeadStage: 12434321,
+        },
+      ],
     };
   },
   computed: {

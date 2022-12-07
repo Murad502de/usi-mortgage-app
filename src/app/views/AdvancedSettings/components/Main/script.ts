@@ -1,12 +1,5 @@
 import { defineComponent } from "vue";
-// import { PropType } from 'vue'
 import Mortgage from '../Mortgage/index.vue';
-
-// interface IMortgage {
-//   title: string
-//   author: string
-//   year: number
-// }
 
 export default defineComponent({
   components: {
@@ -14,9 +7,9 @@ export default defineComponent({
   },
 
   props: {
-    mortgage: {
-      type: Object,
-      required: true,
+    mortgages: {
+      type: Array,
+      default: () => []
     },
   },
   data: () => ({}),
@@ -31,6 +24,10 @@ export default defineComponent({
     /* ACTIONS */
   },
 
-  created() { },
-  mounted() { },
+  created() {
+    console.debug('MAIN::created', this.mortgages); //DELETE
+  },
+  mounted() {
+    console.debug('MAIN::mounted', this.mortgages); //DELETE
+  },
 });

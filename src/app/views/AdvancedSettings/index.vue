@@ -1,7 +1,7 @@
 <template>
   <div class="usi-mortgage--advanced-settings">
     <Header @save="save" @cancel="cancel" />
-    <Main />
+    <Main  />
     <Modal
       teleportTo="#page_holder"
       :visibility="modalVisibility"

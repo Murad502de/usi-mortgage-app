@@ -14,7 +14,7 @@
       <div class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline">
         <div class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__pipeline">
           <Select class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__pipeline--select" :label="mortgagePipelineTitle" />
-          <TextField class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__pipeline--textfield" :label="idCreationLeadStage" />
+          <TextField class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__pipeline--textfield" :label="idCreationLeadStageTitle" />
         </div>
 
         <div class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__stages">
