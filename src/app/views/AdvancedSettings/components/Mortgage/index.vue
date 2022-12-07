@@ -13,7 +13,8 @@
     <div class="usi-mortgage--advanced-settings__mortgage--main">
       <div class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline">
         <div class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__pipeline">
-          <Select label="Воронка Ипотека" />
+          <Select :label="mortgagePipelineTitle" />
+          <TextField :label="idCreationLeadStage" />
         </div>
 
         <div class="usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__stages">

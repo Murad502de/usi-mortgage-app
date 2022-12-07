@@ -19,11 +19,13 @@ export default defineComponent({
     return {
       cardTitel: 'Настройки узла обработки ипотеки',
       mortgageStagesTitle: 'Этапы воронки "Ипотека"',
-      idApplyingStageTitle: 'ID Этапа "Подача заявки"',
-      idsBeforeApplyingStageTitle: 'ID Этапов до этапа "Подача заявки" через ","',
-      idsAfterApplyingStageTitle: 'ID Этапов после этапа "Подача заявки" через ","',
-      idMortgageApprovedStageTitle: 'ID Этапа "Ипотека одобрена"',
-      idBookingStageTitle: 'ID Этапа "Бронирование"',
+      mortgagePipelineTitle: 'Воронка "Ипотека"',
+      idCreationLeadStage: 'ID этапа создания ЛИДа',
+      idApplyingStageTitle: 'ID этапа "Подача заявки"',
+      idsBeforeApplyingStageTitle: 'ID этапов до этапа "Подача заявки" через ","',
+      idsAfterApplyingStageTitle: 'ID этапов после этапа "Подача заявки" через ","',
+      idMortgageApprovedStageTitle: 'ID этапа "Ипотека одобрена"',
+      idBookingStageTitle: 'ID этапа "Бронирование"',
       addNewPipelineTitle: 'Добавить воронку',
     };
   },

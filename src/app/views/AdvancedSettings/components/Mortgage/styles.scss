@@ -17,7 +17,14 @@
   }
 
   &--mortgage-pipeline {
-    &__pipeline {}
+    &__pipeline {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-content: center;
+      justify-content: flex-start;
+      align-items: center;
+    }
 
     &__stages {
       margin-top: 48px;
