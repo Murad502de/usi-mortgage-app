@@ -1,9 +1,11 @@
 import { defineComponent } from "vue";
 import Close from './icons/Close/index.vue';
+import ChevronDown from './icons/ChevronDown/index.vue';
 
 export default defineComponent({
   components: {
     Close,
+    ChevronDown,
   },
 
   props: {
@@ -42,6 +44,9 @@ export default defineComponent({
       switch (name.toLowerCase()) {
         case 'close':
           return 'Close';
+
+        case 'chevrondown':
+          return 'ChevronDown';
 
         default:
           return null;
