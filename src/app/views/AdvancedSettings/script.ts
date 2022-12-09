@@ -1,4 +1,5 @@
 import { defineComponent } from "vue";
+import { mapActions } from 'vuex'
 import { teleport } from '@/app/utils/teleport';
 import Header from './components/Header/index.vue';
 import Main from './components/Main/index.vue';
@@ -61,6 +62,11 @@ export default defineComponent({
     },
   },
   methods: {
+    /* STORE */
+    ...mapActions('dictionaries', {
+      fetchUsersDictionary: 'fetchUsers',
+      fetchPipelinesDictionary: 'fetchPipelines',
+    }),
     /* GETTERS */
     /* SETTERS */
     /* HANDLERS */
@@ -86,6 +92,9 @@ export default defineComponent({
 
   created() {
     console.debug('advancedSettings::created', this); //DELETE
+
+    this.fetchUsersDictionary();
+    this.fetchPipelinesDictionary();
   },
   mounted() {
     setTimeout(() => {

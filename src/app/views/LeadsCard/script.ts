@@ -31,8 +31,8 @@ export default {
 
   async beforeCreate() {
     await MountPoint.createAfter({
-      point: 'usi-mortgage-app--button',
-      after: 'div[data-id="685555"]',
+      point: 'usi-mortgage-app--button', //FIXME: move to .env
+      after: 'div[data-id="685555"]', //FIXME: move to .env
     });
   },
   created() {

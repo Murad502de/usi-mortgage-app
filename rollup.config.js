@@ -70,7 +70,7 @@ export default {
       __VERSION__: version,
       'process.env.NODE_ENV': JSON.stringify('production'),
       'process.env.VUE_APP_MOUNT_POINT': JSON.stringify('usi-mortgage-app'),
-      'process.env.VUE_APP_API_GATEWAY_DEFAULT_URL': JSON.stringify('https://itwelt.de'),
+      'process.env.VUE_APP_API_GATEWAY_DEFAULT_URL': JSON.stringify('http://localhost:8090/api/v1'),
     }),
     jsonlint({
       mode: 'json',
