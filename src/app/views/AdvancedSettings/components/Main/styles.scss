@@ -5,5 +5,18 @@
     margin-top: 24px;
     border: 1px solid #dbdedf;
     border-radius: 3px;
+
+    &_empty {
+      padding: 18px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      font-weight: bold;
+      height: 256px;
+    }
   }
 }

@@ -57,6 +57,26 @@
       color: inherit;
       position: relative;
       border: 1px solid #d4d5d8;
+      z-index: 5;
+      overflow-y: scroll;
+    }
+
+    &--list-item {
+      box-sizing: border-box;
+      height: 36px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-content: center;
+      justify-content: flex-start;
+      align-items: center;
+      cursor: pointer;
+      padding: 0 8px;
+
+      &:hover {
+        background: #dbdedf;
+      }
     }
   }
 }

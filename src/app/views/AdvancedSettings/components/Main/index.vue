@@ -10,7 +10,18 @@
       class="usi-mortgage--advanced-settings__main--card"
       v-for="mortgage in mortgages"
       :key="mortgage.uuid"
+      :pipelines="pipelines"
     />
+
+    <Card
+      v-if="!stub && !mortgages.length"
+      class="
+        usi-mortgage--advanced-settings__main--card
+        usi-mortgage--advanced-settings__main--card_empty
+      "
+    >
+      Ипотечные узлы не обнаружены
+    </Card>
   </div>
 </template>
 

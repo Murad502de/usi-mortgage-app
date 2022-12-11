@@ -19,12 +19,21 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    pipelines: {
+      type: Array,
+      default: () => ([]),
+    },
+    brokers: {
+      type: Array,
+      default: () => ([]),
+    },
   },
   data() {
     return {
       cardTitel: 'Настройки узла обработки ипотеки',
       mortgageStagesTitle: 'Этапы воронки "Ипотека"',
       mortgagePipelineTitle: 'Воронка "Ипотека"',
+      mortgageBrokersTitle: 'Брокеры',
       basicPipelineTitle: 'Воронка',
       idCreationLeadStageTitle: 'ID этапа создания ЛИДа',
       idApplyingStageTitle: 'ID этапа "Подача заявки"',
@@ -33,6 +42,7 @@ export default defineComponent({
       idMortgageApprovedStageTitle: 'ID этапа "Ипотека одобрена"',
       idBookingStageTitle: 'ID этапа "Бронирование"',
       addNewPipelineTitle: 'Добавить воронку',
+      mortgagePipeline: null
     };
   },
   computed: {},
@@ -46,6 +56,10 @@ export default defineComponent({
     /* ACTIONS */
   },
 
-  created() { },
-  mounted() { },
+  created() {
+    console.debug('Mortgage::created', this.pipelines); //DELETE
+  },
+  mounted() {
+    console.debug('Mortgage::mounted', this.pipelines); //DELETE
+  },
 });

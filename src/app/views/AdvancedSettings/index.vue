@@ -1,6 +1,13 @@
 <template>
   <div class="usi-mortgage--advanced-settings">
-    <Header :stub="stub" @save="save" @cancel="cancel" />
+    <Header
+      @save="save"
+      @cancel="cancel"
+      :addDisabled="addDisabled"
+      :cancelVisibility="cancelVisibility"
+      :cancelDisabled="cancelDisabled"
+      :saveDisabled="saveDisabled"
+    />
     <Main :mortgages="mortgages" :stub="stub" />
     <Modal
       teleportTo="#page_holder"

@@ -9,7 +9,19 @@ export default defineComponent({
   },
 
   props: {
-    stub: {
+    addDisabled: {
+      type: Boolean,
+      default: false,
+    },
+    cancelVisibility: {
+      type: Boolean,
+      default: false,
+    },
+    cancelDisabled: {
+      type: Boolean,
+      default: false,
+    },
+    saveDisabled: {
       type: Boolean,
       default: false,
     },

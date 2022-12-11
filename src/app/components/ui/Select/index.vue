@@ -10,7 +10,11 @@
         class="um-select__select_selected"
         @click="toggle"
       >
-        <span>{{ modelValue }}</span>
+        <span>{{
+          modelValue
+            ? modelValue.name || modelValue.value || modelValue
+            : "Выбрать"
+        }}</span>
 
         <Icon class="um-select__select--chevron" name="chevrondown" />
       </div>

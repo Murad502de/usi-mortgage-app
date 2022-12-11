@@ -15,7 +15,7 @@ export default defineComponent({
     },
     items: {
       type: [Array, Object],
-      default: () => []
+      default: () => [],
     },
     valueProp: {
       type: String,
@@ -46,8 +46,8 @@ export default defineComponent({
         events: ['mousedown'],
         isActive: true,
         detectIFrame: true,
-        capture: false
-      }
+        capture: false,
+      },
     };
   },
   computed: {},
@@ -58,20 +58,26 @@ export default defineComponent({
     /* SETTERS */
     /* HANDLERS */
     toggle() {
-      this.showList = !this.showList
+      this.showList = !this.showList;
     },
     hide() {
-      this.showList = false
+      this.showList = false;
     },
     selectItem(index) {
-      this.$emit('update:modelValue', this.items[index])
-      this.hide()
+      console.debug('uiSelect::selectItem', index, this.items[index]); //DELETE
+
+      this.$emit('update:modelValue', this.items[index]);
+      this.hide();
     },
 
     /* HELPERS */
     /* ACTIONS */
   },
 
-  created() {},
-  mounted() {},
+  created() {
+    console.debug('uiSelect::created', this.items); //DELETE
+  },
+  mounted() {
+    console.debug('uiSelect::mounted', this.items); //DELETE
+  },
 });

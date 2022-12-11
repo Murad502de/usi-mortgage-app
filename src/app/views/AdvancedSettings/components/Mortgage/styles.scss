@@ -18,12 +18,19 @@
 
   &--mortgage-pipeline {
     &__pipeline {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      align-content: center;
-      justify-content: flex-start;
-      align-items: center;
+      &--row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 24px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
 
       &--select {}
 

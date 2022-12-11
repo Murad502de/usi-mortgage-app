@@ -1,25 +1,33 @@
+import { fetchMortgages } from '@/app/api/mortgageApi/fetchMortgages';
+
 export default {
   namespaced: true,
 
   state: {
-    id: null,
+    list: [],
   },
 
   getters: {
-    id(state) {
-      return state.id;
+    list(state) {
+      return state.list;
     }
   },
 
   actions: {
-    async fetch({ commit }, { params, }) {
-      commit('updateId', params);
+    async fetchList({ commit }) {
+      console.debug('vuex[mortgage]::fetchList'); //DELETE
+
+      const list: Array<any> = await fetchMortgages();
+
+      // commit('updateList', list);
+
+      return list;
     },
   },
 
   mutations: {
-    updateId(state, params) {
-      state.params = params;
+    updateList(state, list) {
+      state.list = list;
     },
   },
 }

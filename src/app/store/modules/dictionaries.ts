@@ -29,7 +29,7 @@ export default {
     async fetchPipelines({ commit }) {
       console.debug('vuex::fetchPipelines'); //DELETE
 
-      const pipelines: Array<any> = await fetchLeadPipelinesDictionary();;
+      const pipelines: Array<any> = await fetchLeadPipelinesDictionary();
 
       commit('updatePipelines', pipelines);
     },
@@ -41,10 +41,10 @@ export default {
 
       state.users = users;
     },
-    updatePipelines(state, users) {
-      console.debug('vuex::updatePipelines', users); //DELETE
+    updatePipelines(state, pipelines) {
+      console.debug('vuex::updatePipelines', pipelines); //DELETE
 
-      state.users = users;
+      state.pipelines = pipelines;
     },
   },
 }

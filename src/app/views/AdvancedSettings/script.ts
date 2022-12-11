@@ -19,23 +19,43 @@ export default defineComponent({
     return {
       modalVisibility: false,
       mortgages: [],
+      mortgagesFetched: false,
     };
   },
   computed: {
     workArea() {
+      console.debug('AdvancedSettings::computed[widget_code]', this.$store.getters["widget/params"].widget_code); //DELETE
+
       return this.$store.getters["widget/params"].widget_code
         ? `#work-area-${this.$store.getters["widget/params"].widget_code}`
         : null;
     },
     stub() {
-      return !this.mortgages.length;
+      return !this.mortgages.length && !this.mortgagesFetched;
+    },
+    empty() {
+      return !this.stub && !this.mortgages.length;
+    },
+    addDisabled() {
+      return this.stub;
+    },
+    cancelVisibility() {
+      return !this.stub && !this.empty;
+    },
+    cancelDisabled() {
+      return this.stub || this.empty;
+    },
+    saveDisabled() {
+      return this.stub || this.empty;
     },
   },
 
   watch: {
     workArea(newWorkArea, oldWorkArea) {
+      // console.debug('AdvancedSettings::watch[workArea]', newWorkArea, oldWorkArea); //DELETE
+
       if (newWorkArea) {
-        console.debug('AdvancedSettings::watch[workArea]', newWorkArea, oldWorkArea); //DELETE
+        // console.debug('AdvancedSettings::watch[newWorkArea]', newWorkArea); //DELETE
 
         teleport({
           toSelector: newWorkArea,
@@ -50,17 +70,20 @@ export default defineComponent({
       fetchUsersDictionary: 'fetchUsers',
       fetchPipelinesDictionary: 'fetchPipelines',
     }),
+    ...mapActions('mortgage', {
+      fetchMortgages: 'fetchList',
+    }),
     /* GETTERS */
     /* SETTERS */
     /* HANDLERS */
     cancel() {
-      console.debug('AdvancedSettings::cancel'); //DELETE
-      console.debug('AdvancedSettings << open modal'); //DELETE
+      // console.debug('AdvancedSettings::cancel'); //DELETE
+      // console.debug('AdvancedSettings << open modal'); //DELETE
 
       this.modalVisibility = true;
     },
     save() {
-      console.debug('AdvancedSettings::save'); //DELETE
+      // console.debug('AdvancedSettings::save'); //DELETE
     },
     closeModal() {
       this.modalVisibility = false;
@@ -73,32 +96,23 @@ export default defineComponent({
     /* ACTIONS */
   },
 
-  created() {
-    console.debug('advancedSettings::created', this); //DELETE
+  async created() {
+    console.debug('advancedSettings::created', this.$store); //DELETE
 
     this.fetchUsersDictionary();
     this.fetchPipelinesDictionary();
+
+    this.mortgages = await this.fetchMortgages();
+    this.mortgagesFetched = true;
   },
-  mounted() {
-    setTimeout(() => {
-      this.mortgages = [
-        {
-          uuid: 'asd2-12sse-12de1',
-          mortgagePipeline: {
-            id: 23412341,
-            name: 'Ипотека 1'
-          },
-          idCreationLeadStage: 12434321,
-        },
-        {
-          uuid: 'asd2-12sse-12de2',
-          mortgagePipeline: {
-            id: 23412341,
-            name: 'Ипотека 2'
-          },
-          idCreationLeadStage: 12434321,
-        },
-      ];
-    }, 5000);
+  async mounted() {
+    // console.debug('advancedSettings::mounted', this.workArea); //DELETE
+
+    if (this.workArea) {
+      teleport({
+        toSelector: this.workArea,
+        elementSelector: ".usi-mortgage--advanced-settings",
+      });
+    }
   },
 });
