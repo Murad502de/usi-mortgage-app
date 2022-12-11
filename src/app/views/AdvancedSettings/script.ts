@@ -18,27 +18,7 @@ export default defineComponent({
   data: () => {
     return {
       modalVisibility: false,
-
-      mortgages: [
-        {
-          uuid: 'asd2-12sse-12de1',
-          mortgagePipeline: {
-            id: 23412341,
-            name: 'Ипотека 1'
-          },
-          idCreationLeadStage: 12434321,
-        },
-        {
-          uuid: 'asd2-12sse-12de2',
-          mortgagePipeline: {
-            id: 23412341,
-            name: 'Ипотека 2'
-          },
-          idCreationLeadStage: 12434321,
-        },
-      ],
-
-      stub: true,
+      mortgages: [],
     };
   },
   computed: {
@@ -46,6 +26,9 @@ export default defineComponent({
       return this.$store.getters["widget/params"].widget_code
         ? `#work-area-${this.$store.getters["widget/params"].widget_code}`
         : null;
+    },
+    stub() {
+      return !this.mortgages.length;
     },
   },
 
@@ -98,7 +81,24 @@ export default defineComponent({
   },
   mounted() {
     setTimeout(() => {
-      this.stub = false;
+      this.mortgages = [
+        {
+          uuid: 'asd2-12sse-12de1',
+          mortgagePipeline: {
+            id: 23412341,
+            name: 'Ипотека 1'
+          },
+          idCreationLeadStage: 12434321,
+        },
+        {
+          uuid: 'asd2-12sse-12de2',
+          mortgagePipeline: {
+            id: 23412341,
+            name: 'Ипотека 2'
+          },
+          idCreationLeadStage: 12434321,
+        },
+      ];
     }, 5000);
   },
 });

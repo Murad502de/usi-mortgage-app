@@ -71,6 +71,8 @@ export default {
       'process.env.NODE_ENV': JSON.stringify('production'),
       'process.env.VUE_APP_MOUNT_POINT': JSON.stringify('usi-mortgage-app'),
       'process.env.VUE_APP_API_GATEWAY_DEFAULT_URL': JSON.stringify('http://localhost:8090/api/v1'),
+      'process.env.VUE_APP_PAY_FORM_SWITCHER_ID': JSON.stringify(1058931),
+      'process.env.VUE_APP_PAY_FORM_MORTGAGE_ID': JSON.stringify(640645),
     }),
     jsonlint({
       mode: 'json',

@@ -32,7 +32,7 @@ export default {
   async beforeCreate() {
     await MountPoint.createAfter({
       point: 'usi-mortgage-app--button', //FIXME: move to .env
-      after: 'div[data-id="685555"]', //FIXME: move to .env
+      after: `div[data-id="${process.env.VUE_APP_PAY_FORM_SWITCHER_ID}"]`, //FIXME: move to .env
     });
   },
   created() {
