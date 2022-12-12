@@ -18,23 +18,34 @@ export default defineComponent({
   data: () => {
     return {
       modalVisibility: false,
-      mortgages: [],
       mortgagesFetched: false,
+      addMortgages: [],
+      updateMortgages: [],
+      deleteMortgages: [],
     };
   },
   computed: {
+    storeMortgages() {
+      return this.$store.getters["mortgage/list"];
+    },
+    readMortgages() {
+      return [
+        ...this.storeMortgages,
+        ...this.addMortgages,
+      ].filter((mortgage) => (!this.deleteMortgages.includes(mortgage.uuid)));
+    },
     workArea() {
-      console.debug('AdvancedSettings::computed[widget_code]', this.$store.getters["widget/params"].widget_code); //DELETE
+      // console.debug('AdvancedSettings::computed[widget_code]', this.$store.getters["widget/params"].widget_code); //DELETE
 
       return this.$store.getters["widget/params"].widget_code
         ? `#work-area-${this.$store.getters["widget/params"].widget_code}`
         : null;
     },
     stub() {
-      return !this.mortgages.length && !this.mortgagesFetched;
+      return !this.readMortgages.length && !this.mortgagesFetched;
     },
     empty() {
-      return !this.stub && !this.mortgages.length;
+      return !this.readMortgages.length;
     },
     addDisabled() {
       return this.stub;
@@ -43,10 +54,12 @@ export default defineComponent({
       return !this.stub && !this.empty;
     },
     cancelDisabled() {
-      return this.stub || this.empty;
+      return !this.deleteMortgages.length &&
+        !this.updateMortgages.length &&
+        !this.addMortgages.length;
     },
     saveDisabled() {
-      return this.stub || this.empty;
+      return this.cancelDisabled;
     },
   },
 
@@ -77,19 +90,27 @@ export default defineComponent({
     /* SETTERS */
     /* HANDLERS */
     cancel() {
-      // console.debug('AdvancedSettings::cancel'); //DELETE
-      // console.debug('AdvancedSettings << open modal'); //DELETE
+      console.debug('AdvancedSettings::cancel'); //DELETE
 
       this.modalVisibility = true;
     },
     save() {
-      // console.debug('AdvancedSettings::save'); //DELETE
+      console.debug('AdvancedSettings::save'); //DELETE
     },
     closeModal() {
       this.modalVisibility = false;
     },
     saveModal() {
       this.modalVisibility = false;
+
+      this.deleteMortgages = [];
+      this.updateMortgages = [];
+      this.addMortgages = [];
+    },
+    deleteMortgage(mortgage) {
+      console.debug('AdvancedSettings::deleteMortgage', mortgage); //DELETE
+
+      this.deleteMortgages.push(mortgage.uuid);
     },
 
     /* HELPERS */
@@ -97,12 +118,12 @@ export default defineComponent({
   },
 
   async created() {
-    console.debug('advancedSettings::created', this.$store); //DELETE
+    // console.debug('advancedSettings::created', this.$store); //DELETE
 
     this.fetchUsersDictionary();
     this.fetchPipelinesDictionary();
+    await this.fetchMortgages();
 
-    this.mortgages = await this.fetchMortgages();
     this.mortgagesFetched = true;
   },
   async mounted() {

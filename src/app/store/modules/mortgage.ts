@@ -19,7 +19,7 @@ export default {
 
       const list: Array<any> = await fetchMortgages();
 
-      // commit('updateList', list);
+      commit('updateList', list);
 
       return list;
     },

@@ -4,11 +4,10 @@
       @save="save"
       @cancel="cancel"
       :addDisabled="addDisabled"
-      :cancelVisibility="cancelVisibility"
       :cancelDisabled="cancelDisabled"
       :saveDisabled="saveDisabled"
     />
-    <Main :mortgages="mortgages" :stub="stub" />
+    <Main :mortgages="readMortgages" :stub="stub" @delete="deleteMortgage" />
     <Modal
       teleportTo="#page_holder"
       :visibility="modalVisibility"
@@ -16,7 +15,7 @@
       class="usi-mortgage--advanced-settings__modal"
     >
       <div class="usi-mortgage--advanced-settings__modal--message">
-        Вы не сохранили внесенные изменения.
+        Вы не сохранили внесенные изменения!
       </div>
       <div class="usi-mortgage--advanced-settings__modal--actions">
         <ModalActions

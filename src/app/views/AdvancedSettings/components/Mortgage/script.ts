@@ -27,6 +27,10 @@ export default defineComponent({
       type: Array,
       default: () => ([]),
     },
+    mortgage: {
+      type: Object,
+      default: {},
+    },
   },
   data() {
     return {
@@ -42,7 +46,8 @@ export default defineComponent({
       idMortgageApprovedStageTitle: 'ID этапа "Ипотека одобрена"',
       idBookingStageTitle: 'ID этапа "Бронирование"',
       addNewPipelineTitle: 'Добавить воронку',
-      mortgagePipeline: null
+      mortgagePipeline: null,
+      mortgageBrokers: [],
     };
   },
   computed: {},
@@ -52,6 +57,12 @@ export default defineComponent({
     /* GETTERS */
     /* SETTERS */
     /* HANDLERS */
+    deleteMortgage() {
+      console.debug('Mortgage::deleteMortgage', this.mortgage); //DELETE
+
+      this.$emit('delete', this.mortgage);
+    },
+
     /* HELPERS */
     /* ACTIONS */
   },

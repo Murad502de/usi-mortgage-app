@@ -37,6 +37,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    multiple: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -50,11 +54,60 @@ export default defineComponent({
       },
     };
   },
-  computed: {},
+  computed: {
+    bufferItems() {
+      console.debug('bufferItems', this.modelValue); //DELETE
+
+      if (this.multiple && this.modelValue) {
+        console.debug('bufferItems[multiple][modelValue]', this.modelValue); //DELETE
+
+        return this.items.map((item) => {
+          let have = this.modelValue.find(value => value.uuid === item.uuid);
+
+          if (have) {
+            console.debug('bufferItems[have]'); //DELETE
+
+            return {
+              ...item,
+              selected: true,
+            };
+          }
+
+          console.debug('bufferItems[dont have]'); //DELETE
+
+          return {
+            ...item,
+            selected: false,
+          };
+        });
+      }
+
+      console.debug('bufferItems[default]'); //DELETE
+
+      return this.items.map((item) => ({
+        ...item,
+        selected: item.uuid === this.modelValue?.uuid,
+      }));
+    },
+  },
 
   watch: {},
   methods: {
     /* GETTERS */
+    getSelected() {
+      if (this.modelValue) {
+        if (this.multiple) {
+          if (this.modelValue.length) {
+            return `${this.modelValue[0].name || this.modelValue[0].value}${this.modelValue.length > 1 ? ' + ' + (this.modelValue.length - 1) : ''}`;
+          }
+        } else {
+          return this.modelValue.name || this.modelValue.value || this.modelValue;
+        }
+      }
+
+      return "Выбрать";
+    },
+
     /* SETTERS */
     /* HANDLERS */
     toggle() {
@@ -66,8 +119,20 @@ export default defineComponent({
     selectItem(index) {
       console.debug('uiSelect::selectItem', index, this.items[index]); //DELETE
 
-      this.$emit('update:modelValue', this.items[index]);
-      this.hide();
+      // this.items[index].selected = !this.items[index].selected;
+
+      if (this.multiple) {
+        let have = this.modelValue.find(item => item.uuid === this.items[index].uuid);
+
+        if (have) {
+          this.$emit('update:modelValue', [...this.modelValue.filter(item => item.uuid !== this.items[index].uuid)]);
+        } else {
+          this.$emit('update:modelValue', [...this.modelValue, this.items[index]]);
+        }
+      } else {
+        this.$emit('update:modelValue', this.items[index]);
+        this.hide();
+      }
     },
 
     /* HELPERS */

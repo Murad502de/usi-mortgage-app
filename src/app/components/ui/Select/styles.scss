@@ -75,7 +75,11 @@
       padding: 0 8px;
 
       &:hover {
-        background: #dbdedf;
+        background: #F2F2F2;
+      }
+
+      &_selected {
+        background: #dbdedf !important;
       }
     }
   }

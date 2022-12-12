@@ -1,10 +1,12 @@
 <template>
   <Card class="usi-mortgage--advanced-settings__mortgage">
-    <Icon
+    <div
+      v-if="!stub"
       class="usi-mortgage--advanced-settings__mortgage--close"
-      name="close"
-      color="#CCC8C8"
-    />
+      @click="deleteMortgage"
+    >
+      <Icon name="close" color="#CCC8C8" />
+    </div>
 
     <div class="usi-mortgage--advanced-settings__mortgage--title">
       {{ cardTitel }}
@@ -50,7 +52,10 @@
               class="
                 usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__pipeline--select
               "
+              :multiple="true"
               :label="mortgageBrokersTitle"
+              :items="brokers"
+              v-model="mortgageBrokers"
             />
           </div>
         </div>

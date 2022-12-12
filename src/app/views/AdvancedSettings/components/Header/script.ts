@@ -15,7 +15,7 @@ export default defineComponent({
     },
     cancelVisibility: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     cancelDisabled: {
       type: Boolean,

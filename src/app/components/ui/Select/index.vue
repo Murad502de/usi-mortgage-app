@@ -10,20 +10,19 @@
         class="um-select__select_selected"
         @click="toggle"
       >
-        <span>{{
-          modelValue
-            ? modelValue.name || modelValue.value || modelValue
-            : "Выбрать"
-        }}</span>
+        <span>{{ getSelected() }}</span>
 
         <Icon class="um-select__select--chevron" name="chevrondown" />
       </div>
 
       <div v-show="showList" class="um-select__select--list">
         <div
-          class="um-select__select--list-item"
-          v-for="(item, index) in items"
+          v-for="(item, index) in bufferItems"
           :key="index"
+          :class="[
+            { 'um-select__select--list-item': true },
+            { 'um-select__select--list-item_selected': item.selected },
+          ]"
           @click="selectItem(index)"
         >
           {{ item.name || item.value || item }}

@@ -23,6 +23,9 @@ export default defineComponent({
     pipelines() {
       return this.$store.getters["dictionaries/pipelines"];
     },
+    brokers() {
+      return this.$store.getters["dictionaries/users"];
+    },
   },
 
   watch: {},
@@ -30,6 +33,12 @@ export default defineComponent({
     /* GETTERS */
     /* SETTERS */
     /* HANDLERS */
+    deleteMortgage(mortgage) {
+      console.debug('Main::deleteMortgage', mortgage); //DELETE
+
+      this.$emit('delete', mortgage);
+    },
+
     /* HELPERS */
     /* ACTIONS */
   },
