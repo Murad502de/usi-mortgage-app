@@ -3,7 +3,8 @@ import Card from '@components/ui/Card/index.vue';
 import Icon from '@components/ui-embedded/Icon/index.vue';
 import Select from '@components/ui/Select/index.vue';
 import TextField from '@components/ui/TextField/index.vue';
-import Button from "@components/ui/Button/index.vue";
+import Button from '@components/ui/Button/index.vue';
+import Pipeline from './components/Pipeline/index.vue';
 
 export default defineComponent({
   components: {
@@ -12,6 +13,7 @@ export default defineComponent({
     Select,
     TextField,
     Button,
+    Pipeline,
   },
 
   props: {
@@ -48,11 +50,18 @@ export default defineComponent({
       addNewPipelineTitle: 'Добавить воронку',
       mortgagePipeline: null,
       mortgageBrokers: [],
+
+      pipelineValue: null, //DELETE
+      stageValue: '1234321, 8765643', //DELETE
     };
   },
   computed: {},
 
-  watch: {},
+  watch: {
+    stageValue(newVal, oldVal) {
+      console.debug('Mortgage::watcher[stageValue]', newVal, oldVal); //DELETE
+    },
+  },
   methods: {
     /* GETTERS */
     /* SETTERS */

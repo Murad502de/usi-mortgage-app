@@ -61,7 +61,7 @@ export default defineComponent({
     },
   },
   created() {
-    this.bufferValue = this.modelValue
+    this.bufferValue = this.modelValue;
   },
   mounted() {
     if (this.autofocus) this.$nextTick(() => {
@@ -99,29 +99,20 @@ export default defineComponent({
   },
   watch: {
     bufferValue(newVal, oldVal) {
-      if (this.type === 'number') {
-        let temp = parseInt(newVal) || 0
-        this.bufferValue = temp > 150 ? 150 : temp
-      }
+      console.debug('TextField::watcher[bufferValue]', newVal, oldVal); //DELETE
 
-      if (this.type === 'date') {
-        let dateArray = newVal.split('-');
+      if (newVal !== oldVal) {
+        console.debug('TextField::watcher[bufferValue][update]', newVal, oldVal); //DELETE
 
-        if (dateArray[0].length > 4) {
-          this.bufferValue = `2100-${dateArray[1]}-${dateArray[2]}`;
-
-          this.$emit('update:modelValue', `2100-${dateArray[1]}-${dateArray[2]}`);
-        } else {
-          this.$emit('update:modelValue', newVal);
-        }
-      } else {
-        if (newVal !== oldVal) {
-          this.$emit('update:modelValue', this.bufferValue);
-        }
+        this.$emit('update:modelValue', this.bufferValue);
       }
     },
     modelValue(newVal, oldVal) {
+      console.debug('TextField::watcher[modelValue]', newVal, oldVal); //DELETE
+
       if (newVal !== oldVal) {
+        console.debug('TextField::watcher[modelValue][update]', newVal, oldVal); //DELETE
+
         this.bufferValue = newVal;
       }
     }

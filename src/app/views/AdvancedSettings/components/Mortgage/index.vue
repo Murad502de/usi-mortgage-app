@@ -136,25 +136,14 @@
         <div
           class="usi-mortgage--advanced-settings__mortgage--pipelines__items"
         >
-          <div
-            class="usi-mortgage--advanced-settings__mortgage--pipelines__item"
-          >
-            <Select
-              :stub="stub"
-              class="
-                usi-mortgage--advanced-settings__mortgage--pipelines__item--select
-              "
-              :label="basicPipelineTitle"
-              :items="pipelines"
-            />
-            <TextField
-              :stub="stub"
-              class="
-                usi-mortgage--advanced-settings__mortgage--pipelines__item--textfiled
-              "
-              :label="idBookingStageTitle"
-            />
-          </div>
+          <Pipeline
+            :stub="stub"
+            :pipelines="pipelines"
+            :pipelineTitle="basicPipelineTitle"
+            :stageTitle="idBookingStageTitle"
+            v-model:pipeline-value="pipelineValue"
+            v-model:stage-value="stageValue"
+          />
         </div>
       </div>
     </div>

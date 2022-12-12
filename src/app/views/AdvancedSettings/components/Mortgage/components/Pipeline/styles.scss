@@ -1,0 +1,14 @@
+.advanced-mortgage-pipeline {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+
+  &__select {}
+
+  &__textfield {
+    margin-left: 14px;
+  }
+}
