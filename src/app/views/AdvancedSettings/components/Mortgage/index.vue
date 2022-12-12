@@ -145,6 +145,7 @@
                 usi-mortgage--advanced-settings__mortgage--pipelines__item--select
               "
               :label="basicPipelineTitle"
+              :items="pipelines"
             />
             <TextField
               :stub="stub"
