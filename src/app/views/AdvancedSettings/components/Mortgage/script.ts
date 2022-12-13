@@ -52,14 +52,17 @@ export default defineComponent({
       mortgageBrokers: [],
 
       pipelineValue: null, //DELETE
-      stageValue: '1234321, 8765643', //DELETE
+      stageValue: '1111111', //DELETE
     };
   },
   computed: {},
 
   watch: {
-    stageValue(newVal, oldVal) {
+    stageValue(newVal, oldVal) { //DELETE
       console.debug('Mortgage::watcher[stageValue]', newVal, oldVal); //DELETE
+    },
+    pipelineValue(newVal, oldVal) { //DELETE
+      console.debug('Mortgage::watcher[pipelineValue]', newVal, oldVal); //DELETE
     },
   },
   methods: {

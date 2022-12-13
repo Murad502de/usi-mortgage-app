@@ -5,13 +5,13 @@
       :stub="stub"
       :label="pipelineTitle"
       :items="pipelines"
-      v-model="pipelineValue"
+      v-model="bufferPipelineValue"
     />
     <TextField
       class="advanced-mortgage-pipeline__textfield"
       :stub="stub"
       :label="stageTitle"
-      v-model="bufferValue"
+      v-model="bufferStageValue"
     />
   </div>
 </template>

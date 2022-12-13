@@ -36,20 +36,20 @@ export default defineComponent({
   },
   data() {
     return {
-      // bufferValue: this.stageValue,
-      bufferValue: '',
+      bufferStageValue: '',
+      bufferPipelineValue: '',
     };
   },
   computed: {},
 
   watch: {
-    bufferValue(newVal, oldVal) {
-      console.debug('Pipeline::watcher[bufferValue]', newVal, oldVal); //DELETE
+    bufferStageValue(newVal, oldVal) {
+      console.debug('Pipeline::watcher[bufferStageValue]', newVal, oldVal); //DELETE
 
       if (newVal !== oldVal) {
-        console.debug('Pipeline::watcher[bufferValue][update]', newVal, oldVal); //DELETE
+        console.debug('Pipeline::watcher[bufferStageValue][update]', newVal, oldVal); //DELETE
 
-        this.$emit('update:stageValue', this.bufferValue);
+        this.$emit('update:stageValue', this.bufferStageValue);
       }
     },
     stageValue(newVal, oldVal) {
@@ -58,7 +58,25 @@ export default defineComponent({
       if (newVal !== oldVal) {
         console.debug('Pipeline::watcher[stageValue][update]', newVal, oldVal); //DELETE
 
-        this.bufferValue = newVal;
+        this.bufferStageValue = newVal;
+      }
+    },
+    bufferPipelineValue(newVal, oldVal) {
+      console.debug('Pipeline::watcher[bufferPipelineValue]', newVal, oldVal); //DELETE
+
+      if (newVal !== oldVal) {
+        console.debug('Pipeline::watcher[bufferPipelineValue][update]', newVal, oldVal); //DELETE
+
+        this.$emit('update:pipelineValue', this.bufferPipelineValue);
+      }
+    },
+    pipelineValue(newVal, oldVal) {
+      console.debug('Pipeline::watcher[pipelineValue]', newVal, oldVal); //DELETE
+
+      if (newVal !== oldVal) {
+        console.debug('Pipeline::watcher[pipelineValue][update]', newVal, oldVal); //DELETE
+
+        this.bufferPipelineValue = newVal;
       }
     },
   },
@@ -71,13 +89,17 @@ export default defineComponent({
   },
 
   created() {
-    console.debug('Pipeline::created', this.bufferValue, this.stageValue); //DELETE
+    console.debug('Pipeline::created[stage]', this.bufferStageValue, this.stageValue); //DELETE
+    console.debug('Pipeline::created[pipeline]', this.bufferPipelineValue, this.pipelineValue); //DELETE
 
-    this.bufferValue = this.stageValue;
+    this.bufferStageValue = this.stageValue;
+    this.bufferPipelineValue = this.pipelineValue;
 
-    console.debug('Pipeline::created[bufferValue]', this.bufferValue); //DELETE
+    console.debug('Pipeline::created[bufferStageValue]', this.bufferStageValue); //DELETE
+    console.debug('Pipeline::created[bufferPipelineValue]', this.bufferPipelineValue); //DELETE
   },
   mounted() {
-    console.debug('Pipeline::mounted', this.bufferValue, this.stageValue); //DELETE
+    console.debug('Pipeline::mounted[stage]', this.bufferStageValue, this.stageValue); //DELETE
+    console.debug('Pipeline::mounted[pipeline]', this.bufferPipelineValue, this.pipelineValue); //DELETE
   },
 });
