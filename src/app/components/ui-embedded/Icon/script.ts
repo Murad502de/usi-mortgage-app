@@ -1,11 +1,13 @@
 import { defineComponent } from "vue";
 import Close from './icons/Close/index.vue';
 import ChevronDown from './icons/ChevronDown/index.vue';
+import Delete from './icons/Delete/index.vue';
 
 export default defineComponent({
   components: {
     Close,
     ChevronDown,
+    Delete,
   },
 
   props: {
@@ -47,6 +49,9 @@ export default defineComponent({
 
         case 'chevrondown':
           return 'ChevronDown';
+
+        case 'delete':
+          return 'Delete';
 
         default:
           return null;
