@@ -96,6 +96,26 @@ export default {
 
       return;
     },
+    async setBrokers({ commit, getters }, { uuid, brokers, }) {
+      // console.debug('vuex[mortgage]::setBrokers', { uuid, brokers, }); //DELETE
+
+      const mortgages = getters.list.map(mortgage => {
+        if (mortgage.uuid === uuid) {
+          return {
+            ...mortgage,
+            brokers,
+          };
+        }
+
+        return {
+          ...mortgage,
+        };
+      });
+
+      commit('updateList', mortgages);
+
+      return;
+    },
   },
 
   mutations: {

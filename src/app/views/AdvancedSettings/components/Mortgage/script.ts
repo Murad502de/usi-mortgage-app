@@ -66,6 +66,13 @@ export default defineComponent({
     },
     mortgageBrokers(newVal, oldVal) {
       console.debug('Mortgage::watch[mortgageBrokers]', newVal, oldVal); //DELETE
+
+      const brokers = newVal;
+
+      this.$store.dispatch('mortgage/setBrokers', {
+        uuid: this.mortgage.uuid,
+        brokers: brokers.map(broker => broker.amo_id),
+      });
     },
   },
   methods: {
