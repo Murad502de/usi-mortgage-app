@@ -10,12 +10,16 @@ export default defineComponent({
 
   props: {
     modelValue: {
-      type: [String, Number],
+      type: [Array, Object],
       default: '',
     },
     items: {
       type: [Array, Object],
       default: () => [],
+    },
+    value: {
+      type: [Array, Object],
+      default: '',
     },
     valueProp: {
       type: String,
@@ -56,16 +60,16 @@ export default defineComponent({
   },
   computed: {
     bufferItems() {
-      console.debug('bufferItems', this.modelValue); //DELETE
+      // console.debug('bufferItems', this.modelValue); //DELETE
 
       if (this.multiple && this.modelValue) {
-        console.debug('bufferItems[multiple][modelValue]', this.modelValue); //DELETE
+        // console.debug('bufferItems[multiple][modelValue]', this.modelValue); //DELETE
 
         return this.items.map((item) => {
           let have = this.modelValue.find(value => value.uuid === item.uuid);
 
           if (have) {
-            console.debug('bufferItems[have]'); //DELETE
+            // console.debug('bufferItems[have]'); //DELETE
 
             return {
               ...item,
@@ -73,7 +77,7 @@ export default defineComponent({
             };
           }
 
-          console.debug('bufferItems[dont have]'); //DELETE
+          // console.debug('bufferItems[dont have]'); //DELETE
 
           return {
             ...item,
@@ -82,7 +86,7 @@ export default defineComponent({
         });
       }
 
-      console.debug('bufferItems[default]'); //DELETE
+      // console.debug('bufferItems[default]'); //DELETE
 
       return this.items.map((item) => ({
         ...item,
@@ -117,9 +121,7 @@ export default defineComponent({
       this.showList = false;
     },
     selectItem(index) {
-      console.debug('uiSelect::selectItem', index, this.items[index]); //DELETE
-
-      // this.items[index].selected = !this.items[index].selected;
+      // console.debug('uiSelect::selectItem', index, this.items[index]); //DELETE
 
       if (this.multiple) {
         let have = this.modelValue.find(item => item.uuid === this.items[index].uuid);
@@ -140,9 +142,9 @@ export default defineComponent({
   },
 
   created() {
-    console.debug('uiSelect::created', this.items); //DELETE
+    // console.debug('uiSelect::created', this.items, this.value, this.modelValue); //DELETE
   },
   mounted() {
-    console.debug('uiSelect::mounted', this.items); //DELETE
+    // console.debug('uiSelect::mounted', this.items); //DELETE
   },
 });

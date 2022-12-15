@@ -64,6 +64,9 @@ export default defineComponent({
     pipelineValue(newVal, oldVal) { //DELETE
       // console.debug('Mortgage::watcher[pipelineValue]', newVal, oldVal); //DELETE
     },
+    mortgageBrokers(newVal, oldVal) {
+      console.debug('Mortgage::watch[mortgageBrokers]', newVal, oldVal); //DELETE
+    },
   },
   methods: {
     /* GETTERS */
@@ -102,18 +105,27 @@ export default defineComponent({
   },
 
   created() {
-    console.debug('Mortgage::created', this.stub, this.pipelines, this.mortgage); //DELETE
+    console.debug('Mortgage::created', this.stub, this.pipelines, this.brokers, this.mortgage); //DELETE
 
-    if (!this.stub && this.pipelines.length) {
-      const pipeline = this.pipelines.find(pipeline => pipeline.amo_id === this.mortgage.amo_mortgage_id);
+    if (!this.stub) { /* FIXME: implement as a service method */
+      if (this.pipelines.length) { /* FIXME: implement as a service method */
+        const pipeline = this.pipelines.find(
+          pipeline => pipeline.amo_id === this.mortgage.amo_mortgage_id
+        );
 
-      // console.debug('Mortgage::created[amo_mortgage_id]', this.mortgage.amo_mortgage_id); //DELETE
-      // console.debug('Mortgage::created[pipeline]', pipeline); //DELETE
+        this.mortgagePipeline = pipeline || null;
+      }
 
-      this.mortgagePipeline = pipeline || null;
+      if (this.brokers.length) { /* FIXME: implement as a service method */
+        this.mortgage.brokers.forEach(brokerId => {
+          const broker = this.brokers.find(broker => broker.amo_id === brokerId);
+
+          if (broker) {
+            this.mortgageBrokers.push(broker);
+          }
+        });
+      }
     }
   },
-  mounted() {
-    // console.debug('Mortgage::mounted[mortgage]', this.mortgage); //DELETE
-  },
+  mounted() { },
 });

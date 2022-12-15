@@ -94,26 +94,26 @@ export default defineComponent({
       this.$refs.ipt.focus()
     },
     input(e) {
-      console.debug('TextField::input', e); //DELETE
+      // console.debug('TextField::input', e); //DELETE
 
       this.$emit('inputValue', e.target.value);
     }
   },
   watch: {
     bufferValue(newVal, oldVal) {
-      console.debug('TextField::watcher[bufferValue]', newVal, oldVal); //DELETE
+      // console.debug('TextField::watcher[bufferValue]', newVal, oldVal); //DELETE
 
       if (newVal !== oldVal) {
-        console.debug('TextField::watcher[bufferValue][update]', newVal, oldVal); //DELETE
+        // console.debug('TextField::watcher[bufferValue][update]', newVal, oldVal); //DELETE
 
         this.$emit('update:modelValue', this.bufferValue);
       }
     },
     modelValue(newVal, oldVal) {
-      console.debug('TextField::watcher[modelValue]', newVal, oldVal); //DELETE
+      // console.debug('TextField::watcher[modelValue]', newVal, oldVal); //DELETE
 
       if (newVal !== oldVal) {
-        console.debug('TextField::watcher[modelValue][update]', newVal, oldVal); //DELETE
+        // console.debug('TextField::watcher[modelValue][update]', newVal, oldVal); //DELETE
 
         this.bufferValue = newVal;
       }
