@@ -39,6 +39,7 @@
                 usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__pipeline--textfield
               "
               :label="idCreationLeadStageTitle"
+              v-model="mortgage.amo_mortgage_creation_stage_id"
             />
           </div>
 
@@ -89,22 +90,27 @@
                   usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__stages--row-item
                 "
                 :label="idApplyingStageTitle"
+                v-model="mortgage.amo_mortgage_applying_stage_id"
               />
               <TextField
-                :stub="stub"
                 class="
                   usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__stages--row-item
                 "
-                :label="idsBeforeApplyingStageTitle"
                 width="285"
+                :stub="stub"
+                :label="idsBeforeApplyingStageTitle"
+                :value="mortgage.amo_mortgage_before_applying_stage_ids?.join(',')"
+                @inputValue="inputBeforeApplyingStages"
               />
               <TextField
-                :stub="stub"
+                width="310"
                 class="
                   usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__stages--row-item
                 "
+                :stub="stub"
                 :label="idsAfterApplyingStageTitle"
-                width="310"
+                :value="mortgage.amo_mortgage_after_applying_stage_ids?.join(',')"
+                @inputValue="inputAfterApplyingStages"
               />
             </div>
 
@@ -119,6 +125,7 @@
                   usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__stages--row-item
                 "
                 :label="idMortgageApprovedStageTitle"
+                v-model="mortgage.amo_mortgage_approved_stage_id"
               />
             </div>
           </div>

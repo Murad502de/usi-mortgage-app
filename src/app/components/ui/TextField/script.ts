@@ -35,6 +35,10 @@ export default defineComponent({
       type: String,
       default: '',
     },
+    value: {
+      type: String,
+      default: '',
+    },
     theme: {
       type: String,
       default: () => "default"
@@ -61,7 +65,7 @@ export default defineComponent({
     },
   },
   created() {
-    this.bufferValue = this.modelValue;
+    this.bufferValue = this.modelValue || this.value;
   },
   mounted() {
     if (this.autofocus) this.$nextTick(() => {
@@ -89,12 +93,10 @@ export default defineComponent({
     setFocus() {
       this.$refs.ipt.focus()
     },
-    inputHandler(e) {
-      console.debug('inputHandler', e); //DELETE
+    input(e) {
+      console.debug('TextField::input', e); //DELETE
 
-      let event = e;
-
-      this.$emit('input', event);
+      this.$emit('inputValue', e.target.value);
     }
   },
   watch: {

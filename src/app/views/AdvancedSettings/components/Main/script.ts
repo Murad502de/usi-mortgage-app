@@ -28,7 +28,11 @@ export default defineComponent({
     },
   },
 
-  watch: {},
+  watch: {
+    mortgages(newVal, oldVal) { //DELETE
+      console.debug('Main::watch[mortgages]', newVal, oldVal); //DELETE
+    },
+  },
   methods: {
     /* GETTERS */
     /* SETTERS */
@@ -44,9 +48,13 @@ export default defineComponent({
   },
 
   created() {
-    console.debug('MAIN::created', this.mortgages, this.pipelines); //DELETE
+    console.debug('MAIN::created[mortgages]', this.mortgages); //DELETE
+    console.debug('MAIN::created[pipelines]', this.pipelines); //DELETE
+    console.debug('MAIN::created[brokers]', this.brokers); //DELETE
   },
   mounted() {
-    console.debug('MAIN::mounted', this.mortgages, this.pipelines); //DELETE
+    console.debug('MAIN::mounted[mortgages]', this.mortgages); //DELETE
+    console.debug('MAIN::mounted[pipelines]', this.pipelines); //DELETE
+    console.debug('MAIN::mounted[brokers]', this.brokers); //DELETE
   },
 });

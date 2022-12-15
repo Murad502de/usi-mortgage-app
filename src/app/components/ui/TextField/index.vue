@@ -12,7 +12,7 @@
       @blur="$emit('blur');focused = false;"
       ref="ipt"
       :type="getType"
-      @input="inputHandler"
+      @input="input"
       :disabled="disabled"
     />
 

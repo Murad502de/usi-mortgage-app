@@ -1,11 +1,13 @@
 import { defineComponent } from "vue";
 import Select from '@components/ui/Select/index.vue';
 import TextField from '@components/ui/TextField/index.vue';
+import Icon from '@components/ui-embedded/Icon/index.vue';
 
 export default defineComponent({
   components: {
     Select,
     TextField,
+    Icon,
   },
 
   props: {
@@ -44,28 +46,28 @@ export default defineComponent({
 
   watch: {
     bufferStageValue(newVal, oldVal) {
-      console.debug('Pipeline::watcher[bufferStageValue]', newVal, oldVal); //DELETE
+      // console.debug('Pipeline::watcher[bufferStageValue]', newVal, oldVal); //DELETE
 
       if (newVal !== oldVal) {
-        console.debug('Pipeline::watcher[bufferStageValue][update]', newVal, oldVal); //DELETE
+        // console.debug('Pipeline::watcher[bufferStageValue][update]', newVal, oldVal); //DELETE
 
         this.$emit('update:stageValue', this.bufferStageValue);
       }
     },
     stageValue(newVal, oldVal) {
-      console.debug('Pipeline::watcher[stageValue]', newVal, oldVal); //DELETE
+      // console.debug('Pipeline::watcher[stageValue]', newVal, oldVal); //DELETE
 
       if (newVal !== oldVal) {
-        console.debug('Pipeline::watcher[stageValue][update]', newVal, oldVal); //DELETE
+        // console.debug('Pipeline::watcher[stageValue][update]', newVal, oldVal); //DELETE
 
         this.bufferStageValue = newVal;
       }
     },
     bufferPipelineValue(newVal, oldVal) {
-      console.debug('Pipeline::watcher[bufferPipelineValue]', newVal, oldVal); //DELETE
+      // console.debug('Pipeline::watcher[bufferPipelineValue]', newVal, oldVal); //DELETE
 
       if (newVal !== oldVal) {
-        console.debug('Pipeline::watcher[bufferPipelineValue][update]', newVal, oldVal); //DELETE
+        // console.debug('Pipeline::watcher[bufferPipelineValue][update]', newVal, oldVal); //DELETE
 
         this.$emit('update:pipelineValue', this.bufferPipelineValue);
       }
@@ -74,7 +76,7 @@ export default defineComponent({
       console.debug('Pipeline::watcher[pipelineValue]', newVal, oldVal); //DELETE
 
       if (newVal !== oldVal) {
-        console.debug('Pipeline::watcher[pipelineValue][update]', newVal, oldVal); //DELETE
+        // console.debug('Pipeline::watcher[pipelineValue][update]', newVal, oldVal); //DELETE
 
         this.bufferPipelineValue = newVal;
       }
@@ -89,17 +91,17 @@ export default defineComponent({
   },
 
   created() {
-    console.debug('Pipeline::created[stage]', this.bufferStageValue, this.stageValue); //DELETE
-    console.debug('Pipeline::created[pipeline]', this.bufferPipelineValue, this.pipelineValue); //DELETE
+    // console.debug('Pipeline::created[stage]', this.bufferStageValue, this.stageValue); //DELETE
+    // console.debug('Pipeline::created[pipeline]', this.bufferPipelineValue, this.pipelineValue); //DELETE
 
     this.bufferStageValue = this.stageValue;
     this.bufferPipelineValue = this.pipelineValue;
 
-    console.debug('Pipeline::created[bufferStageValue]', this.bufferStageValue); //DELETE
-    console.debug('Pipeline::created[bufferPipelineValue]', this.bufferPipelineValue); //DELETE
+    // console.debug('Pipeline::created[bufferStageValue]', this.bufferStageValue); //DELETE
+    // console.debug('Pipeline::created[bufferPipelineValue]', this.bufferPipelineValue); //DELETE
   },
   mounted() {
-    console.debug('Pipeline::mounted[stage]', this.bufferStageValue, this.stageValue); //DELETE
-    console.debug('Pipeline::mounted[pipeline]', this.bufferPipelineValue, this.pipelineValue); //DELETE
+    // console.debug('Pipeline::mounted[stage]', this.bufferStageValue, this.stageValue); //DELETE
+    // console.debug('Pipeline::mounted[pipeline]', this.bufferPipelineValue, this.pipelineValue); //DELETE
   },
 });

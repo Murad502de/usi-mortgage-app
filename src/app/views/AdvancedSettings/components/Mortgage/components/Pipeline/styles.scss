@@ -4,11 +4,16 @@
   flex-wrap: nowrap;
   align-content: center;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-end;
 
   &__select {}
 
   &__textfield {
     margin-left: 14px;
+  }
+
+  &__delete {
+    margin-left: 14px;
+    cursor: pointer;
   }
 }

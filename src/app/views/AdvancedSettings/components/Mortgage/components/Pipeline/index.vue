@@ -13,6 +13,10 @@
       :label="stageTitle"
       v-model="bufferStageValue"
     />
+
+    <div class="advanced-mortgage-pipeline__delete">
+      <Icon name="delete" color="#DA6A6A" />
+    </div>
   </div>
 </template>
 

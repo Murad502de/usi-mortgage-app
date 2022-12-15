@@ -1,5 +1,5 @@
 import { defineComponent } from "vue";
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
 import { teleport } from '@/app/utils/teleport';
 import Header from './components/Header/index.vue';
 import Main from './components/Main/index.vue';
@@ -120,8 +120,8 @@ export default defineComponent({
   async created() {
     // console.debug('advancedSettings::created', this.$store); //DELETE
 
-    this.fetchUsersDictionary();
-    this.fetchPipelinesDictionary();
+    await this.fetchUsersDictionary();
+    await this.fetchPipelinesDictionary();
     await this.fetchMortgages();
 
     this.mortgagesFetched = true;
