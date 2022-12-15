@@ -133,6 +133,7 @@ export default defineComponent({
         }
       } else {
         this.$emit('update:modelValue', this.items[index]);
+        this.$emit('selectItem', this.items[index]);
         this.hide();
       }
     },

@@ -53,17 +53,26 @@ export default defineComponent({
 
       pipelineValue: null, //DELETE
       stageValue: '1111111', //DELETE
+
+      addPipelines: [],
+      updatePipelines: [],
+      deletePipelines: [],
     };
   },
-  computed: {},
+  computed: {
+    readPipelines() {
+      if (this.stub) {
+        return [];
+      }
+
+      return [
+        ...this.mortgage.pipelines,
+        ...this.addPipelines,
+      ].filter((pipeline) => (!this.deletePipelines.includes(pipeline.uuid)));
+    },
+  },
 
   watch: {
-    stageValue(newVal, oldVal) { //DELETE
-      // console.debug('Mortgage::watcher[stageValue]', newVal, oldVal); //DELETE
-    },
-    pipelineValue(newVal, oldVal) { //DELETE
-      // console.debug('Mortgage::watcher[pipelineValue]', newVal, oldVal); //DELETE
-    },
     mortgageBrokers(newVal, oldVal) {
       console.debug('Mortgage::watch[mortgageBrokers]', newVal, oldVal); //DELETE
 
@@ -74,9 +83,27 @@ export default defineComponent({
         brokers: brokers.map(broker => broker.amo_id),
       });
     },
+    deletePipelines(newVal, oldVal) {
+      console.debug('Mortgage::watch[deletePipelines]', newVal); //DELETE
+
+      this.$store.dispatch('mortgage/setDeletePipelines', { pipelines: newVal, });
+    },
+    updatePipelines(newVal, oldVal) {
+      console.debug('Mortgage::watch[updatePipelines]', newVal); //DELETE
+
+      this.$store.dispatch('mortgage/setUpdatePipelines', { pipelines: newVal, });
+    },
   },
   methods: {
     /* GETTERS */
+    getPipelineById(id) {
+      if (!this.stub && this.pipelines.length) {
+        return this.pipelines.find(pipeline => pipeline.amo_id === id) || null;
+      }
+
+      return null;
+    },
+
     /* SETTERS */
     /* HANDLERS */
     deleteMortgage() {
@@ -105,6 +132,54 @@ export default defineComponent({
           .split(',')
           .map(stage => Number(stage)),
       });
+    },
+    addPipeline() {
+      console.debug('Mortgage::addPipeline'); //DELETE
+
+      this.addPipelines = [...this.addPipelines, {
+        uuid: new Date().getTime(),
+        amo_pipeline_id: null,
+        amo_pipeline_booking_stage_id: '',
+      }];
+    },
+    updatePipeline(data) {
+      console.debug('Mortgage::updatePipeline', data); //DELETE
+
+      const index = this.updatePipelines.findIndex(pipeline => pipeline.uuid === data.uuid);
+      const pipeline = {
+        uuid: data.uuid,
+        amo_pipeline_id: data.pipeline?.amo_id,
+        amo_pipeline_booking_stage_id: data.stage,
+      };
+
+      if (index !== -1) {
+        // console.debug('Mortgage::updatePipeline[have]', pipeline); //DELETE
+
+        this.updatePipelines = this.updatePipelines.map((updatePipeline, updatePipelineIndex) => {
+          if (updatePipelineIndex === index) {
+            return { ...pipeline };
+          }
+
+          return { ...updatePipeline };
+        });
+      } else {
+        // console.debug('Mortgage::updatePipeline[dont have]', pipeline); //DELETE
+
+        this.updatePipelines = [...this.updatePipelines, pipeline];
+      }
+
+      // console.debug('Mortgage::updatePipeline[updatePipelines]', this.updatePipelines); //DELETE
+    },
+    deletePipeline(pipeline) {
+      console.debug('Mortgage::deletePipeline', pipeline); //DELETE
+
+      this.deletePipelines = [
+        ...this.deletePipelines,
+        pipeline.uuid,
+      ];
+      this.updatePipelines = this.updatePipelines.filter(
+        updatePipeline => updatePipeline.uuid !== pipeline.uuid
+      );
     },
 
     /* HELPERS */

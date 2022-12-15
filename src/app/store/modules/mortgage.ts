@@ -5,11 +5,15 @@ export default {
 
   state: {
     list: [],
+    deletePipelines: [],
   },
 
   getters: {
     list(state) {
       return state.list;
+    },
+    deletePipelines(state) {
+      return state.deletePipelines;
     },
   },
 
@@ -24,6 +28,8 @@ export default {
 
       return list;
     },
+
+    /* SETTERS */
     /* FIXME: it is recommended to implement one generic method with setAfterApplyingStages */
     async setBeforeApplyingStages({ commit, getters }, { uuid, stages, }) {
       // console.debug('vuex[mortgage]::setBeforeApplyingStages', { uuid, stages, }, getters.list); //DELETE
@@ -115,6 +121,12 @@ export default {
       commit('updateList', mortgages);
 
       return;
+    },
+    async setDeletePipelines({ commit, getters }, { pipelines, }) {
+      console.debug('vuex[mortgage]::setDeletePipelines', { pipelines, }); //DELETE
+    },
+    async setUpdatePipelines({ commit, getters }, { pipelines, }) {
+      console.debug('vuex[mortgage]::setUpdatePipelines', { pipelines, }); //DELETE
     },
   },
 

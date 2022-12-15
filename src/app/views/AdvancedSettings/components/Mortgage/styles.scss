@@ -80,17 +80,10 @@
     }
 
     &__item {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      align-content: center;
-      justify-content: flex-start;
-      align-items: center;
+      margin-top: 24px;
 
-      &--select {}
-
-      &--textfiled {
-        margin-left: 14px;
+      &:first-child {
+        margin-top: 0;
       }
     }
   }

@@ -6,15 +6,17 @@
       :label="pipelineTitle"
       :items="pipelines"
       v-model="bufferPipelineValue"
+      @selectItem="selectPipeline"
     />
     <TextField
       class="advanced-mortgage-pipeline__textfield"
       :stub="stub"
       :label="stageTitle"
       v-model="bufferStageValue"
+      @inputValue="inputStage"
     />
 
-    <div class="advanced-mortgage-pipeline__delete">
+    <div class="advanced-mortgage-pipeline__delete" @click="deletePipeline">
       <Icon name="delete" color="#DA6A6A" />
     </div>
   </div>

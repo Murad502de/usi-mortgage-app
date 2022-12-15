@@ -99,7 +99,9 @@
                 width="285"
                 :stub="stub"
                 :label="idsBeforeApplyingStageTitle"
-                :value="mortgage.amo_mortgage_before_applying_stage_ids?.join(',')"
+                :value="
+                  mortgage.amo_mortgage_before_applying_stage_ids?.join(',')
+                "
                 @inputValue="inputBeforeApplyingStages"
               />
               <TextField
@@ -109,7 +111,9 @@
                 "
                 :stub="stub"
                 :label="idsAfterApplyingStageTitle"
-                :value="mortgage.amo_mortgage_after_applying_stage_ids?.join(',')"
+                :value="
+                  mortgage.amo_mortgage_after_applying_stage_ids?.join(',')
+                "
                 @inputValue="inputAfterApplyingStages"
               />
             </div>
@@ -134,8 +138,9 @@
 
       <div class="usi-mortgage--advanced-settings__mortgage--pipelines">
         <Button
-          :disabled="stub"
           class="usi-mortgage--advanced-settings__mortgage--pipelines__add"
+          :disabled="stub"
+          @click="addPipeline"
         >
           {{ addNewPipelineTitle }}
         </Button>
@@ -144,12 +149,17 @@
           class="usi-mortgage--advanced-settings__mortgage--pipelines__items"
         >
           <Pipeline
+            v-for="pipeline in readPipelines"
+            class="usi-mortgage--advanced-settings__mortgage--pipelines__item"
+            :key="pipeline.uuid"
             :stub="stub"
             :pipelines="pipelines"
             :pipelineTitle="basicPipelineTitle"
             :stageTitle="idBookingStageTitle"
-            v-model:pipeline-value="pipelineValue"
-            v-model:stage-value="stageValue"
+            :pipeline-value="getPipelineById(pipeline.amo_pipeline_id)"
+            :stage-value="pipeline.amo_pipeline_booking_stage_id"
+            @updatePipeline="updatePipeline"
+            @deletePipeline="deletePipeline"
           />
         </div>
       </div>
