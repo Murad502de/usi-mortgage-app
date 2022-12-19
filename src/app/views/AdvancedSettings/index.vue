@@ -3,6 +3,7 @@
     <Header
       @save="save"
       @cancel="cancel"
+      @add="addMortgage"
       :addDisabled="addDisabled"
       :cancelDisabled="cancelDisabled"
       :saveDisabled="saveDisabled"

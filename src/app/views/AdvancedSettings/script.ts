@@ -32,7 +32,7 @@ export default defineComponent({
       return [
         ...this.storeMortgages,
         ...this.addMortgages,
-      ].filter((mortgage) => (!this.deleteMortgages.includes(mortgage.uuid)));
+      ].filter((mortgage) => (!this.deleteMortgages.includes(mortgage.uuid || mortgage.id)));
     },
     workArea() {
       // console.debug('AdvancedSettings::computed[widget_code]', this.$store.getters["widget/params"].widget_code); //DELETE
@@ -76,6 +76,9 @@ export default defineComponent({
         });
       }
     },
+    addMortgage(newVal, oldVal) { //DELETE
+      console.debug('AdvancedSettings/watch/addMortgage', newVal, oldVal);
+    },
   },
   methods: {
     /* STORE */
@@ -86,6 +89,7 @@ export default defineComponent({
     ...mapActions('mortgage', {
       fetchMortgages: 'fetchList',
     }),
+
     /* GETTERS */
     /* SETTERS */
     /* HANDLERS */
@@ -110,7 +114,22 @@ export default defineComponent({
     deleteMortgage(mortgage) {
       console.debug('AdvancedSettings::deleteMortgage', mortgage); //DELETE
 
-      this.deleteMortgages.push(mortgage.uuid);
+      this.deleteMortgages.push(mortgage.uuid || mortgage.id);
+    },
+    addMortgage() {
+      console.debug('addMortgage'); //DELETE
+
+      this.addMortgages.push({
+        id: new Date().getTime(),
+        pipelines: [],
+        brokers: [],
+        amo_mortgage_id: null,
+        amo_mortgage_creation_stage_id: null,
+        amo_mortgage_before_applying_stage_ids: null,
+        amo_mortgage_approved_stage_id: null,
+        amo_mortgage_applying_stage_id: null,
+        amo_mortgage_after_applying_stage_ids: null,
+      });
     },
 
     /* HELPERS */

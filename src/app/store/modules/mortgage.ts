@@ -132,7 +132,7 @@ export default {
 
   mutations: {
     updateList(state, list) {
-      console.debug('vuex[mortgage]::updateList', list); //DELETE
+      console.debug('vuex[mortgage]/mutations/updateList', list); //DELETE
 
       state.list = list;
     },

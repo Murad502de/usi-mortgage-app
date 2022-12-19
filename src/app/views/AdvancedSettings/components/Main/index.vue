@@ -9,7 +9,7 @@
       v-else
       class="usi-mortgage--advanced-settings__main--card"
       v-for="mortgage in mortgages"
-      :key="mortgage.uuid"
+      :key="mortgage.uuid || mortgage.id"
       :mortgage="mortgage"
       :pipelines="pipelines"
       :brokers="brokers"
