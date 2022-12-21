@@ -30,7 +30,7 @@ export default defineComponent({
 
   watch: {
     mortgages(newVal, oldVal) { //DELETE
-      console.debug('Main::watch[mortgages]', newVal, oldVal); //DELETE
+      console.debug('Main/watch/mortgages', newVal, oldVal); //DELETE
     },
   },
   methods: {
@@ -38,9 +38,25 @@ export default defineComponent({
     /* SETTERS */
     /* HANDLERS */
     deleteMortgage(mortgage) {
-      console.debug('Main::deleteMortgage', mortgage); //DELETE
+      console.debug('Main/deleteMortgage', mortgage); //DELETE
 
       this.$emit('delete', mortgage);
+    },
+    updateMortgage(mortgage) {
+      console.debug('Main/updateMortgage', mortgage); //DELETE
+
+      // if (this.mortgage.uuid) {
+      //   console.debug('Mortgage/watch/mortgageBrokers/uuid', brokers); //DELETE
+
+      //   this.$store.dispatch('mortgage/setBrokers', {
+      //     uuid: this.mortgage.uuid,
+      //     brokers: brokers.map(broker => broker.amo_id),
+      //   });
+      // }
+
+      // if (this.mortgage.id) {
+      //   console.debug('Mortgage/watch/mortgageBrokers/id', brokers); //DELETE
+      // }
     },
 
     /* HELPERS */
@@ -48,13 +64,13 @@ export default defineComponent({
   },
 
   created() {
-    console.debug('MAIN::created[mortgages]', this.mortgages); //DELETE
-    console.debug('MAIN::created[pipelines]', this.pipelines); //DELETE
-    console.debug('MAIN::created[brokers]', this.brokers); //DELETE
+    console.debug('MAIN/created/mortgages', this.mortgages); //DELETE
+    console.debug('MAIN/created/pipelines', this.pipelines); //DELETE
+    console.debug('MAIN/created/brokers', this.brokers); //DELETE
   },
   mounted() {
-    console.debug('MAIN::mounted[mortgages]', this.mortgages); //DELETE
-    console.debug('MAIN::mounted[pipelines]', this.pipelines); //DELETE
-    console.debug('MAIN::mounted[brokers]', this.brokers); //DELETE
+    console.debug('MAIN/mounted/mortgages]', this.mortgages); //DELETE
+    console.debug('MAIN/mounted/pipelines]', this.pipelines); //DELETE
+    console.debug('MAIN/mounted/brokers]', this.brokers); //DELETE
   },
 });

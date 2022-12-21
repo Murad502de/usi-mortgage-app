@@ -15,7 +15,7 @@ export default defineComponent({
   },
 
   props: {},
-  data: () => {
+  data() {
     return {
       modalVisibility: false,
       mortgagesFetched: false,
@@ -99,7 +99,11 @@ export default defineComponent({
       this.modalVisibility = true;
     },
     save() {
-      console.debug('AdvancedSettings::save'); //DELETE
+      console.debug('AdvancedSettings/methods/save'); //DELETE
+      console.debug('AdvancedSettings/methods/save/readMortgages', this.readMortgages); //DELETE
+      console.debug('AdvancedSettings/methods/save/addMortgages', this.addMortgages); //DELETE
+      console.debug('AdvancedSettings/methods/save/updateMortgages', this.updateMortgages); //DELETE
+      console.debug('AdvancedSettings/methods/save/deleteMortgages', this.deleteMortgages); //DELETE
     },
     closeModal() {
       this.modalVisibility = false;
@@ -117,7 +121,7 @@ export default defineComponent({
       this.deleteMortgages.push(mortgage.uuid || mortgage.id);
     },
     addMortgage() {
-      console.debug('addMortgage'); //DELETE
+      console.debug('AdvancedSettings/methods/addMortgage'); //DELETE
 
       this.addMortgages.push({
         id: new Date().getTime(),

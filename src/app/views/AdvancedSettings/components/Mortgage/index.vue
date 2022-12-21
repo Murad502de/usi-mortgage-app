@@ -39,7 +39,7 @@
                 usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__pipeline--textfield
               "
               :label="idCreationLeadStageTitle"
-              v-model="mortgage.amo_mortgage_creation_stage_id"
+              v-model="amoMortgageCreationStageId"
             />
           </div>
 
@@ -90,7 +90,7 @@
                   usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__stages--row-item
                 "
                 :label="idApplyingStageTitle"
-                v-model="mortgage.amo_mortgage_applying_stage_id"
+                v-model="amoMortgageApplyingStageId"
               />
               <TextField
                 class="
@@ -129,7 +129,7 @@
                   usi-mortgage--advanced-settings__mortgage--mortgage-pipeline__stages--row-item
                 "
                 :label="idMortgageApprovedStageTitle"
-                v-model="mortgage.amo_mortgage_approved_stage_id"
+                v-model="amoMortgageApprovedStageId"
               />
             </div>
           </div>

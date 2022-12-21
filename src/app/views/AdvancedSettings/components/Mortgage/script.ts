@@ -36,6 +36,7 @@ export default defineComponent({
   },
   data() {
     return {
+      inited: false,
       cardTitel: 'Настройки узла обработки ипотеки',
       mortgageStagesTitle: 'Этапы воронки "Ипотека"',
       mortgagePipelineTitle: 'Воронка "Ипотека"',
@@ -48,8 +49,12 @@ export default defineComponent({
       idMortgageApprovedStageTitle: 'ID этапа "Ипотека одобрена"',
       idBookingStageTitle: 'ID этапа "Бронирование"',
       addNewPipelineTitle: 'Добавить воронку',
+
       mortgagePipeline: null,
+      amoMortgageCreationStageId: null,
       mortgageBrokers: [],
+      amoMortgageApplyingStageId: null,
+      amoMortgageApprovedStageId: null,
 
       pipelineValue: null, //DELETE
       stageValue: '1111111', //DELETE
@@ -73,23 +78,119 @@ export default defineComponent({
   },
 
   watch: {
+    mortgagePipeline(newVal, oldVal) {
+      console.debug('Mortgage/watch/mortgagePipeline/stub', this.stub); //DELETE
+      console.debug('Mortgage/watch/mortgagePipeline/newVal', newVal); //DELETE
+      console.debug('Mortgage/watch/mortgagePipeline/oldVal', oldVal); //DELETE
+
+      if (this.isWatcherAvailable()) {
+        return;
+      }
+
+      console.debug('Mortgage/watch/mortgagePipeline::run'); //DELETE
+    },
+    amoMortgageCreationStageId(newVal, oldVal) {
+      console.debug('Mortgage/watch/amoMortgageCreationStageId/stub', this.stub); //DELETE
+      console.debug('Mortgage/watch/amoMortgageCreationStageId/inited', this.inited); //DELETE
+      console.debug('Mortgage/watch/amoMortgageCreationStageId/newVal', newVal); //DELETE
+      console.debug('Mortgage/watch/amoMortgageCreationStageId/oldVal', oldVal); //DELETE
+
+      if (this.isWatcherAvailable()) {
+        return;
+      }
+
+      console.debug('Mortgage/watch/amoMortgageCreationStageId::run'); //DELETE
+
+      const mortgage = {
+        ...this.mortgage,
+        amo_mortgage_creation_stage_id: newVal,
+      };
+
+      console.debug('Mortgage/watch/amoMortgageCreationStageId/mortgage', mortgage); //DELETE
+
+      this.$emit('updateMortgage', mortgage);
+    },
     mortgageBrokers(newVal, oldVal) {
-      console.debug('Mortgage::watch[mortgageBrokers]', newVal, oldVal); //DELETE
+      console.debug('Mortgage/watch/mortgageBrokers/stub', this.stub); //DELETE
+      console.debug('Mortgage/watch/mortgageBrokers/newVal', newVal); //DELETE
+      console.debug('Mortgage/watch/mortgageBrokers/oldVal', oldVal); //DELETE
+
+      if (this.isWatcherAvailable()) {
+        return;
+      }
+
+      console.debug('Mortgage/watch/mortgageBrokers::run'); //DELETE
 
       const brokers = newVal;
 
-      this.$store.dispatch('mortgage/setBrokers', {
-        uuid: this.mortgage.uuid,
+      console.debug('Mortgage/watch/mortgageBrokers/mortgageNode', this.mortgage); //DELETE
+
+      const mortgage = {
+        ...this.mortgage,
         brokers: brokers.map(broker => broker.amo_id),
-      });
+      };
+
+      console.debug('Mortgage/watch/mortgageBrokers/mortgage', mortgage); //DELETE
+
+      this.$emit('updateMortgage', mortgage);
+    },
+    amoMortgageApplyingStageId(newVal, oldVal) {
+      console.debug('Mortgage/watch/amoMortgageApplyingStageId/stub', this.stub); //DELETE
+      console.debug('Mortgage/watch/amoMortgageApplyingStageId/newVal', newVal); //DELETE
+      console.debug('Mortgage/watch/amoMortgageApplyingStageId/oldVal', oldVal); //DELETE
+
+      if (this.isWatcherAvailable()) {
+        return;
+      }
+
+      console.debug('Mortgage/watch/amoMortgageApplyingStageId::run'); //DELETE
+
+      const mortgage = {
+        ...this.mortgage,
+        amo_mortgage_applying_stage_id: newVal,
+      };
+
+      console.debug('Mortgage/watch/amoMortgageApplyingStageId/mortgage', mortgage); //DELETE
+
+      this.$emit('updateMortgage', mortgage);
+    },
+    amoMortgageApprovedStageId(newVal, oldVal) {
+      console.debug('Mortgage/watch/amoMortgageApprovedStageId/stub', this.stub); //DELETE
+      console.debug('Mortgage/watch/amoMortgageApprovedStageId/newVal', newVal); //DELETE
+      console.debug('Mortgage/watch/amoMortgageApprovedStageId/oldVal', oldVal); //DELETE
+
+      if (this.isWatcherAvailable()) {
+        return;
+      }
+
+      console.debug('Mortgage/watch/amoMortgageApprovedStageId::run'); //DELETE
+
+      const mortgage = {
+        ...this.mortgage,
+        amo_mortgage_approved_stage_id: newVal,
+      };
+
+      console.debug('Mortgage/watch/amoMortgageApprovedStageId/mortgage', mortgage); //DELETE
+
+      this.$emit('updateMortgage', mortgage);
     },
     deletePipelines(newVal, oldVal) {
-      console.debug('Mortgage::watch[deletePipelines]', newVal); //DELETE
+      console.debug('Mortgage/watch/deletePipelines/stub', this.stub); //DELETE
+      console.debug('Mortgage/watch/deletePipelines/values', newVal, oldVal); //DELETE
+
+      if (this.isWatcherAvailable()) {
+        return;
+      }
 
       this.$store.dispatch('mortgage/setDeletePipelines', { pipelines: newVal, });
     },
     updatePipelines(newVal, oldVal) {
-      console.debug('Mortgage::watch[updatePipelines]', newVal); //DELETE
+      console.debug('Mortgage/watch/updatePipelines/stub', this.stub); //DELETE
+      console.debug('Mortgage/watch/updatePipelines/values', newVal, oldVal); //DELETE
+
+      if (this.isWatcherAvailable()) {
+        return;
+      }
 
       this.$store.dispatch('mortgage/setUpdatePipelines', { pipelines: newVal, });
     },
@@ -97,6 +198,8 @@ export default defineComponent({
   methods: {
     /* GETTERS */
     getPipelineById(id) {
+      console.debug('Mortgage/methods/getPipelineById', id); //DELETE
+
       if (!this.stub && this.pipelines.length) {
         return this.pipelines.find(pipeline => pipeline.amo_id === id) || null;
       }
@@ -107,34 +210,42 @@ export default defineComponent({
     /* SETTERS */
     /* HANDLERS */
     deleteMortgage() {
-      // console.debug('Mortgage::deleteMortgage', this.mortgage); //DELETE
+      console.debug('Mortgage/methods/deleteMortgage', this.mortgage); //DELETE
 
       this.$emit('delete', this.mortgage);
     },
     /* FIXME: it is recommended to implement one generic method with inputAfterApplyingStages */
     inputBeforeApplyingStages(strStages) {
-      console.debug('Mortgage::inputBeforeApplyingStages', strStages); //DELETE
+      console.debug('Mortgage/methods/inputBeforeApplyingStages', strStages); //DELETE
 
-      this.$store.dispatch('mortgage/setBeforeApplyingStages', {
-        uuid: this.mortgage.uuid,
-        stages: strStages.replaceAll(' ', '')
+      const mortgage = {
+        ...this.mortgage,
+        amo_mortgage_before_applying_stage_ids: strStages.replaceAll(' ', '')
           .split(',')
           .map(stage => Number(stage)),
-      });
+      };
+
+      console.debug('Mortgage/methods/inputBeforeApplyingStages/mortgage', mortgage); //DELETE
+
+      this.$emit('updateMortgage', mortgage);
     },
     /* FIXME: it is recommended to implement one generic method with inputBeforeApplyingStages */
     inputAfterApplyingStages(strStages) {
-      console.debug('Mortgage::inputAfterApplyingStages', strStages); //DELETE
+      console.debug('Mortgage/methods/inputAfterApplyingStages', strStages); //DELETE
 
-      this.$store.dispatch('mortgage/setAfterApplyingStages', {
-        uuid: this.mortgage.uuid,
-        stages: strStages.replaceAll(' ', '')
+      const mortgage = {
+        ...this.mortgage,
+        amo_mortgage_after_applying_stage_ids: strStages.replaceAll(' ', '')
           .split(',')
           .map(stage => Number(stage)),
-      });
+      };
+
+      console.debug('Mortgage/methods/inputAfterApplyingStages/mortgage', mortgage); //DELETE
+
+      this.$emit('updateMortgage', mortgage);
     },
     addPipeline() {
-      console.debug('Mortgage::addPipeline'); //DELETE
+      console.debug('Mortgage/methods/addPipeline'); //DELETE
 
       this.addPipelines = [...this.addPipelines, {
         uuid: new Date().getTime(),
@@ -143,7 +254,7 @@ export default defineComponent({
       }];
     },
     updatePipeline(data) {
-      console.debug('Mortgage::updatePipeline', data); //DELETE
+      console.debug('Mortgage/methods/updatePipeline', data); //DELETE
 
       const index = this.updatePipelines.findIndex(pipeline => pipeline.uuid === data.uuid);
       const pipeline = {
@@ -171,7 +282,7 @@ export default defineComponent({
       // console.debug('Mortgage::updatePipeline[updatePipelines]', this.updatePipelines); //DELETE
     },
     deletePipeline(pipeline) {
-      console.debug('Mortgage::deletePipeline', pipeline); //DELETE
+      console.debug('Mortgage/methods/deletePipeline', pipeline); //DELETE
 
       this.deletePipelines = [
         ...this.deletePipelines,
@@ -183,31 +294,50 @@ export default defineComponent({
     },
 
     /* HELPERS */
+    isWatcherAvailable() {
+      console.debug('Mortgage/methods/isWatcherAvailable'); //DELETE
+
+      return this.stub || !this.inited;
+    },
+
     /* ACTIONS */
+    async init() {
+      console.debug('Mortgage/methods/init'); //DELETE
+
+      if (!this.stub) { /* FIXME: implement as a service method */
+        if (this.pipelines.length) { /* FIXME: implement as a service method */
+          const pipeline = this.pipelines.find(
+            pipeline => pipeline.amo_id === this.mortgage.amo_mortgage_id
+          );
+
+          this.mortgagePipeline = pipeline || null;
+        }
+
+        if (this.brokers.length) { /* FIXME: implement as a service method */
+          this.mortgage.brokers.forEach(brokerId => {
+            const broker = this.brokers.find(broker => broker.amo_id === brokerId);
+
+            if (broker) {
+              this.mortgageBrokers.push(broker);
+            }
+          });
+        }
+
+        this.amoMortgageCreationStageId = this.mortgage.amo_mortgage_creation_stage_id;
+        this.amoMortgageApplyingStageId = this.mortgage.amo_mortgage_applying_stage_id;
+        this.amoMortgageApprovedStageId = this.mortgage.amo_mortgage_approved_stage_id;
+      }
+    },
   },
 
-  created() {
-    console.debug('Mortgage::created', this.stub, this.pipelines, this.brokers, this.mortgage); //DELETE
+  async created() {
+    console.debug('Mortgage/created', this.stub, this.pipelines, this.brokers, this.mortgage); //DELETE
 
-    if (!this.stub) { /* FIXME: implement as a service method */
-      if (this.pipelines.length) { /* FIXME: implement as a service method */
-        const pipeline = this.pipelines.find(
-          pipeline => pipeline.amo_id === this.mortgage.amo_mortgage_id
-        );
+    await this.init();
 
-        this.mortgagePipeline = pipeline || null;
-      }
-
-      if (this.brokers.length) { /* FIXME: implement as a service method */
-        this.mortgage.brokers.forEach(brokerId => {
-          const broker = this.brokers.find(broker => broker.amo_id === brokerId);
-
-          if (broker) {
-            this.mortgageBrokers.push(broker);
-          }
-        });
-      }
-    }
+    this.inited = true;
   },
-  mounted() { },
+  async mounted() {
+    console.debug('Mortgage/mounted', this.stub, this.pipelines, this.brokers, this.mortgage); //DELETE
+  },
 });

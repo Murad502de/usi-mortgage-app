@@ -14,6 +14,7 @@
       :pipelines="pipelines"
       :brokers="brokers"
       @delete="deleteMortgage"
+      @updateMortgage="updateMortgage"
     />
 
     <Card
