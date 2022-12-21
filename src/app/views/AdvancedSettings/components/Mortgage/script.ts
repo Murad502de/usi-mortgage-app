@@ -80,6 +80,7 @@ export default defineComponent({
   watch: {
     mortgagePipeline(newVal, oldVal) {
       console.debug('Mortgage/watch/mortgagePipeline/stub', this.stub); //DELETE
+      console.debug('Mortgage/watch/amoMortgageCreationStageId/inited', this.inited); //DELETE
       console.debug('Mortgage/watch/mortgagePipeline/newVal', newVal); //DELETE
       console.debug('Mortgage/watch/mortgagePipeline/oldVal', oldVal); //DELETE
 
@@ -88,6 +89,17 @@ export default defineComponent({
       }
 
       console.debug('Mortgage/watch/mortgagePipeline::run'); //DELETE
+
+      console.debug('Mortgage/watch/amoMortgageCreationStageId::run'); //DELETE
+
+      const mortgage = {
+        ...this.mortgage,
+        amo_mortgage_id: newVal.amo_id,
+      };
+
+      console.debug('Mortgage/watch/amoMortgageCreationStageId/mortgage', mortgage); //DELETE
+
+      this.$emit('updateMortgage', mortgage);
     },
     amoMortgageCreationStageId(newVal, oldVal) {
       console.debug('Mortgage/watch/amoMortgageCreationStageId/stub', this.stub); //DELETE

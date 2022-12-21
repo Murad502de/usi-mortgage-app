@@ -45,18 +45,13 @@ export default defineComponent({
     updateMortgage(mortgage) {
       console.debug('Main/updateMortgage', mortgage); //DELETE
 
-      // if (this.mortgage.uuid) {
-      //   console.debug('Mortgage/watch/mortgageBrokers/uuid', brokers); //DELETE
+      if (mortgage.uuid) {
+        console.debug('Main/updateMortgage/uuid', mortgage.uuid); //DELETE
+      }
 
-      //   this.$store.dispatch('mortgage/setBrokers', {
-      //     uuid: this.mortgage.uuid,
-      //     brokers: brokers.map(broker => broker.amo_id),
-      //   });
-      // }
-
-      // if (this.mortgage.id) {
-      //   console.debug('Mortgage/watch/mortgageBrokers/id', brokers); //DELETE
-      // }
+      if (mortgage.id) {
+        console.debug('Main/updateMortgage/id', mortgage.id); //DELETE
+      }
     },
 
     /* HELPERS */
