@@ -58,17 +58,36 @@ export default defineComponent({
 
       pipelineValue: null, //DELETE
       stageValue: '1111111', //DELETE
-
-      addPipelines: [],
-      updatePipelines: [],
-      deletePipelines: [],
     };
   },
   computed: {
+    addPipelines() {
+      const pipelines = this.$store
+        .getters["mortgage/addPipelines"]
+        .find(pipeline => pipeline.uuid === this.$.vnode.key);
+
+      return pipelines ? pipelines.pipelines : [];
+    },
+    updatePipelines() {
+      const pipelines = this.$store
+        .getters["mortgage/updatePipelines"]
+        .find(pipeline => pipeline.uuid === this.$.vnode.key);
+
+      return pipelines ? pipelines.pipelines : [];
+    },
+    deletePipelines() {
+      const pipelines = this.$store
+        .getters["mortgage/deletePipelines"]
+        .find(pipeline => pipeline.uuid === this.$.vnode.key);
+
+      return pipelines ? pipelines.pipelines : [];
+    },
     readPipelines() {
       if (this.stub) {
         return [];
       }
+
+      console.debug('Mortgage/computed/readPipelines/addPipelines', this.addPipelines); //DELETE
 
       return [
         ...this.mortgage.pipelines,
@@ -78,9 +97,27 @@ export default defineComponent({
   },
 
   watch: {
+    async mortgage(newVal, oldVal) {
+      console.debug('Mortgage/watch/mortgage/stub', this.stub); //DELETE
+      console.debug('Mortgage/watch/mortgage/inited', this.inited); //DELETE
+      console.debug('Mortgage/watch/mortgage/newVal', newVal); //DELETE
+      console.debug('Mortgage/watch/mortgage/oldVal', oldVal); //DELETE
+
+      if (this.isWatcherAvailable()) {
+        return;
+      }
+
+      console.debug('Mortgage/watch/mortgage/run'); //DELETE
+
+      this.inited = false;
+
+      await this.init();
+
+      this.inited = true;
+    },
     mortgagePipeline(newVal, oldVal) {
       console.debug('Mortgage/watch/mortgagePipeline/stub', this.stub); //DELETE
-      console.debug('Mortgage/watch/amoMortgageCreationStageId/inited', this.inited); //DELETE
+      console.debug('Mortgage/watch/mortgagePipeline/inited', this.inited); //DELETE
       console.debug('Mortgage/watch/mortgagePipeline/newVal', newVal); //DELETE
       console.debug('Mortgage/watch/mortgagePipeline/oldVal', oldVal); //DELETE
 
@@ -90,14 +127,12 @@ export default defineComponent({
 
       console.debug('Mortgage/watch/mortgagePipeline::run'); //DELETE
 
-      console.debug('Mortgage/watch/amoMortgageCreationStageId::run'); //DELETE
-
       const mortgage = {
         ...this.mortgage,
         amo_mortgage_id: newVal.amo_id,
       };
 
-      console.debug('Mortgage/watch/amoMortgageCreationStageId/mortgage', mortgage); //DELETE
+      console.debug('Mortgage/watch/mortgagePipeline/mortgage', mortgage); //DELETE
 
       this.$emit('updateMortgage', mortgage);
     },
@@ -186,26 +221,6 @@ export default defineComponent({
 
       this.$emit('updateMortgage', mortgage);
     },
-    deletePipelines(newVal, oldVal) {
-      console.debug('Mortgage/watch/deletePipelines/stub', this.stub); //DELETE
-      console.debug('Mortgage/watch/deletePipelines/values', newVal, oldVal); //DELETE
-
-      if (this.isWatcherAvailable()) {
-        return;
-      }
-
-      this.$store.dispatch('mortgage/setDeletePipelines', { pipelines: newVal, });
-    },
-    updatePipelines(newVal, oldVal) {
-      console.debug('Mortgage/watch/updatePipelines/stub', this.stub); //DELETE
-      console.debug('Mortgage/watch/updatePipelines/values', newVal, oldVal); //DELETE
-
-      if (this.isWatcherAvailable()) {
-        return;
-      }
-
-      this.$store.dispatch('mortgage/setUpdatePipelines', { pipelines: newVal, });
-    },
   },
   methods: {
     /* GETTERS */
@@ -256,53 +271,104 @@ export default defineComponent({
 
       this.$emit('updateMortgage', mortgage);
     },
+
     addPipeline() {
       console.debug('Mortgage/methods/addPipeline'); //DELETE
 
-      this.addPipelines = [...this.addPipelines, {
-        uuid: new Date().getTime(),
-        amo_pipeline_id: null,
-        amo_pipeline_booking_stage_id: '',
-      }];
+      this.$store.dispatch('mortgage/setAddPipelines', {
+        uuid: this.$.vnode.key,
+        pipelines: [...this.addPipelines, {
+          uuid: new Date().getTime(), //FIXME
+          amo_pipeline_id: null,
+          amo_pipeline_booking_stage_id: '',
+        }],
+      });
     },
     updatePipeline(data) {
       console.debug('Mortgage/methods/updatePipeline', data); //DELETE
 
-      const index = this.updatePipelines.findIndex(pipeline => pipeline.uuid === data.uuid);
+      const isNew = !!this.addPipelines.find(pipeline => pipeline.uuid === data.uuid);
       const pipeline = {
         uuid: data.uuid,
         amo_pipeline_id: data.pipeline?.amo_id,
         amo_pipeline_booking_stage_id: data.stage,
       };
 
-      if (index !== -1) {
-        // console.debug('Mortgage::updatePipeline[have]', pipeline); //DELETE
+      if (!isNew) {
+        console.debug('Mortgage/methods/updatePipeline/notNew'); //DELETE
 
-        this.updatePipelines = this.updatePipelines.map((updatePipeline, updatePipelineIndex) => {
-          if (updatePipelineIndex === index) {
-            return { ...pipeline };
-          }
+        const index = this.updatePipelines.findIndex(pipeline => pipeline.uuid === data.uuid);
 
-          return { ...updatePipeline };
-        });
+        if (index !== -1) {
+          console.debug('Mortgage/methods/updatePipeline/have', pipeline); //DELETE
+
+          this.$store.dispatch('mortgage/setUpdatePipelines', {
+            uuid: this.$.vnode.key,
+            pipelines: this.updatePipelines.map((updatePipeline, updatePipelineIndex) => {
+              if (updatePipelineIndex === index) {
+                return { ...pipeline };
+              }
+
+              return { ...updatePipeline };
+            }),
+          });
+        } else {
+          console.debug('Mortgage/methods/updatePipeline/dontHave', pipeline); //DELETE
+
+          this.$store.dispatch('mortgage/setUpdatePipelines', {
+            uuid: this.$.vnode.key,
+            pipelines: [...this.updatePipelines, pipeline],
+          });
+        }
+
+        console.debug('Mortgage/methods/updatePipeline/updatePipelines', this.updatePipelines); //DELETE
       } else {
-        // console.debug('Mortgage::updatePipeline[dont have]', pipeline); //DELETE
+        console.debug('Mortgage/methods/updatePipeline/new'); //DELETE
 
-        this.updatePipelines = [...this.updatePipelines, pipeline];
+        this.$store.dispatch('mortgage/setAddPipelines', {
+          uuid: this.$.vnode.key,
+          pipelines: this.addPipelines.map((addPipeline) => {
+            if (addPipeline.uuid === pipeline.uuid) {
+              return { ...pipeline };
+            }
+
+            return { ...addPipeline };
+          }),
+        });
       }
-
-      // console.debug('Mortgage::updatePipeline[updatePipelines]', this.updatePipelines); //DELETE
     },
     deletePipeline(pipeline) {
       console.debug('Mortgage/methods/deletePipeline', pipeline); //DELETE
 
-      this.deletePipelines = [
-        ...this.deletePipelines,
-        pipeline.uuid,
-      ];
-      this.updatePipelines = this.updatePipelines.filter(
-        updatePipeline => updatePipeline.uuid !== pipeline.uuid
-      );
+      const fromAddPipelines = this.addPipelines.find(addPipeline => addPipeline.uuid === pipeline.uuid);
+
+      if (fromAddPipelines) {
+        console.debug('Mortgage/methods/fromAddPipelines'); //DELETE
+
+        this.$store.dispatch('mortgage/setAddPipelines', {
+          uuid: this.$.vnode.key,
+          pipelines: this.addPipelines.filter(
+            addPipeline => addPipeline.uuid !== pipeline.uuid
+          ),
+        });
+      } else {
+        console.debug('Mortgage/methods/notFromAddPipelines'); //DELETE
+
+        this.$store.dispatch('mortgage/setDeletePipelines', {
+          uuid: this.$.vnode.key,
+          pipelines: [
+            ...this.deletePipelines,
+            pipeline.uuid,
+          ],
+        });
+
+        this.$store.dispatch('mortgage/setUpdatePipelines', {
+          uuid: this.$.vnode.key,
+          pipelines: this.updatePipelines.filter(
+            updatePipeline => updatePipeline.uuid !== pipeline.uuid
+          ),
+        });
+      }
     },
 
     /* HELPERS */
@@ -326,6 +392,8 @@ export default defineComponent({
         }
 
         if (this.brokers.length) { /* FIXME: implement as a service method */
+          this.mortgageBrokers = [];
+
           this.mortgage.brokers.forEach(brokerId => {
             const broker = this.brokers.find(broker => broker.amo_id === brokerId);
 

@@ -45,13 +45,16 @@ export default defineComponent({
     updateMortgage(mortgage) {
       console.debug('Main/updateMortgage', mortgage); //DELETE
 
-      if (mortgage.uuid) {
-        console.debug('Main/updateMortgage/uuid', mortgage.uuid); //DELETE
-      }
-
-      if (mortgage.id) {
-        console.debug('Main/updateMortgage/id', mortgage.id); //DELETE
-      }
+      this.$emit('updateMortgage', mortgage);
+    },
+    addMortgagePipelines(data) {
+      console.debug('Main/addMortgagePipelines', data); //DELETE
+    },
+    updateMortgagePipelines(data) {
+      console.debug('Main/updateMortgagePipelines', data); //DELETE
+    },
+    deleteMortgagePipelines(data) {
+      console.debug('Main/deleteMortgagePipelines', data); //DELETE
     },
 
     /* HELPERS */

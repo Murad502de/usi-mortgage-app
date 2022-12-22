@@ -25,6 +25,18 @@ export default defineComponent({
     };
   },
   computed: {
+    addPipelines() {
+      return this.$store.getters["mortgage/addPipelines"];
+    },
+    updatePipelines() {
+      return this.$store.getters["mortgage/updatePipelines"];
+    },
+    deletePipelines() {
+      return this.$store.getters["mortgage/deletePipelines"];
+    },
+    storeMortgagesChanged() {
+      return this.$store.getters["mortgage/changed"];
+    },
     storeMortgages() {
       return this.$store.getters["mortgage/list"];
     },
@@ -56,7 +68,8 @@ export default defineComponent({
     cancelDisabled() {
       return !this.deleteMortgages.length &&
         !this.updateMortgages.length &&
-        !this.addMortgages.length;
+        !this.addMortgages.length &&
+        !this.storeMortgagesChanged;
     },
     saveDisabled() {
       return this.cancelDisabled;
@@ -99,11 +112,15 @@ export default defineComponent({
       this.modalVisibility = true;
     },
     save() {
-      console.debug('AdvancedSettings/methods/save'); //DELETE
       console.debug('AdvancedSettings/methods/save/readMortgages', this.readMortgages); //DELETE
       console.debug('AdvancedSettings/methods/save/addMortgages', this.addMortgages); //DELETE
       console.debug('AdvancedSettings/methods/save/updateMortgages', this.updateMortgages); //DELETE
       console.debug('AdvancedSettings/methods/save/deleteMortgages', this.deleteMortgages); //DELETE
+      console.debug('AdvancedSettings/methods/save/addPipelines', this.addPipelines); //DELETE
+      console.debug('AdvancedSettings/methods/save/updatePipelines', this.updatePipelines); //DELETE
+      console.debug('AdvancedSettings/methods/save/deletePipelines', this.deletePipelines); //DELETE
+
+      //TODO: implement integration with server
     },
     closeModal() {
       this.modalVisibility = false;
@@ -114,11 +131,34 @@ export default defineComponent({
       this.deleteMortgages = [];
       this.updateMortgages = [];
       this.addMortgages = [];
+
+      this.$store.dispatch('mortgage/reset');
     },
     deleteMortgage(mortgage) {
       console.debug('AdvancedSettings::deleteMortgage', mortgage); //DELETE
 
-      this.deleteMortgages.push(mortgage.uuid || mortgage.id);
+      if (mortgage.uuid) {
+        this.deleteMortgages.push(mortgage.uuid);
+      }
+
+      if (mortgage.id) {
+        this.addMortgages = this.addMortgages.filter(
+          addMortgage => addMortgage.id !== mortgage.id
+        );
+      }
+
+      this.$store.dispatch('mortgage/setAddPipelines', {
+        uuid: mortgage.uuid || mortgage.id,
+        pipelines: [],
+      });
+      this.$store.dispatch('mortgage/setUpdatePipelines', {
+        uuid: mortgage.uuid || mortgage.id,
+        pipelines: [],
+      });
+      this.$store.dispatch('mortgage/setDeletePipelines', {
+        uuid: mortgage.uuid || mortgage.id,
+        pipelines: [],
+      });
     },
     addMortgage() {
       console.debug('AdvancedSettings/methods/addMortgage'); //DELETE
@@ -134,6 +174,33 @@ export default defineComponent({
         amo_mortgage_applying_stage_id: null,
         amo_mortgage_after_applying_stage_ids: null,
       });
+    },
+    updateMortgage(mortgage) {
+      console.debug('AdvancedSettings/updateMortgage', mortgage); //DELETE
+
+      if (mortgage.uuid) {
+        console.debug('AdvancedSettings/updateMortgage/uuid', mortgage.uuid); //DELETE
+
+        this.$store.dispatch('mortgage/setMortgageList', this.storeMortgages.map(storeMortgage => {
+          if (storeMortgage.uuid === mortgage.uuid) {
+            return { ...mortgage };
+          }
+
+          return { ...storeMortgage };
+        }));
+      }
+
+      if (mortgage.id) {
+        console.debug('AdvancedSettings/updateMortgage/id', mortgage.id); //DELETE
+
+        this.addMortgages = this.addMortgages.map(addMortgage => {
+          if (addMortgage.id === mortgage.id) {
+            return { ...mortgage };
+          }
+
+          return { ...addMortgage };
+        });
+      }
     },
 
     /* HELPERS */
