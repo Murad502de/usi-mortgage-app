@@ -36,10 +36,21 @@ export default {
   actions: {
     /* ACTIONS */
     async reset({ commit, getters, dispatch, }) {
-      console.debug('vuex/mortgage/reset/listNode', getters.listNode); //DELETE
-      console.debug('vuex/mortgage/reset/list', getters.list); //DELETE
+      console.debug('store/mortgage/actions/reset/listNode', getters.listNode); //DELETE
+      console.debug('store/mortgage/actions/reset/list', getters.list); //DELETE
 
       commit('updateList', getters.listNode);
+      commit('updateAddPipelines', []);
+      commit('updateUpdatePipelines', []);
+      commit('updateDeletePipelines', []);
+      dispatch('setChangeStatus', false);
+
+      return;
+    },
+    async save({ commit, getters, dispatch, }) {
+      console.debug('store/mortgage/actions/save/listNode', getters.listNode); //DELETE
+      console.debug('store/mortgage/actions/save/list', getters.list); //DELETE
+
       commit('updateAddPipelines', []);
       commit('updateUpdatePipelines', []);
       commit('updateDeletePipelines', []);
@@ -187,6 +198,22 @@ export default {
       }
 
       dispatch('setChangeStatus', true);
+    },
+    async replaceUuidInAddPipelines({ commit, getters, dispatch }, { newUuid, oldUuid, }) {
+      console.debug('vuex/mortgage/replaceUuidInAddPipelines', { newUuid, oldUuid, }); //DELETE
+
+      commit('updateAddPipelines', [
+        ...getters.addPipelines.map(addPipeline => {
+          if (addPipeline.uuid === oldUuid) {
+            return {
+              ...addPipeline,
+              uuid: newUuid,
+            };
+          }
+
+          return addPipeline;
+        })
+      ]);
     },
     async setUpdatePipelines({ commit, getters, dispatch }, { uuid, pipelines, }) {
       console.debug('vuex/mortgage/setUpdatePipelines', { uuid, pipelines, }); //DELETE

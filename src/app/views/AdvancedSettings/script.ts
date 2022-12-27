@@ -124,11 +124,12 @@ export default defineComponent({
       this.saveLoader = true;
 
       await this.createMortgages(this.addMortgages);
-      // await this.updtMortgages(this.updateMortgages)
-      // await this.delMortgages(this.deleteMortgages);
-      // await this.createPipelines(this.addPipelines);
-      // await this.updtPipelines(this.updatePipelines);
-      // await this.delPipelines(this.deletePipelines);
+      await this.updtMortgages(this.updateMortgages)
+      await this.delMortgages(this.deleteMortgages);
+      await this.createPipelines(this.addPipelines);
+      await this.updtPipelines(this.updatePipelines);
+      await this.delPipelines(this.deletePipelines);
+      await this.fetchMortgages();
       await this.afterSave();
 
       this.saveLoader = false;
@@ -224,14 +225,13 @@ export default defineComponent({
       console.debug('AdvancedSettings/methods/reset'); //DELETE
 
       await this.localReset();
-      this.$store.dispatch('mortgage/reset');
+      await this.$store.dispatch('mortgage/reset');
     },
     async afterSave() {
       console.debug('AdvancedSettings/methods/afterSave'); //DELETE
 
       await this.localReset();
-
-      //TODO: copy saved state to node
+      await this.$store.dispatch('mortgage/save');
     },
     async localReset() {
       console.debug('AdvancedSettings/methods/localReset'); //DELETE
@@ -249,6 +249,11 @@ export default defineComponent({
         const uuid = await createMortgage(mortgages[i]);
 
         console.debug('AdvancedSettings/methods/createMortgages/uuid', uuid); //DELETE
+
+        await this.$store.dispatch('mortgage/replaceUuidInAddPipelines', {
+          newUuid: uuid,
+          oldUuid: mortgages[i].id,
+        });
       }
     },
     async updtMortgages(mortgages) {
