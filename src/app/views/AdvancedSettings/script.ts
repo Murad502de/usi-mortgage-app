@@ -4,6 +4,7 @@ import { teleport } from '@/app/utils/teleport';
 import { createMortgage } from '@/app/api/mortgageApi/createMortgage';
 import { deleteMortgage } from '@/app/api/mortgageApi/deleteMortgage';
 import { updateMortgage } from '@/app/api/mortgageApi/updateMortgage';
+import { createPipeline } from '@/app/api/pipelineApi/createPipeline';
 import Header from './components/Header/index.vue';
 import Main from './components/Main/index.vue';
 import Modal from '@components/TheModal/index.vue';
@@ -120,11 +121,9 @@ export default defineComponent({
       await this.createMortgages(this.addMortgages);
       await this.updtMortgages(this.updateMortgages)
       await this.delMortgages(this.deleteMortgages);
-
-      console.debug('AdvancedSettings/methods/save/addPipelines', this.addPipelines); //DELETE
-      console.debug('AdvancedSettings/methods/save/updatePipelines', this.updatePipelines); //DELETE
-      console.debug('AdvancedSettings/methods/save/deletePipelines', this.deletePipelines); //DELETE
-
+      await this.createPipelines(this.addPipelines);
+      await this.updtPipelines(this.updatePipelines);
+      await this.delPipelines(this.deletePipelines);
       this.reset();
     },
     closeModal() {
@@ -248,7 +247,16 @@ export default defineComponent({
       for (let i = 0; i < mortgages.length; i++) {
         await deleteMortgage(mortgages[i]);
       }
-    }
+    },
+    async createPipelines(pipelines) {
+      console.debug('AdvancedSettings/methods/createPipelines/pipelines', pipelines); //DELETE
+    },
+    async updtPipelines(pipelines) {
+      console.debug('AdvancedSettings/methods/updtPipelines/pipelines', pipelines); //DELETE
+    },
+    async delPipelines(pipelines) {
+      console.debug('AdvancedSettings/methods/delPipelines/pipelines', pipelines); //DELETE
+    },
   },
 
   async created() {
