@@ -23,6 +23,7 @@ export default defineComponent({
   props: {},
   data() {
     return {
+      saveLoader: false,
       modalVisibility: false,
       mortgagesFetched: false,
       addMortgages: [],
@@ -120,13 +121,17 @@ export default defineComponent({
     async save() {
       console.debug('AdvancedSettings/methods/save/readMortgages', this.readMortgages); //DELETE
 
+      this.saveLoader = true;
+
       await this.createMortgages(this.addMortgages);
-      await this.updtMortgages(this.updateMortgages)
-      await this.delMortgages(this.deleteMortgages);
-      await this.createPipelines(this.addPipelines);
-      await this.updtPipelines(this.updatePipelines);
-      await this.delPipelines(this.deletePipelines);
-      this.reset();
+      // await this.updtMortgages(this.updateMortgages)
+      // await this.delMortgages(this.deleteMortgages);
+      // await this.createPipelines(this.addPipelines);
+      // await this.updtPipelines(this.updatePipelines);
+      // await this.delPipelines(this.deletePipelines);
+      await this.afterSave();
+
+      this.saveLoader = false;
     },
     closeModal() {
       this.modalVisibility = false;
@@ -215,21 +220,35 @@ export default defineComponent({
     },
 
     /* HELPERS */
-    /* ACTIONS */
-    reset() {
+    async reset() {
       console.debug('AdvancedSettings/methods/reset'); //DELETE
+
+      await this.localReset();
+      this.$store.dispatch('mortgage/reset');
+    },
+    async afterSave() {
+      console.debug('AdvancedSettings/methods/afterSave'); //DELETE
+
+      await this.localReset();
+
+      //TODO: copy saved state to node
+    },
+    async localReset() {
+      console.debug('AdvancedSettings/methods/localReset'); //DELETE
 
       this.deleteMortgages = [];
       this.updateMortgages = [];
       this.addMortgages = [];
-
-      this.$store.dispatch('mortgage/reset');
     },
+
+    /* ACTIONS */
     async createMortgages(mortgages) {
       console.debug('AdvancedSettings/methods/createMortgages/mortgages', mortgages); //DELETE
 
       for (let i = 0; i < mortgages.length; i++) {
-        await createMortgage(mortgages[i]);
+        const uuid = await createMortgage(mortgages[i]);
+
+        console.debug('AdvancedSettings/methods/createMortgages/uuid', uuid); //DELETE
       }
     },
     async updtMortgages(mortgages) {

@@ -31,6 +31,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    loader: {
+      type: Boolean,
+      default: false
+    },
   },
   data() {
     return {};
@@ -45,14 +49,14 @@ export default defineComponent({
     cancel() {
       console.debug('ResultActions::cancel'); //DELETE
 
-      if (!this.cancelDisabled) {
+      if (!this.cancelDisabled && !this.loader) {
         this.$emit('cancel');
       }
     },
     save() {
       console.debug('ResultActions::save'); //DELETE
 
-      if (!this.saveDisabled) {
+      if (!this.saveDisabled && !this.loader) {
         this.$emit('save');
       }
     },

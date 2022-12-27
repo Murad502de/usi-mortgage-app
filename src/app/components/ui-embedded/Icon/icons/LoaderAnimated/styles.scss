@@ -1,0 +1,9 @@
+.um-icon-loader-animated {
+  animation: spin infinite linear 1s;
+
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

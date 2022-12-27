@@ -2,12 +2,14 @@ import { defineComponent } from "vue";
 import Close from './icons/Close/index.vue';
 import ChevronDown from './icons/ChevronDown/index.vue';
 import Delete from './icons/Delete/index.vue';
+import LoaderAnimated from './icons/LoaderAnimated/index.vue';
 
 export default defineComponent({
   components: {
     Close,
     ChevronDown,
     Delete,
+    LoaderAnimated,
   },
 
   props: {
@@ -52,6 +54,9 @@ export default defineComponent({
 
         case 'delete':
           return 'Delete';
+
+        case 'loaderanimated':
+          return 'LoaderAnimated';
 
         default:
           return null;

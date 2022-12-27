@@ -4,6 +4,7 @@
       @save="save"
       @cancel="cancel"
       @add="addMortgage"
+      :loader="saveLoader"
       :addDisabled="addDisabled"
       :cancelDisabled="cancelDisabled"
       :saveDisabled="saveDisabled"

@@ -7,7 +7,10 @@
   align-items: center;
 
   &__button {
+    box-sizing: border-box;
     width: max-content;
+    min-width: 84px;
+    height: 36px;
     margin-left: 7px;
 
     &:first-child {

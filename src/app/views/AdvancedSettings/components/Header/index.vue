@@ -1,6 +1,6 @@
 <template>
   <div class="usi-mortgage--advanced-settings__header">
-    <Button :disabled="addDisabled" @click="add">
+    <Button :disabled="addDisabled || loader" @click="add">
       {{ addMortgageTitle }}
     </Button>
 
@@ -8,6 +8,7 @@
       :cancelVisibility="cancelVisibility"
       :cancelDisabled="cancelDisabled"
       :saveDisabled="saveDisabled"
+      :loader="loader"
       @save="save"
       @cancel="cancel"
     />

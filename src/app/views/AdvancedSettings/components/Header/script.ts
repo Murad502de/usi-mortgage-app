@@ -25,6 +25,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    loader: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {

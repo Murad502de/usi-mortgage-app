@@ -1,7 +1,10 @@
 import { defineComponent } from "vue";
+import Icon from '@components/ui-embedded/Icon/index.vue';
 
 export default defineComponent({
-  components: {},
+  components: {
+    Icon,
+  },
 
   props: {
     loader: {
