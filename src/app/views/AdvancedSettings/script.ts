@@ -5,6 +5,8 @@ import { createMortgage } from '@/app/api/mortgageApi/createMortgage';
 import { deleteMortgage } from '@/app/api/mortgageApi/deleteMortgage';
 import { updateMortgage } from '@/app/api/mortgageApi/updateMortgage';
 import { createPipeline } from '@/app/api/pipelineApi/createPipeline';
+import { updatePipeline } from '@/app/api/pipelineApi/updatePipeline';
+import { deletePipeline } from '@/app/api/pipelineApi/deletePipeline';
 import Header from './components/Header/index.vue';
 import Main from './components/Main/index.vue';
 import Modal from '@components/TheModal/index.vue';
@@ -248,14 +250,53 @@ export default defineComponent({
         await deleteMortgage(mortgages[i]);
       }
     },
-    async createPipelines(pipelines) {
-      console.debug('AdvancedSettings/methods/createPipelines/pipelines', pipelines); //DELETE
+    async createPipelines(mortgagePipelines) {
+      console.debug('AdvancedSettings/methods/createPipelines/mortgagePipelines', mortgagePipelines); //DELETE
+
+      for (let i = 0; i < mortgagePipelines.length; i++) {
+        let tmpMortgageUuid = mortgagePipelines[i].uuid;
+        let tmpMortgagePipelines = mortgagePipelines[i].pipelines;
+
+        for (let j = 0; j < tmpMortgagePipelines.length; j++) {
+          let tmpPipeline = {
+            mortgage_uuid: tmpMortgageUuid,
+            amo_pipeline_id: tmpMortgagePipelines[j].amo_pipeline_id,
+            amo_pipeline_booking_stage_id: tmpMortgagePipelines[j].amo_pipeline_booking_stage_id,
+          };
+
+          await createPipeline(tmpPipeline);
+        }
+      }
     },
-    async updtPipelines(pipelines) {
-      console.debug('AdvancedSettings/methods/updtPipelines/pipelines', pipelines); //DELETE
+    async updtPipelines(mortgagePipelines) {
+      console.debug('AdvancedSettings/methods/updtPipelines/mortgagePipelines', mortgagePipelines); //DELETE
+
+      for (let i = 0; i < mortgagePipelines.length; i++) {
+        let tmpMortgageUuid = mortgagePipelines[i].uuid;
+        let tmpMortgagePipelines = mortgagePipelines[i].pipelines;
+
+        for (let j = 0; j < tmpMortgagePipelines.length; j++) {
+          let tmpPipeline = {
+            mortgage_uuid: tmpMortgageUuid,
+            uuid: tmpMortgagePipelines[j].uuid,
+            amo_pipeline_id: tmpMortgagePipelines[j].amo_pipeline_id,
+            amo_pipeline_booking_stage_id: tmpMortgagePipelines[j].amo_pipeline_booking_stage_id,
+          };
+
+          await updatePipeline(tmpPipeline);
+        }
+      }
     },
-    async delPipelines(pipelines) {
-      console.debug('AdvancedSettings/methods/delPipelines/pipelines', pipelines); //DELETE
+    async delPipelines(mortgagePipelines) {
+      console.debug('AdvancedSettings/methods/delPipelines/mortgagePipelines', mortgagePipelines); //DELETE
+
+      for (let i = 0; i < mortgagePipelines.length; i++) {
+        let tmpMortgagePipelines = mortgagePipelines[i].pipelines;
+
+        for (let j = 0; j < tmpMortgagePipelines.length; j++) {
+          await deletePipeline(tmpMortgagePipelines[j]);
+        }
+      }
     },
   },
 
