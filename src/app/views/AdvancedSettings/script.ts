@@ -1,6 +1,9 @@
 import { defineComponent } from "vue";
 import { mapActions } from 'vuex';
 import { teleport } from '@/app/utils/teleport';
+import { createMortgage } from '@/app/api/mortgageApi/createMortgage';
+import { deleteMortgage } from '@/app/api/mortgageApi/deleteMortgage';
+import { updateMortgage } from '@/app/api/mortgageApi/updateMortgage';
 import Header from './components/Header/index.vue';
 import Main from './components/Main/index.vue';
 import Modal from '@components/TheModal/index.vue';
@@ -111,16 +114,18 @@ export default defineComponent({
 
       this.modalVisibility = true;
     },
-    save() {
+    async save() {
       console.debug('AdvancedSettings/methods/save/readMortgages', this.readMortgages); //DELETE
-      console.debug('AdvancedSettings/methods/save/addMortgages', this.addMortgages); //DELETE
-      console.debug('AdvancedSettings/methods/save/updateMortgages', this.updateMortgages); //DELETE
-      console.debug('AdvancedSettings/methods/save/deleteMortgages', this.deleteMortgages); //DELETE
+
+      await this.createMortgages(this.addMortgages);
+      await this.updtMortgages(this.updateMortgages)
+      await this.delMortgages(this.deleteMortgages);
+
       console.debug('AdvancedSettings/methods/save/addPipelines', this.addPipelines); //DELETE
       console.debug('AdvancedSettings/methods/save/updatePipelines', this.updatePipelines); //DELETE
       console.debug('AdvancedSettings/methods/save/deletePipelines', this.deletePipelines); //DELETE
 
-      //TODO: implement integration with server
+      this.reset();
     },
     closeModal() {
       this.modalVisibility = false;
@@ -128,11 +133,7 @@ export default defineComponent({
     saveModal() {
       this.modalVisibility = false;
 
-      this.deleteMortgages = [];
-      this.updateMortgages = [];
-      this.addMortgages = [];
-
-      this.$store.dispatch('mortgage/reset');
+      this.reset();
     },
     deleteMortgage(mortgage) {
       console.debug('AdvancedSettings::deleteMortgage', mortgage); //DELETE
@@ -188,6 +189,15 @@ export default defineComponent({
 
           return { ...storeMortgage };
         }));
+
+        console.debug('AdvancedSettings/updateMortgage/updateMortgages/before', this.updateMortgages); //DELETE
+
+        this.updateMortgages = [
+          ...[...this.updateMortgages].filter(updateMortgage => updateMortgage !== mortgage.uuid),
+          mortgage.uuid,
+        ];
+
+        console.debug('AdvancedSettings/updateMortgage/updateMortgages/after', this.updateMortgages); //DELETE
       }
 
       if (mortgage.id) {
@@ -205,6 +215,40 @@ export default defineComponent({
 
     /* HELPERS */
     /* ACTIONS */
+    reset() {
+      console.debug('AdvancedSettings/methods/reset'); //DELETE
+
+      this.deleteMortgages = [];
+      this.updateMortgages = [];
+      this.addMortgages = [];
+
+      this.$store.dispatch('mortgage/reset');
+    },
+    async createMortgages(mortgages) {
+      console.debug('AdvancedSettings/methods/createMortgages/mortgages', mortgages); //DELETE
+
+      for (let i = 0; i < mortgages.length; i++) {
+        await createMortgage(mortgages[i]);
+      }
+    },
+    async updtMortgages(mortgages) {
+      console.debug('AdvancedSettings/methods/updtMortgages/mortgages', mortgages); //DELETE
+
+      for (let i = 0; i < mortgages.length; i++) {
+        await updateMortgage(
+          await this.storeMortgages.find(
+            storeMortgage => storeMortgage.uuid === mortgages[i]
+          )
+        );
+      }
+    },
+    async delMortgages(mortgages) {
+      console.debug('AdvancedSettings/methods/delMortgages/mortgages', mortgages); //DELETE
+
+      for (let i = 0; i < mortgages.length; i++) {
+        await deleteMortgage(mortgages[i]);
+      }
+    }
   },
 
   async created() {

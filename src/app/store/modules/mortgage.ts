@@ -35,16 +35,6 @@ export default {
 
   actions: {
     /* ACTIONS */
-    async fetchList({ commit }) {
-      console.debug('vuex[mortgage]::fetchList'); //DELETE
-
-      const list: Array<any> = await fetchMortgages();
-
-      commit('updateListNode', list);
-      commit('updateList', list);
-
-      return list;
-    },
     async reset({ commit, getters, dispatch, }) {
       console.debug('vuex/mortgage/reset/listNode', getters.listNode); //DELETE
       console.debug('vuex/mortgage/reset/list', getters.list); //DELETE
@@ -56,6 +46,16 @@ export default {
       dispatch('setChangeStatus', false);
 
       return;
+    },
+    async fetchList({ commit }) {
+      console.debug('vuex[mortgage]::fetchList'); //DELETE
+
+      const list: Array<any> = await fetchMortgages();
+
+      commit('updateListNode', list);
+      commit('updateList', list);
+
+      return list;
     },
 
     /* SETTERS */

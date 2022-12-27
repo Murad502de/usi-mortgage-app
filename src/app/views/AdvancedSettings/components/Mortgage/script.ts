@@ -395,7 +395,7 @@ export default defineComponent({
           this.mortgageBrokers = [];
 
           this.mortgage.brokers.forEach(brokerId => {
-            const broker = this.brokers.find(broker => broker.amo_id === brokerId);
+            const broker = this.brokers.find(broker => Number(broker.amo_id) === Number(brokerId));
 
             if (broker) {
               this.mortgageBrokers.push(broker);

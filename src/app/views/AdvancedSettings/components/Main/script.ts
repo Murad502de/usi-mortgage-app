@@ -45,7 +45,12 @@ export default defineComponent({
     updateMortgage(mortgage) {
       console.debug('Main/updateMortgage', mortgage); //DELETE
 
-      this.$emit('updateMortgage', mortgage);
+      this.$emit('updateMortgage', {
+        ...mortgage,
+        amo_mortgage_applying_stage_id: Number(mortgage.amo_mortgage_applying_stage_id),
+        amo_mortgage_approved_stage_id: Number(mortgage.amo_mortgage_approved_stage_id),
+        amo_mortgage_creation_stage_id: Number(mortgage.amo_mortgage_creation_stage_id),
+      });
     },
     addMortgagePipelines(data) {
       console.debug('Main/addMortgagePipelines', data); //DELETE
