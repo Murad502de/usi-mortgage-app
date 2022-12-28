@@ -26,7 +26,7 @@ export default defineComponent({
       return [
         { 'mt-button_load': this.loader },
         this.color ? `um-button_${this.color}` : '',
-        this.disabled ? `um-button_disabled` : '',
+        this.disabled || this.loader ? `um-button_disabled` : '',
       ];
     },
   },

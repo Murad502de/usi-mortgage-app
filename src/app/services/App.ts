@@ -9,7 +9,9 @@ import View from '@/app/services/View';
 
 class App {
   async create({ area, widget, view, }) {
-    console.debug('AppService::create[widget]', widget); //DELETE
+    console.debug('app/services/App/create/area', area); //DELETE
+    console.debug('app/services/App/create/widget', widget); //DELETE
+    console.debug('app/services/App/create/view', view); //DELETE
 
     const WIDGET_CODE = widget.params.widget_code;
     const MOUNT_POINT = process.env.VUE_APP_MOUNT_POINT || null;
@@ -22,7 +24,7 @@ class App {
       });
     }
 
-    console.debug('AppService::create[VIEW]', VIEW); //DELETE
+    console.debug('app/services/App/create/VIEW', VIEW); //DELETE
 
     if (!VIEW || !MOUNT_POINT) return;
 
@@ -35,22 +37,9 @@ class App {
     });
   }
   async createIn({ view, point, widget, }) {
-    console.debug('AppService::createIn', { view, point, widget, }); //DELETE
-
-    console.debug('AppService::createIn[widget]', widget.authorizedRequest); //DELETE
-
-    // widget.crm_post(
-    //   'https://webhook.site/aa372c9b-68ea-4731-9ec0-8c17d9616158',
-    //   {
-    //     // Передаем POST данные
-    //     name: 'TEST NAME',
-    //   },
-    //   function (msg: any) {
-    //     console.debug('AppService::crm_post', msg)
-    //   },
-    //   'json'
-    // );
-
+    console.debug('app/services/App/createIn/view', view); //DELETE
+    console.debug('app/services/App/createIn/point', point); //DELETE
+    console.debug('app/services/App/createIn/widget', widget); //DELETE
 
     const app = createApp(view)
       // .use(VueAxios, { $apiGatewayDefault: apiGatewayDefault, })
@@ -58,7 +47,7 @@ class App {
       .use(vClickOutside)
       .mount(point);
 
-    console.debug('AppService::createIn[app]', app); //DELETE
+    console.debug('app/services/App/createIn/app', app); //DELETE
 
     await app.$store.dispatch('widget/setParams', {
       params: widget.params

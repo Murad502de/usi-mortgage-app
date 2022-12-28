@@ -73,6 +73,7 @@ export default {
       'process.env.VUE_APP_API_GATEWAY_DEFAULT_URL': JSON.stringify('http://localhost:8090/api/v1'),
       'process.env.VUE_APP_PAY_FORM_SWITCHER_ID': JSON.stringify(1058931),
       'process.env.VUE_APP_PAY_FORM_MORTGAGE_ID': JSON.stringify(640645),
+      'process.env.VUE_APP_AMOCRM_SUBDOMAIN': JSON.stringify('integrat3'),
     }),
     jsonlint({
       mode: 'json',

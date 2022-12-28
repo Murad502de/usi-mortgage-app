@@ -8,7 +8,7 @@ const Widget = {
     console.debug('Widget[Mortgage]::render'); //DELETE
   },
   init(self: any) {
-    console.debug('Widget[Mortgage]::init'); //DELETE
+    console.debug('app/main/Widget/init'); //DELETE
 
     App.create({
       area: window.AMOCRM.getWidgetsArea(),

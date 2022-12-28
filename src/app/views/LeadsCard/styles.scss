@@ -5,4 +5,9 @@
   align-content: center;
   justify-content: center;
   align-items: center;
+
+  &__lead-button {
+    min-width: 250px;
+    width: 50%;
+  }
 }
