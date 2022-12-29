@@ -1,20 +1,30 @@
 import debounce from "@/app/utils/debounce";
 import MountPoint from '@/app/services/MountPoint';
-import Mortgage from './services/helpers/Mortgage';
-import MortgageButton from "@components/ui/Button/index.vue";
 import { fetchLeadByAmoId } from '@/app/api/leadApi/fetchLead';
+import { fetchPipelineByAmoId } from '@/app/api/pipelineApi/fetchPipeline';
+import MortgageButton from "@components/ui/Button/index.vue";
+import Modal from '@components/TheModal/index.vue';
+import Mortgage from './services/helpers/Mortgage';
+import ActionsView from './components/ModalViews/ActionsView/index.vue';
+import SettingsView from './components/ModalViews/SettingsView/index.vue';
 
 export default {
   components: {
     MortgageButton,
+    Modal,
+    ActionsView,
+    SettingsView,
   },
 
   props: {},
   data: () => {
     return {
       lead: null,
+      pipeline: null,
       btnRedirectLoader: false,
       mortgageBtnShow: false,
+      modalVisibility: false,
+      activeModalView: null,
       goToBasicLeadTitle: 'Перейти в основную сделку',
       goToMortgageLeadTitle: 'Перейти в сделку в воронке "Ипотека"',
       createMortgageLeadTitle: 'Создать сделку в воронке "Ипотека"',
@@ -24,6 +34,9 @@ export default {
     leadId() {
       return +window.AMOCRM.data.current_card.id;
     },
+    leadPipeline() {
+      return +window.AMOCRM.data.current_card.model.attributes['lead[PIPELINE_ID]'];
+    },
     isLeadMortgage() {
       return !!this.lead?.is_mortgage;
     },
@@ -31,13 +44,18 @@ export default {
       return !!this.lead;
     },
     isPipelineAuthorized() {
-      return false;
+      return !!this.pipeline;
     },
     relatedLead() {
       return this.lead?.lead?.amo_id;
     },
     relatedLeadUrl() {
       return `https://${process.env.VUE_APP_AMOCRM_SUBDOMAIN}.amocrm.ru/leads/detail/${this.relatedLead}`;
+    },
+    brokers() {
+      return this.pipeline ? this.pipeline.mortgage.brokers.map(broker => {
+        return window.AMOCRM.constant('managers')[broker];
+      }) : [];
     },
   },
 
@@ -64,6 +82,28 @@ export default {
       this.btnRedirectLoader = true;
       document.location.href = this.relatedLeadUrl;
     },
+    addMortgage() {
+      console.debug('app/views/LeadsCard/methods/lead', this.lead); //DELETE
+      console.debug('app/views/LeadsCard/methods/pipeline', this.pipeline); //DELETE
+      console.debug('app/views/LeadsCard/methods/brokers', this.brokers); //DELETE
+
+      this.activeModalView = 'ActionsView';
+      this.modalVisibility = true;
+    },
+    closeModal() {
+      this.modalVisibility = false;
+      this.activeModalView = null;
+    },
+    createMortgage() {
+      console.debug('app/views/LeadsCard/methods/createMortgage'); //DELETE
+
+      this.activeModalView = 'SettingsView';
+    },
+    consultation() {
+      console.debug('app/views/LeadsCard/methods/consultation'); //DELETE
+
+      this.activeModalView = 'SettingsView';
+    },
 
     /* HELPERS */
     /* ACTIONS */
@@ -81,12 +121,21 @@ export default {
     console.debug('app/views/LeadsCard/created/leadId', this.leadId); //DELETE
 
     Mortgage.addEventListener({ callback: this.selectMortgage });
-    const response = await fetchLeadByAmoId(this.leadId);
 
-    console.debug('app/views/LeadsCard/created/response', response); //DELETE
+    const fetchLeadByAmoIdResponse = await fetchLeadByAmoId(this.leadId);
 
-    if (!!response) {
-      this.lead = response;
+    console.debug('app/views/LeadsCard/created/fetchLeadByAmoIdResponse', fetchLeadByAmoIdResponse); //DELETE
+
+    if (!!fetchLeadByAmoIdResponse) {
+      this.lead = fetchLeadByAmoIdResponse;
+    }
+
+    const fetchPipelineByAmoIdResponse = await fetchPipelineByAmoId(this.leadPipeline);
+
+    console.debug('app/views/LeadsCard/created/fetchPipelineByAmoIdResponse', fetchPipelineByAmoIdResponse); //DELETE
+
+    if (!!fetchPipelineByAmoIdResponse) {
+      this.pipeline = fetchPipelineByAmoIdResponse;
     }
   },
   mounted() {

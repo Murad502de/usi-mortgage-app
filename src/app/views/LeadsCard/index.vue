@@ -4,8 +4,8 @@
       <MortgageButton
         class="usi-mortgage--leadscard__lead-button"
         v-show="isLeadAuthorized && isLeadMortgage"
-        @click="goToRelatedLead()"
         :loader="btnRedirectLoader"
+        @click="goToRelatedLead"
       >
         {{ goToBasicLeadTitle }}
       </MortgageButton>
@@ -13,20 +13,41 @@
       <MortgageButton
         class="usi-mortgage--leadscard__lead-button"
         v-show="isLeadAuthorized && !isLeadMortgage"
-        @click="goToRelatedLead()"
         :loader="btnRedirectLoader"
+        @click="goToRelatedLead"
       >
         {{ goToMortgageLeadTitle }}
       </MortgageButton>
 
       <MortgageButton
         class="usi-mortgage--leadscard__lead-button"
-        v-show="isPipelineAuthorized && mortgageBtnShow"
+        v-show="isPipelineAuthorized && !isLeadAuthorized && mortgageBtnShow"
         :loader="btnRedirectLoader"
+        @click="addMortgage"
       >
         {{ createMortgageLeadTitle }}
       </MortgageButton>
     </teleport>
+
+    <Modal
+      teleportTo="#page_holder"
+      class="usi-mortgage--leadscard-modal"
+      :visibility="modalVisibility"
+      @close="closeModal"
+    >
+      <div class="usi-mortgage--leadscard-modal--body">
+        <ActionsView
+          v-show="activeModalView === 'ActionsView'"
+          @yes="createMortgage"
+          @consultation="consultation"
+          @cancel="closeModal"
+        />
+        <SettingsView
+          v-show="activeModalView === 'SettingsView'"
+          :brokers="brokers"
+        />
+      </div>
+    </Modal>
   </div>
 </template>
 

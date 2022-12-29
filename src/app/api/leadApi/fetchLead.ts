@@ -23,7 +23,6 @@ export const fetchLeadByAmoId = async (amo_id) => {
 
       response = data.data;
     }).fail(function (data) {
-      // alert(`Ошибка при обновлении ипотечного узла: ${amo_id}`);
       console.debug('app/api/leadApi/fetchLeadByAmoId/fail', data); //DELETE
     });
 

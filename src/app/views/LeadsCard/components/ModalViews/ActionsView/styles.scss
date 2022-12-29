@@ -1,0 +1,24 @@
+.usi-mortgage--leadscard--actions-view {
+  &__title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &__body {
+    box-sizing: border-box;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__btn {
+    margin-left: 16px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
