@@ -16,19 +16,11 @@
         </Button>
       </div>
 
-      <div class="usi-mortgage--leadscard--settings-view__message">
-        <textarea
-          style="
-            box-sizing: border-box;
-            border: 1px solid rgb(211, 214, 215);
-            height: 103px;
-            padding: 10px;
-            width: 320px;
-            resize: none;
-            height: 120px;
-          "
-        ></textarea>
-      </div>
+      <TextArea
+        class="usi-mortgage--leadscard--settings-view__message"
+        v-model="message"
+        :label="'Примечание для брокера'"
+      />
     </div>
   </div>
 </template>

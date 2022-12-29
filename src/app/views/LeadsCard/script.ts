@@ -21,6 +21,7 @@ export default {
     return {
       lead: null,
       pipeline: null,
+      createdLeadType: null,
       btnRedirectLoader: false,
       mortgageBtnShow: false,
       modalVisibility: false,
@@ -94,19 +95,28 @@ export default {
       this.modalVisibility = false;
       this.activeModalView = null;
     },
-    createMortgage() {
-      console.debug('app/views/LeadsCard/methods/createMortgage'); //DELETE
+    actionsViewYes() {
+      console.debug('app/views/LeadsCard/methods/actionsViewYes'); //DELETE
 
       this.activeModalView = 'SettingsView';
+      this.createdLeadType = 'mortgage';
     },
-    consultation() {
-      console.debug('app/views/LeadsCard/methods/consultation'); //DELETE
+    actionsViewConsultation() {
+      console.debug('app/views/LeadsCard/methods/actionsViewConsultation'); //DELETE
 
       this.activeModalView = 'SettingsView';
+      this.createdLeadType = 'consultation';
     },
 
     /* HELPERS */
     /* ACTIONS */
+    createMortgage(data) {
+      console.debug('app/views/LeadsCard/methods/createMortgage/data', data); //DELETE
+      console.debug('app/views/LeadsCard/methods/createMortgage/brokerId', data.broker.id); //DELETE
+      console.debug('app/views/LeadsCard/methods/createMortgage/message', data.message); //DELETE
+      console.debug('app/views/LeadsCard/methods/createMortgage/leadId', this.leadId); //DELETE
+      console.debug('app/views/LeadsCard/methods/createMortgage/createdLeadType', this.createdLeadType); //DELETE
+    },
   },
 
   async beforeCreate() {

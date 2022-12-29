@@ -38,13 +38,14 @@
       <div class="usi-mortgage--leadscard-modal--body">
         <ActionsView
           v-show="activeModalView === 'ActionsView'"
-          @yes="createMortgage"
-          @consultation="consultation"
+          @yes="actionsViewYes"
+          @consultation="actionsViewConsultation"
           @cancel="closeModal"
         />
         <SettingsView
           v-show="activeModalView === 'SettingsView'"
           :brokers="brokers"
+          @selectBroker="createMortgage"
         />
       </div>
     </Modal>
