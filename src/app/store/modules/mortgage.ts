@@ -241,6 +241,29 @@ export default {
             { uuid, pipelines, },
           ]);
         }
+
+        console.debug('vuex/mortgage/setUpdatePipelines/mortgages', getters.list); //DELETE
+
+        commit('updateList', getters.list.map((mortgage) => {
+          if (mortgage.uuid === uuid) {
+            return {
+              ...mortgage,
+              pipelines: mortgage.pipelines.map((pipeline) => {
+                const foundPipeline = pipelines.find((_pipeline) => (_pipeline.uuid === pipeline.uuid));
+
+                if (foundPipeline) {
+                  console.debug('vuex/mortgage/setUpdatePipelines/mortgage', foundPipeline); //DELETE
+
+                  return foundPipeline;
+                }
+
+                return pipeline;
+              }),
+            }
+          }
+
+          return mortgage;
+        }));
       }
 
       dispatch('setChangeStatus', true);

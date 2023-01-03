@@ -121,20 +121,30 @@ export default defineComponent({
       this.showList = false;
     },
     selectItem(index) {
-      // console.debug('uiSelect::selectItem', index, this.items[index]); //DELETE
+      console.debug('uiSelect/selectItem', index, this.items[index]); //DELETE
 
-      if (this.multiple) {
-        let have = this.modelValue.find(item => item.uuid === this.items[index].uuid);
+      if (!this.items[index].blocked) {
+        console.debug('uiSelect/selectItem/change', index, this.items[index]); //DELETE
 
-        if (have) {
-          this.$emit('update:modelValue', [...this.modelValue.filter(item => item.uuid !== this.items[index].uuid)]);
+        if (this.multiple) {
+          console.debug('uiSelect/selectItem/change/multiple', index, this.items[index]); //DELETE
+
+          let have = this.modelValue.find(item => item.uuid === this.items[index].uuid);
+
+          if (have) {
+            this.$emit('update:modelValue', [...this.modelValue.filter(item => item.uuid !== this.items[index].uuid)]);
+          } else {
+            this.$emit('update:modelValue', [...this.modelValue, this.items[index]]);
+          }
         } else {
-          this.$emit('update:modelValue', [...this.modelValue, this.items[index]]);
+          console.debug('uiSelect/selectItem/change/single', index, this.items[index]); //DELETE
+
+          this.$emit('update:modelValue', this.items[index]);
+          this.$emit('selectItem', this.items[index]);
+          this.hide();
         }
       } else {
-        this.$emit('update:modelValue', this.items[index]);
-        this.$emit('selectItem', this.items[index]);
-        this.hide();
+        console.debug('uiSelect/selectItem/not-change', index, this.items[index]); //DELETE
       }
     },
 
@@ -143,9 +153,9 @@ export default defineComponent({
   },
 
   created() {
-    // console.debug('uiSelect::created', this.items, this.value, this.modelValue); //DELETE
+    console.debug('uiSelect::created', this.items, this.value, this.modelValue); //DELETE
   },
   mounted() {
-    // console.debug('uiSelect::mounted', this.items); //DELETE
+    console.debug('uiSelect::mounted', this.items); //DELETE
   },
 });

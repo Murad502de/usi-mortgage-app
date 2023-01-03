@@ -30,7 +30,7 @@
     </teleport>
 
     <Modal
-      teleportTo="#page_holder"
+      teleportTo="#card_holder"
       class="usi-mortgage--leadscard-modal"
       :visibility="modalVisibility"
       @close="closeModal"

@@ -20,8 +20,90 @@ export default defineComponent({
   },
   data: () => ({}),
   computed: {
+    addPipelines() {
+      return this.$store.getters["mortgage/addPipelines"];
+    },
+    updatePipelines() {
+      return this.$store.getters["mortgage/updatePipelines"];
+    },
+    deletePipelines() {
+      return this.$store.getters["mortgage/deletePipelines"];
+    },
     pipelines() {
-      return this.$store.getters["dictionaries/pipelines"];
+      // console.debug('Main/computed/pipelines/deletePipelines', this.deletePipelines); //DELETE
+      // console.debug('Main/computed/pipelines/pipelines', this.$store.getters["dictionaries/pipelines"]); //DELETE
+
+      return this.$store.getters["dictionaries/pipelines"].map((pipeline) => {
+        let foundPipeline = false;
+        let foundPipelineUuid = '';
+        // let foundPipelineAmoId = '';
+
+        for (let i = 0; i < this.mortgages.length; i++) {
+          if (+this.mortgages[i].amo_mortgage_id === +pipeline.amo_id) {
+            foundPipeline = true;
+            // foundPipelineUuid = this.mortgages[i].uuid;
+            // foundPipelineAmoId = this.mortgages[i].amo_mortgage_id;
+            break;
+          }
+
+          mortgagesLoop:
+          for (let j = 0; j < this.mortgages[i].pipelines.length; j++) {
+            if (+this.mortgages[i].pipelines[j].amo_pipeline_id === +pipeline.amo_id) {
+              foundPipeline = true;
+              foundPipelineUuid = this.mortgages[i].pipelines[j].uuid;
+              break mortgagesLoop;
+            }
+          }
+        }
+
+        for (let i = 0; i < this.deletePipelines.length; i++) {
+          deletePipelines:
+          for (let j = 0; j < this.deletePipelines[i].pipelines.length; j++) {
+            // console.debug('Main/computed/pipelines/deletePipelines/uuid', this.deletePipelines[i].pipelines[j]); //DELETE
+            // console.debug('Main/computed/pipelines/deletePipelines/foundPipelineUuid', foundPipelineUuid); //DELETE
+
+            if (this.deletePipelines[i].pipelines[j] === foundPipelineUuid) {
+              foundPipeline = false;
+              break deletePipelines;
+            }
+          }
+        }
+
+        for (let i = 0; i < this.updatePipelines.length; i++) {
+          updatePipelines:
+          for (let j = 0; j < this.updatePipelines[i].pipelines.length; j++) {
+            // console.debug('Main/computed/pipelines/updatePipelines/amo_pipeline_id', this.updatePipelines[i].pipelines[j].amo_pipeline_id); //DELETE
+            // console.debug('Main/computed/pipelines/updatePipelines/pipeline.amo_id', pipeline.amo_id); //DELETE
+
+            if (+this.updatePipelines[i].pipelines[j].amo_pipeline_id === +pipeline.amo_id) {
+              // console.debug('Main/computed/pipelines/updatePipelines/FOUND', +pipeline.amo_id); //DELETE
+
+              foundPipeline = true;
+              break updatePipelines;
+            }
+          }
+        }
+
+        for (let i = 0; i < this.addPipelines.length; i++) {
+          addPipelines:
+          for (let j = 0; j < this.addPipelines[i].pipelines.length; j++) {
+            // console.debug('Main/computed/pipelines/addPipelines/amo_pipeline_id', this.addPipelines[i].pipelines[j].amo_pipeline_id); //DELETE
+            // console.debug('Main/computed/pipelines/addPipelines/pipeline.amo_id', pipeline.amo_id); //DELETE
+
+            if (+this.addPipelines[i].pipelines[j].amo_pipeline_id === +pipeline.amo_id) {
+              // console.debug('Main/computed/pipelines/addPipelines/FOUND', +pipeline.amo_id); //DELETE
+
+              foundPipeline = true;
+              break addPipelines;
+            }
+          }
+        }
+
+        return {
+          ...pipeline,
+          blocked: foundPipeline,
+        };
+      });
     },
     brokers() {
       return this.$store.getters["dictionaries/users"];
@@ -31,6 +113,9 @@ export default defineComponent({
   watch: {
     mortgages(newVal, oldVal) { //DELETE
       console.debug('Main/watch/mortgages', newVal, oldVal); //DELETE
+    },
+    pipelines(newVal, oldVal) { //DELETE
+      console.debug('Main/watch/pipelines', newVal, oldVal); //DELETE
     },
   },
   methods: {

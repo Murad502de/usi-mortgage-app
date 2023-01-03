@@ -1,6 +1,7 @@
 import debounce from "@/app/utils/debounce";
 import MountPoint from '@/app/services/MountPoint';
 import { fetchLeadByAmoId } from '@/app/api/leadApi/fetchLead';
+import { createLead } from '@/app/api/leadApi/createLead';
 import { fetchPipelineByAmoId } from '@/app/api/pipelineApi/fetchPipeline';
 import MortgageButton from "@components/ui/Button/index.vue";
 import Modal from '@components/TheModal/index.vue';
@@ -27,11 +28,17 @@ export default {
       modalVisibility: false,
       activeModalView: null,
       goToBasicLeadTitle: 'Перейти в основную сделку',
-      goToMortgageLeadTitle: 'Перейти в сделку в воронке "Ипотека"',
+      goToMortgageLeadTitle: 'Перейти в сделку ипотеки',
       createMortgageLeadTitle: 'Создать сделку в воронке "Ипотека"',
     };
   },
   computed: {
+    manager() {
+      return {
+        manager_amo_id: +window.AMOCRM.constant('user').id,
+        manager_amo_name: window.AMOCRM.constant('user').name,
+      };
+    },
     leadId() {
       return +window.AMOCRM.data.current_card.id;
     },
@@ -87,6 +94,11 @@ export default {
       console.debug('app/views/LeadsCard/methods/lead', this.lead); //DELETE
       console.debug('app/views/LeadsCard/methods/pipeline', this.pipeline); //DELETE
       console.debug('app/views/LeadsCard/methods/brokers', this.brokers); //DELETE
+      console.debug('app/views/LeadsCard/methods/btnRedirectLoader', this.btnRedirectLoader); //DELETE
+
+      if (this.btnRedirectLoader) {
+        return;
+      }
 
       this.activeModalView = 'ActionsView';
       this.modalVisibility = true;
@@ -110,12 +122,49 @@ export default {
 
     /* HELPERS */
     /* ACTIONS */
-    createMortgage(data) {
-      console.debug('app/views/LeadsCard/methods/createMortgage/data', data); //DELETE
-      console.debug('app/views/LeadsCard/methods/createMortgage/brokerId', data.broker.id); //DELETE
-      console.debug('app/views/LeadsCard/methods/createMortgage/message', data.message); //DELETE
-      console.debug('app/views/LeadsCard/methods/createMortgage/leadId', this.leadId); //DELETE
-      console.debug('app/views/LeadsCard/methods/createMortgage/createdLeadType', this.createdLeadType); //DELETE
+    async createMortgage(data) {
+      const requestParams = {
+        lead_amo_id: this.leadId,
+        manager_amo_id: this.manager.manager_amo_id,
+        manager_amo_name: this.manager.manager_amo_name,
+        broker_amo_id: +data.broker.id,
+        broker_amo_name: data.broker.title,
+        created_lead_type: this.createdLeadType,
+        message_for_broker: data.message,
+      };
+
+      console.debug('app/views/LeadsCard/methods/createMortgage/requestParams', requestParams); //DELETE
+
+      this.closeModal();
+
+      this.btnRedirectLoader = true;
+
+      await createLead(requestParams);
+      await this.fetchLead();
+
+      this.btnRedirectLoader = false;
+    },
+    async fetchLead() {
+      console.debug('app/views/LeadsCard/methods/fetchLead'); //DELETE
+
+      const fetchLeadByAmoIdResponse = await fetchLeadByAmoId(this.leadId);
+
+      console.debug('app/views/LeadsCard/created/fetchLeadByAmoIdResponse', fetchLeadByAmoIdResponse); //DELETE
+
+      if (!!fetchLeadByAmoIdResponse) {
+        this.lead = fetchLeadByAmoIdResponse;
+      }
+    },
+    async fetchPipeline() {
+      console.debug('app/views/LeadsCard/methods/fetchPipeline'); //DELETE
+
+      const fetchPipelineByAmoIdResponse = await fetchPipelineByAmoId(this.leadPipeline);
+
+      console.debug('app/views/LeadsCard/created/fetchPipelineByAmoIdResponse', fetchPipelineByAmoIdResponse); //DELETE
+
+      if (!!fetchPipelineByAmoIdResponse) {
+        this.pipeline = fetchPipelineByAmoIdResponse;
+      }
     },
   },
 
@@ -131,22 +180,8 @@ export default {
     console.debug('app/views/LeadsCard/created/leadId', this.leadId); //DELETE
 
     Mortgage.addEventListener({ callback: this.selectMortgage });
-
-    const fetchLeadByAmoIdResponse = await fetchLeadByAmoId(this.leadId);
-
-    console.debug('app/views/LeadsCard/created/fetchLeadByAmoIdResponse', fetchLeadByAmoIdResponse); //DELETE
-
-    if (!!fetchLeadByAmoIdResponse) {
-      this.lead = fetchLeadByAmoIdResponse;
-    }
-
-    const fetchPipelineByAmoIdResponse = await fetchPipelineByAmoId(this.leadPipeline);
-
-    console.debug('app/views/LeadsCard/created/fetchPipelineByAmoIdResponse', fetchPipelineByAmoIdResponse); //DELETE
-
-    if (!!fetchPipelineByAmoIdResponse) {
-      this.pipeline = fetchPipelineByAmoIdResponse;
-    }
+    await this.fetchLead();
+    await this.fetchPipeline();
   },
   mounted() {
     console.debug('app/views/LeadsCard/mounted'); //DELETE

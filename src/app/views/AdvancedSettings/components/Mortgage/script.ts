@@ -221,6 +221,11 @@ export default defineComponent({
 
       this.$emit('updateMortgage', mortgage);
     },
+    readPipelines(newVal, oldVal) { //DELETE
+      console.debug('Mortgage/watch/readPipelines/stub', this.stub); //DELETE
+      console.debug('Mortgage/watch/readPipelines/newVal', newVal); //DELETE
+      console.debug('Mortgage/watch/readPipelines/oldVal', oldVal); //DELETE
+    },
   },
   methods: {
     /* GETTERS */
@@ -411,7 +416,10 @@ export default defineComponent({
   },
 
   async created() {
-    console.debug('Mortgage/created', this.stub, this.pipelines, this.brokers, this.mortgage); //DELETE
+    console.debug('Mortgage/created/stub', this.stub); //DELETE
+    console.debug('Mortgage/created/pipelines', this.pipelines); //DELETE
+    console.debug('Mortgage/created/brokers', this.brokers); //DELETE
+    console.debug('Mortgage/created/mortgage', this.mortgage); //DELETE
 
     await this.init();
 

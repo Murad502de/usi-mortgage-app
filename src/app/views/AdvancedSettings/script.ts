@@ -99,6 +99,19 @@ export default defineComponent({
     addMortgage(newVal, oldVal) { //DELETE
       console.debug('AdvancedSettings/watch/addMortgage', newVal, oldVal);
     },
+
+    addPipelines(newVal, oldVal) { //DELETE
+      console.debug('AdvancedSettings/watch/addPipelines/newVal', newVal);
+      console.debug('AdvancedSettings/watch/addPipelines/oldVal', oldVal);
+    },
+    updatePipelines(newVal, oldVal) { //DELETE
+      console.debug('AdvancedSettings/watch/updatePipelines/newVal', newVal);
+      console.debug('AdvancedSettings/watch/updatePipelines/oldVal', oldVal);
+    },
+    deletePipelines(newVal, oldVal) { //DELETE
+      console.debug('AdvancedSettings/watch/deletePipelines/newVal', newVal);
+      console.debug('AdvancedSettings/watch/deletePipelines/oldVal', oldVal);
+    },
   },
   methods: {
     /* STORE */

@@ -22,6 +22,7 @@
           :class="[
             { 'um-select__select--list-item': true },
             { 'um-select__select--list-item_selected': item.selected },
+            { 'um-select__select--list-item_blocked': item.blocked },
           ]"
           @click="selectItem(index)"
         >
