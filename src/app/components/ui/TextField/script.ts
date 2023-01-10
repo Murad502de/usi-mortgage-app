@@ -65,9 +65,15 @@ export default defineComponent({
     },
   },
   created() {
+    console.debug('TextField/created/value', this.value); //DELETE
+    console.debug('TextField/created/modelValue', this.modelValue); //DELETE
+
     this.bufferValue = this.modelValue || this.value;
   },
   mounted() {
+    console.debug('TextField/mounted/value', this.value); //DELETE
+    console.debug('TextField/mounted/modelValue', this.modelValue); //DELETE
+
     if (this.autofocus) this.$nextTick(() => {
       this.setFocus()
     })
@@ -101,22 +107,31 @@ export default defineComponent({
   },
   watch: {
     bufferValue(newVal, oldVal) {
-      // console.debug('TextField::watcher[bufferValue]', newVal, oldVal); //DELETE
+      console.debug('TextField::watcher[bufferValue]', newVal, oldVal); //DELETE
 
       if (newVal !== oldVal) {
-        // console.debug('TextField::watcher[bufferValue][update]', newVal, oldVal); //DELETE
+        console.debug('TextField::watcher[bufferValue][update]', newVal, oldVal); //DELETE
 
         this.$emit('update:modelValue', this.bufferValue);
       }
     },
     modelValue(newVal, oldVal) {
-      // console.debug('TextField::watcher[modelValue]', newVal, oldVal); //DELETE
+      console.debug('TextField/watch/modelValue', newVal, oldVal); //DELETE
 
       if (newVal !== oldVal) {
-        // console.debug('TextField::watcher[modelValue][update]', newVal, oldVal); //DELETE
+        console.debug('TextField/watch/modelValue/update', newVal, oldVal); //DELETE
 
         this.bufferValue = newVal;
       }
-    }
+    },
+    value(newVal, oldVal) {
+      console.debug('TextField/watch/value', newVal, oldVal); //DELETE
+
+      if (newVal !== oldVal) {
+        console.debug('TextField/watch/value/update', newVal, oldVal); //DELETE
+
+        this.bufferValue = newVal;
+      }
+    },
   }
 });

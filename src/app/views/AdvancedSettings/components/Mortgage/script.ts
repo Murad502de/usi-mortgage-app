@@ -94,6 +94,16 @@ export default defineComponent({
         ...this.addPipelines,
       ].filter((pipeline) => (!this.deletePipelines.includes(pipeline.uuid)));
     },
+    beforeApplyingStagesValue() {
+      console.debug('Mortgage/computed/beforeApplyingStagesValue/mortgage', this.mortgage); //DELETE
+
+      return this.mortgage.amo_mortgage_before_applying_stage_ids?.join(',');
+    },
+    afterApplyingStages() {
+      console.debug('Mortgage/computed/afterApplyingStages/mortgage', this.mortgage); //DELETE
+
+      return this.mortgage.amo_mortgage_after_applying_stage_ids?.join(',');
+    },
   },
 
   watch: {
@@ -248,12 +258,16 @@ export default defineComponent({
     },
     /* FIXME: it is recommended to implement one generic method with inputAfterApplyingStages */
     inputBeforeApplyingStages(strStages) {
-      console.debug('Mortgage/methods/inputBeforeApplyingStages', strStages); //DELETE
+      console.debug(
+        'Mortgage/methods/inputBeforeApplyingStages/strStages',
+        strStages.replaceAll(' ', '').split(',').filter(stage => !!stage).map(stage => Number(stage))
+      ); //DELETE
 
       const mortgage = {
         ...this.mortgage,
         amo_mortgage_before_applying_stage_ids: strStages.replaceAll(' ', '')
           .split(',')
+          .filter(stage => !!stage)
           .map(stage => Number(stage)),
       };
 

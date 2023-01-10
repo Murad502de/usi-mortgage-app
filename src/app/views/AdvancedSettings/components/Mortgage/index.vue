@@ -99,9 +99,7 @@
                 width="285"
                 :stub="stub"
                 :label="idsBeforeApplyingStageTitle"
-                :value="
-                  mortgage.amo_mortgage_before_applying_stage_ids?.join(',')
-                "
+                :value="beforeApplyingStagesValue"
                 @inputValue="inputBeforeApplyingStages"
               />
               <TextField
@@ -111,9 +109,7 @@
                 "
                 :stub="stub"
                 :label="idsAfterApplyingStageTitle"
-                :value="
-                  mortgage.amo_mortgage_after_applying_stage_ids?.join(',')
-                "
+                :value="afterApplyingStages"
                 @inputValue="inputAfterApplyingStages"
               />
             </div>
